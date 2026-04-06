@@ -1,0 +1,1314 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Hampton Grove PM</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0d1117;--s1:#161b22;--s2:#21262d;--s3:#30363d;
+  --b1:#21262d;--b2:#30363d;--b3:#484f58;
+  --t1:#f0f6fc;--t2:#8b949e;--t3:#484f58;
+  --blue:#58a6ff;--green:#3fb950;--gold:#d29922;
+  --red:#f85149;--purple:#bc8cff;--teal:#39d353;
+  --r:12px;--r2:8px;--tap:48px;--sidebar:260px;
+  --safe-t:env(safe-area-inset-top,0px);
+  --safe-b:env(safe-area-inset-bottom,0px);
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;-webkit-text-size-adjust:100%;}
+html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--t1);font-family:'IBM Plex Sans Thai',sans-serif;font-size:15px;}
+
+/* ════ SETUP ════ */
+#setup{position:fixed;inset:0;z-index:3000;background:var(--bg);display:flex;align-items:center;justify-content:center;padding:20px;overflow-y:auto;}
+.setup-box{width:100%;max-width:420px;}
+.setup-logo{text-align:center;margin-bottom:28px;}
+.setup-card{background:var(--s1);border:1px solid var(--b1);border-radius:16px;padding:24px;margin-bottom:12px;}
+.sc-title{font-size:17px;font-weight:700;margin-bottom:6px;}
+.sc-sub{font-size:13px;color:var(--t2);margin-bottom:18px;line-height:1.7;}
+.lbl{font-size:13px;color:var(--t2);font-weight:600;margin-bottom:7px;}
+.inp{width:100%;background:var(--s2);border:1px solid var(--b2);border-radius:10px;color:var(--t1);padding:12px 14px;font-size:14px;font-family:'IBM Plex Sans Thai',sans-serif;outline:none;margin-bottom:14px;min-height:var(--tap);}
+.inp:focus{border-color:var(--blue);}
+.inp-mono{font-family:'IBM Plex Mono',monospace;font-size:12px;}
+.pbtn{width:100%;min-height:var(--tap);padding:13px;border-radius:var(--r);font-size:15px;font-weight:700;border:none;cursor:pointer;font-family:'IBM Plex Sans Thai',sans-serif;transition:opacity .15s;margin-bottom:8px;}
+.pbtn:hover{opacity:.86;}
+.pbtn-blue{background:var(--blue);color:#0d1117;}
+.pbtn-gray{background:var(--s2);color:var(--t2);border:1px solid var(--b2);}
+.setup-hint{background:var(--s2);border-radius:10px;padding:12px 14px;font-size:12px;color:var(--t2);line-height:1.9;border-left:3px solid var(--gold);}
+.setup-hint b{color:var(--t1);}
+.setup-hint a{color:var(--blue);text-decoration:none;}
+
+/* ════ APP LAYOUT ════ */
+#app{display:none;height:100%;width:100%;overflow:hidden;}
+.app-wrap{display:flex;height:100%;width:100%;}
+#sb{width:var(--sidebar);flex-shrink:0;background:var(--s1);border-right:1px solid var(--b1);display:flex;flex-direction:column;padding-top:var(--safe-t);z-index:100;transition:transform .25s;}
+#sb-hdr{padding:16px 18px 12px;border-bottom:1px solid var(--b1);}
+#sb-logo{font-size:18px;font-weight:700;}
+#sb-logo span{color:var(--blue);}
+#sb-role{font-size:11px;color:var(--gold);margin-top:1px;}
+#sb-uname{font-size:12px;color:var(--t2);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+#sb-nav{flex:1;overflow-y:auto;padding:6px 0;}
+.sni{display:flex;align-items:center;gap:12px;padding:0 16px;min-height:var(--tap);cursor:pointer;color:var(--t2);font-size:14px;font-weight:500;border:none;background:transparent;width:100%;text-align:left;font-family:'IBM Plex Sans Thai',sans-serif;transition:all .15s;}
+.sni:hover{background:var(--s2);color:var(--t1);}
+.sni.active{background:rgba(88,166,255,.12);color:var(--blue);}
+.sni-ic{font-size:18px;width:24px;text-align:center;flex-shrink:0;}
+.sni-badge{margin-left:auto;background:var(--red);color:#fff;font-size:10px;font-weight:700;padding:1px 6px;border-radius:10px;}
+#sb-ftr{padding:10px 14px calc(10px + var(--safe-b));border-top:1px solid var(--b1);}
+.sync-row{display:flex;align-items:center;gap:8px;padding:7px 2px;cursor:pointer;border-radius:8px;}
+.sync-row:hover{background:var(--s2);}
+.sdot{width:8px;height:8px;border-radius:50%;background:var(--b3);flex-shrink:0;transition:background .3s;}
+.stxt{font-size:12px;color:var(--t2);flex:1;}
+.sb-logout{width:100%;margin-top:8px;padding:9px;border-radius:8px;border:1px solid var(--b2);background:transparent;color:var(--t3);font-size:13px;cursor:pointer;font-family:inherit;transition:all .15s;}
+.sb-logout:hover{border-color:var(--red);color:var(--red);}
+#main{flex:1;display:flex;flex-direction:column;min-width:0;overflow:hidden;}
+#topbar{display:none;align-items:center;gap:10px;min-height:calc(50px + var(--safe-t));padding:calc(var(--safe-t) + 8px) 16px 8px;background:var(--s1);border-bottom:1px solid var(--b1);flex-shrink:0;}
+#hbtn{width:var(--tap);height:var(--tap);display:flex;align-items:center;justify-content:center;background:none;border:none;color:var(--t1);font-size:22px;cursor:pointer;flex-shrink:0;}
+#tb-title{font-size:17px;font-weight:700;flex:1;}
+#tb-title span{color:var(--blue);}
+#tb-sync{width:var(--tap);height:var(--tap);display:flex;align-items:center;justify-content:center;background:none;border:none;font-size:18px;cursor:pointer;}
+#screens{flex:1;overflow:hidden;position:relative;}
+.screen{position:absolute;inset:0;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;display:none;flex-direction:column;}
+.screen.active{display:flex;}
+.screen::-webkit-scrollbar{width:5px;}
+.screen::-webkit-scrollbar-thumb{background:var(--b2);border-radius:3px;}
+#bnav{display:none;flex-shrink:0;background:var(--s1);border-top:1px solid var(--b1);padding-bottom:var(--safe-b);}
+.bni{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:var(--tap);padding:6px 4px;gap:3px;cursor:pointer;font-size:11px;color:var(--t3);border:none;background:transparent;font-family:'IBM Plex Sans Thai',sans-serif;position:relative;}
+.bni.active{color:var(--blue);}
+.bni-ic{font-size:22px;line-height:1;}
+.nbadge{position:absolute;top:5px;right:calc(50% - 18px);background:var(--red);color:#fff;font-size:9px;font-weight:700;padding:1px 5px;border-radius:10px;min-width:16px;text-align:center;}
+#overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:90;backdrop-filter:blur(2px);}
+
+/* RESPONSIVE */
+@media(max-width:767px){
+  #topbar{display:flex;}
+  #bnav{display:flex;}
+  #sb{position:fixed;top:0;bottom:0;left:0;transform:translateX(-100%);}
+  #sb.open{transform:translateX(0);}
+  .screen{padding-bottom:calc(var(--safe-b) + 66px);}
+}
+@media(min-width:768px) and (max-width:1023px){
+  #topbar{display:flex;}
+  #sb{position:fixed;top:0;bottom:0;left:0;transform:translateX(-100%);}
+  #sb.open{transform:translateX(0);}
+  .screen{padding-bottom:var(--safe-b);}
+}
+@media(min-width:1024px){
+  #topbar{display:none!important;}
+  #bnav{display:none!important;}
+  #sb{transform:none!important;position:relative;}
+  .screen{padding-bottom:var(--safe-b);}
+  .pgrid{grid-template-columns:1fr 1fr!important;}
+  .kgrid{grid-template-columns:repeat(6,1fr)!important;}
+}
+
+/* SHARED */
+.ph{padding:14px 18px 10px;background:var(--s1);border-bottom:1px solid var(--b1);flex-shrink:0;}
+.ph-t{font-size:20px;font-weight:700;margin-bottom:2px;}
+.ph-s{font-size:13px;color:var(--t2);}
+.slbl{font-size:11px;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:1.2px;padding:14px 18px 8px;}
+.kgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;padding:0 16px;}
+.kbox{background:var(--s1);border:1px solid var(--b1);border-radius:var(--r);padding:14px 12px;}
+.knum{font-size:26px;font-weight:700;font-family:'IBM Plex Mono',monospace;line-height:1;}
+.klbl{font-size:11px;color:var(--t2);margin-top:4px;}
+.card{margin:0 16px 10px;background:var(--s1);border:1px solid var(--b1);border-radius:var(--r);overflow:hidden;}
+.crow{display:flex;align-items:center;justify-content:space-between;padding:0 16px;min-height:var(--tap);border-bottom:1px solid var(--b1);cursor:pointer;transition:background .12s;}
+.crow:last-child{border-bottom:none;}
+.crow:hover{background:var(--s2);}
+.crow-l{flex:1;min-width:0;padding:10px 0;}
+.crow-t{font-size:14px;font-weight:600;}
+.crow-s{font-size:12px;color:var(--t2);margin-top:2px;}
+.badge{font-size:11px;font-weight:700;padding:3px 9px;border-radius:20px;font-family:'IBM Plex Mono',monospace;white-space:nowrap;}
+.badge-blue{background:rgba(88,166,255,.15);color:var(--blue);}
+.badge-green{background:rgba(63,185,80,.15);color:var(--green);}
+.badge-gold{background:rgba(210,153,34,.15);color:var(--gold);}
+.badge-red{background:rgba(248,81,73,.15);color:var(--red);}
+.badge-gray{background:rgba(72,79,88,.3);color:var(--t2);}
+.swrap{padding:10px 16px;background:var(--s1);border-bottom:1px solid var(--b1);flex-shrink:0;}
+.sbar{display:flex;align-items:center;gap:10px;background:var(--s2);border:1px solid var(--b2);border-radius:10px;padding:10px 14px;}
+.sbar input{background:none;border:none;outline:none;color:var(--t1);font-size:15px;flex:1;font-family:'IBM Plex Sans Thai',sans-serif;}
+.sbar input::placeholder{color:var(--t3);}
+.chips{display:flex;gap:8px;padding:10px 16px;overflow-x:auto;flex-shrink:0;}
+.chips::-webkit-scrollbar{display:none;}
+.chip{padding:0 14px;min-height:38px;display:flex;align-items:center;border-radius:20px;font-size:13px;font-weight:600;border:1px solid var(--b2);background:transparent;color:var(--t2);cursor:pointer;white-space:nowrap;flex-shrink:0;font-family:'IBM Plex Sans Thai',sans-serif;transition:all .15s;}
+.chip:hover{border-color:var(--blue);color:var(--blue);}
+.chip.on{background:var(--blue);color:#fff;border-color:var(--blue);}
+.zprog{margin:0 16px 10px;background:var(--s1);border:1px solid var(--b1);border-radius:var(--r);overflow:hidden;}
+.zrow{padding:12px 16px;border-bottom:1px solid var(--b1);}
+.zrow:last-child{border-bottom:none;}
+.zrow-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:7px;}
+.zname{font-size:14px;font-weight:700;font-family:'IBM Plex Mono',monospace;}
+.zpct{font-size:13px;font-weight:700;font-family:'IBM Plex Mono',monospace;}
+.zbar{height:5px;background:var(--b2);border-radius:3px;overflow:hidden;}
+.zfill{height:100%;border-radius:3px;transition:width .4s;}
+.zstat{font-size:11px;color:var(--t2);margin-top:4px;}
+.pcard{background:var(--s1);border:1px solid var(--b1);border-radius:var(--r);overflow:hidden;cursor:pointer;transition:border-color .15s;}
+.pcard:hover{border-color:var(--blue);}
+.pcard-top{display:flex;align-items:center;gap:11px;padding:13px 13px 9px;}
+.pdot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+.pc-id{font-size:15px;font-weight:700;font-family:'IBM Plex Mono',monospace;}
+.pc-sub{font-size:11px;color:var(--t2);margin-top:2px;}
+.pc-pct{font-size:19px;font-weight:700;font-family:'IBM Plex Mono',monospace;}
+.pbar{height:4px;background:var(--b2);}
+.pbar-fill{height:100%;transition:width .3s;}
+.pcard-bot{display:flex;justify-content:space-between;padding:7px 13px;font-size:11px;color:var(--t2);}
+.aitem{margin:0 16px 9px;background:var(--s1);border:1px solid var(--b1);border-radius:var(--r);padding:13px 14px;display:flex;gap:11px;cursor:pointer;transition:border-color .15s;}
+.aitem:hover{border-color:var(--blue);}
+.aicon{font-size:20px;flex-shrink:0;margin-top:1px;}
+.a-title{font-size:14px;font-weight:600;margin-bottom:2px;}
+.a-sub{font-size:12px;color:var(--t2);}
+.a-time{font-size:11px;margin-top:4px;font-family:'IBM Plex Mono',monospace;}
+.dhero{background:var(--s1);border-bottom:1px solid var(--b1);padding:14px 16px;}
+.dback{display:flex;align-items:center;gap:8px;min-height:var(--tap);color:var(--blue);font-size:15px;font-weight:500;cursor:pointer;background:none;border:none;margin-bottom:10px;font-family:'IBM Plex Sans Thai',sans-serif;padding:0;}
+.did{font-size:26px;font-weight:700;font-family:'IBM Plex Mono',monospace;margin-bottom:2px;}
+.dzone{font-size:12px;color:var(--t2);margin-bottom:12px;}
+.bigpct{font-size:44px;font-weight:700;font-family:'IBM Plex Mono',monospace;line-height:1;}
+.bigbar{height:7px;background:var(--b2);border-radius:4px;overflow:hidden;margin-bottom:12px;}
+.bigfill{height:100%;border-radius:4px;transition:width .4s;}
+.dmeta{display:flex;gap:8px;flex-wrap:wrap;}
+.mpill{flex:1;min-width:90px;background:var(--s2);border-radius:var(--r2);padding:9px 11px;cursor:pointer;min-height:52px;transition:background .15s;}
+.mpill:hover{background:var(--s3);}
+.mp-l{font-size:10px;color:var(--t3);text-transform:uppercase;letter-spacing:.8px;}
+.mp-v{font-size:13px;font-weight:600;margin-top:2px;}
+.titem{display:flex;align-items:center;gap:11px;padding:0 16px;min-height:var(--tap);border-bottom:1px solid var(--b1);cursor:pointer;transition:background .12s;}
+.titem:hover{background:var(--s2);}
+.tck{width:26px;height:26px;border-radius:50%;border:2px solid var(--b3);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:13px;transition:all .2s;}
+.tck.done{background:var(--green);border-color:var(--green);color:#fff;}
+.tck.part{background:rgba(88,166,255,.2);border-color:var(--blue);}
+.tinfo{flex:1;min-width:0;padding:11px 0;}
+.tname{font-size:14px;font-weight:500;margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.tname.done{color:var(--t3);text-decoration:line-through;}
+.tmeta{display:flex;align-items:center;gap:5px;flex-wrap:wrap;}
+.tcb{font-size:10px;font-weight:700;padding:2px 6px;border-radius:3px;font-family:'IBM Plex Mono',monospace;flex-shrink:0;}
+.td{font-size:11px;color:var(--t3);}
+.ts{font-size:11px;}
+.tpct{font-size:14px;font-weight:700;font-family:'IBM Plex Mono',monospace;flex-shrink:0;}
+.tph{width:38px;height:38px;border-radius:7px;object-fit:cover;border:1px solid var(--b2);flex-shrink:0;}
+.tph-ph{width:38px;height:38px;border-radius:7px;background:var(--s2);border:1px solid var(--b2);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;color:var(--t3);}
+.grow{display:flex;align-items:center;gap:6px;padding:3px 0;border-bottom:1px solid rgba(48,54,61,.4);}
+.glbl{width:110px;font-size:9px;color:var(--t2);flex-shrink:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.gtl{flex:1;position:relative;height:18px;}
+.gplan{position:absolute;top:3px;height:12px;border-left:2px solid;border-radius:0 3px 3px 0;}
+.gact{position:absolute;top:3px;height:12px;border-radius:3px;}
+.gtoday{position:absolute;top:0;bottom:0;width:2px;background:var(--gold);opacity:.7;}
+.rkpi{display:flex;gap:9px;padding:0 16px;margin-bottom:10px;flex-wrap:wrap;}
+.rbox{flex:1;min-width:80px;background:var(--s1);border:1px solid var(--b1);border-radius:var(--r);padding:12px;text-align:center;}
+.rnum{font-size:22px;font-weight:700;font-family:'IBM Plex Mono',monospace;}
+.rlbl{font-size:11px;color:var(--t2);margin-top:2px;}
+
+/* MODAL */
+.mo{position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:500;display:none;align-items:flex-end;justify-content:center;backdrop-filter:blur(4px);}
+.mo.open{display:flex;}
+@media(min-width:768px){.mo{align-items:center;}.ms{border-radius:var(--r)!important;max-width:480px!important;max-height:88vh;}}
+.ms{width:100%;max-width:540px;background:var(--s1);border-radius:20px 20px 0 0;border:1px solid var(--b1);border-bottom:none;padding:20px 22px calc(20px + var(--safe-b));max-height:86vh;overflow-y:auto;}
+.ms::-webkit-scrollbar{display:none;}
+.mh{width:36px;height:4px;background:var(--b3);border-radius:2px;margin:0 auto 16px;}
+.mt{font-size:17px;font-weight:700;margin-bottom:3px;}
+.msb{font-size:12px;color:var(--t2);margin-bottom:18px;}
+.ml{font-size:13px;color:var(--t2);font-weight:600;margin-bottom:7px;}
+.mi{width:100%;background:var(--s2);border:1px solid var(--b2);border-radius:10px;color:var(--t1);padding:12px 14px;font-size:15px;font-family:'IBM Plex Sans Thai',sans-serif;outline:none;margin-bottom:14px;min-height:var(--tap);}
+.mi:focus{border-color:var(--blue);}
+.msel{width:100%;background:var(--s2);border:1px solid var(--b2);border-radius:10px;color:var(--t1);padding:12px 14px;font-size:15px;font-family:'IBM Plex Sans Thai',sans-serif;outline:none;margin-bottom:14px;min-height:var(--tap);}
+.mrow{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;}
+.mib{flex:1;min-width:85px;background:var(--s2);border-radius:var(--r2);padding:10px 12px;}
+.mib-l{font-size:10px;color:var(--t3);margin-bottom:2px;text-transform:uppercase;letter-spacing:.5px;}
+.mib-v{font-size:13px;font-weight:600;}
+.bslider{width:100%;height:7px;-webkit-appearance:none;appearance:none;border-radius:4px;outline:none;cursor:pointer;background:var(--b2);margin-bottom:10px;}
+.bslider::-webkit-slider-thumb{-webkit-appearance:none;width:30px;height:30px;border-radius:50%;background:var(--blue);border:3px solid var(--s1);box-shadow:0 2px 8px rgba(0,0,0,.4);cursor:pointer;}
+.pdisp{text-align:center;font-size:50px;font-weight:700;font-family:'IBM Plex Mono',monospace;color:var(--blue);margin:6px 0 14px;}
+.qbtns{display:flex;gap:7px;margin-bottom:18px;flex-wrap:wrap;}
+.qbtn{flex:1;min-width:50px;min-height:var(--tap);border-radius:var(--r2);border:1px solid var(--b2);background:transparent;color:var(--t1);font-size:13px;font-weight:600;cursor:pointer;font-family:'IBM Plex Sans Thai',sans-serif;transition:all .15s;}
+.qbtn:hover{background:var(--s2);}
+.qbtn.g{border-color:var(--green);color:var(--green);}
+.pgrid-ph{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:10px;}
+.pthumb{position:relative;aspect-ratio:1;border-radius:8px;overflow:hidden;background:var(--s2);border:1px solid var(--b2);}
+.pthumb img{width:100%;height:100%;object-fit:cover;}
+.pdel{position:absolute;top:3px;right:3px;background:rgba(0,0,0,.75);color:#fff;border:none;border-radius:50%;width:20px;height:20px;font-size:11px;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+.padd{width:100%;min-height:46px;border-radius:8px;border:2px dashed var(--b2);background:transparent;cursor:pointer;color:var(--t3);font-family:'IBM Plex Sans Thai',sans-serif;display:flex;align-items:center;justify-content:center;gap:10px;font-size:14px;margin-bottom:14px;transition:border-color .15s;}
+.padd:hover{border-color:var(--blue);color:var(--blue);}
+.savebtn{width:100%;min-height:var(--tap);padding:13px;border-radius:var(--r);background:var(--blue);color:#fff;font-size:16px;font-weight:700;border:none;cursor:pointer;font-family:'IBM Plex Sans Thai',sans-serif;transition:opacity .15s;}
+.savebtn:hover{opacity:.87;}
+.savebtn2{width:100%;min-height:var(--tap);padding:11px;border-radius:var(--r);background:transparent;color:var(--t2);font-size:14px;border:1px solid var(--b2);cursor:pointer;font-family:'IBM Plex Sans Thai',sans-serif;margin-top:8px;}
+.savebtn2:hover{border-color:var(--t2);color:var(--t1);}
+.toast{position:fixed;bottom:calc(76px + var(--safe-b));left:50%;transform:translateX(-50%) translateY(20px);background:var(--s2);border:1px solid var(--b2);color:var(--t1);padding:10px 20px;border-radius:24px;font-size:14px;font-weight:500;z-index:999;opacity:0;transition:all .25s;white-space:nowrap;pointer-events:none;}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+@media(min-width:768px){.toast{bottom:24px;}}
+</style>
+</head>
+<body>
+
+<!-- SETUP -->
+<div id="setup">
+  <div class="setup-box">
+    <div class="setup-logo">
+      <div style="font-size:52px;margin-bottom:10px">🏗️</div>
+      <div style="font-size:24px;font-weight:700">Hampton <span style="color:var(--blue)">Grove</span></div>
+      <div style="font-size:12px;color:var(--t2);margin-top:4px">Construction PM System</div>
+    </div>
+    <div class="setup-card">
+      <div class="sc-title">👤 ชื่อของคุณ</div>
+      <div class="sc-sub">ระบุชื่อหรือตำแหน่งเพื่อแสดงในระบบ</div>
+      <div class="lbl">ชื่อ / ตำแหน่ง</div>
+      <input class="inp" id="su-name" type="text" placeholder="เช่น PM-วุฒิชัย, โฟร์แมน-ก่อสร้าง">
+      <div class="lbl">สิทธิ์การใช้งาน</div>
+      <select class="inp" id="su-role">
+        <option value="admin">👑 Admin — แก้ไขได้ทุกอย่าง</option>
+        <option value="foreman">👷 โฟร์แมน — อัปเดต % งาน + ถ่ายรูป</option>
+        <option value="qc">🔍 QC — อัปเดต % งาน + ถ่ายรูป</option>
+        <option value="sales">💼 ฝ่ายขาย — ดูข้อมูล + Export</option>
+        <option value="viewer">👁️ ผู้บริหาร — ดูอย่างเดียว</option>
+      </select>
+      <button class="pbtn pbtn-blue" onclick="doEnter()">✅ เข้าใช้งาน →</button>
+    </div>
+    <div class="setup-hint">
+      ☁️ <b>Google Sheets Sync:</b> ข้อมูลจะ sync กับ Sheets โดยอัตโนมัติ<br>
+      URL ถูกตั้งค่าไว้แล้ว — เพียงใส่ชื่อแล้วกดเข้าใช้งาน
+    </div>
+  </div>
+</div>
+
+<!-- APP -->
+<div id="app">
+  <div class="app-wrap">
+    <nav id="sb">
+      <div id="sb-hdr">
+        <div id="sb-logo">Hampton <span>Grove</span></div>
+        <div id="sb-role"></div>
+        <div id="sb-uname"></div>
+      </div>
+      <div id="sb-nav">
+        <button class="sni active" onclick="sw('s-home',this)"><span class="sni-ic">🏠</span>หน้าหลัก</button>
+        <button class="sni" onclick="sw('s-plots',this)"><span class="sni-ic">🏗️</span>รายการแปลง</button>
+        <button class="sni" onclick="sw('s-gantt',this)"><span class="sni-ic">📅</span>Gantt Chart</button>
+        <button class="sni" onclick="sw('s-report',this)"><span class="sni-ic">📊</span>รายงาน</button>
+        <button class="sni" onclick="sw('s-alerts',this)"><span class="sni-ic">🔔</span>แจ้งเตือน<span class="sni-badge" id="snb" style="display:none">0</span></button>
+      </div>
+      <div id="sb-ftr">
+        <div class="sync-row" onclick="openSyncM()">
+          <div class="sdot" id="sdot"></div>
+          <div class="stxt" id="stxt">Google Sheets Sync</div>
+          <span style="font-size:13px;color:var(--t3)">☁️</span>
+        </div>
+        <div style="font-size:11px;color:var(--t3);margin-top:4px" id="clk"></div>
+        <button class="sb-logout" onclick="doLogout()">🚪 ออกจากระบบ</button>
+      </div>
+    </nav>
+
+    <div id="main">
+      <div id="topbar">
+        <button id="hbtn" onclick="togSB()">☰</button>
+        <div id="tb-title">Hampton <span>Grove</span></div>
+        <button id="tb-sync" onclick="openSyncM()">☁️</button>
+      </div>
+      <div id="screens">
+
+        <!-- HOME -->
+        <div class="screen active" id="s-home">
+          <div class="ph"><div class="ph-t" id="hGreet">สวัสดีครับ 👋</div><div class="ph-s" id="dateTxt"></div></div>
+
+          <!-- Project selector -->
+          <div style="padding:10px 16px;background:var(--s1);border-bottom:1px solid var(--b1);flex-shrink:0;">
+            <div style="display:flex;gap:8px;overflow-x:auto;padding-bottom:2px;" id="projChips"></div>
+          </div>
+
+          <div class="slbl">ภาพรวมโครงการที่เลือก</div>
+          <div class="kgrid" id="hKpi" style="margin-bottom:4px"></div>
+          <div class="slbl" id="aLbl">แจ้งเตือน</div>
+          <div id="hAlerts"></div>
+          <div class="slbl">สถานะรายโซน</div>
+          <div id="hZones"></div>
+          <div style="height:16px"></div>
+        </div>
+
+        <!-- PLOTS -->
+        <div class="screen" id="s-plots">
+          <div class="swrap"><div class="sbar"><span style="font-size:17px;color:var(--t3)">🔍</span><input id="srch" placeholder="ค้นหาแปลง เช่น GA1, CO5..." type="search" autocomplete="off"></div></div>
+          <!-- Project filter -->
+          <div style="display:flex;gap:8px;padding:8px 16px;overflow-x:auto;flex-shrink:0;border-bottom:1px solid var(--b1);" id="plotProjChips"></div>
+          <div class="chips" id="zChips"></div>
+          <div class="pgrid" id="plotList" style="display:grid;grid-template-columns:1fr;gap:10px;padding:0 16px"></div>
+          <div style="height:16px"></div>
+        </div>
+
+        <!-- DETAIL -->
+        <div class="screen" id="s-detail">
+          <div class="dhero">
+            <button class="dback" onclick="goBack()">‹ กลับ</button>
+            <div class="did" id="dId">—</div>
+            <div class="dzone" id="dZone">—</div>
+            <div style="display:flex;align-items:center;gap:16px;margin-bottom:12px">
+              <div class="bigpct" id="dPct">0%</div>
+              <div style="display:flex;flex-direction:column;gap:5px">
+                <span style="font-size:12px;color:var(--t2)" id="dDone">0/50</span>
+                <span class="badge badge-gray" id="dSale">ว่าง</span>
+                <span style="font-size:11px;color:var(--gold)" id="dEndInfo"></span>
+              </div>
+            </div>
+            <div class="bigbar"><div class="bigfill" id="dBar" style="width:0%"></div></div>
+            <div class="dmeta">
+              <div class="mpill" onclick="openPlotM()"><div class="mp-l">📅 เริ่ม</div><div class="mp-v" id="dStart" style="color:var(--gold)">ตั้งค่า</div></div>
+              <div class="mpill" onclick="openPlotM()"><div class="mp-l">🏁 ส่งมอบ</div><div class="mp-v" id="dDeliv" style="color:var(--green)">—</div></div>
+              <div class="mpill"><div class="mp-l">⏱ เหลือ</div><div class="mp-v" id="dLeft">—</div></div>
+              <div class="mpill" onclick="openPlotM()"><div class="mp-l">👷 PM</div><div class="mp-v" id="dResp" style="color:var(--purple)">ตั้งค่า</div></div>
+            </div>
+          </div>
+          <div class="chips" id="catChips" style="border-bottom:1px solid var(--b1)"></div>
+          <div id="taskList" style="flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch"></div>
+        </div>
+
+        <!-- GANTT -->
+        <div class="screen" id="s-gantt">
+          <div class="ph"><div class="ph-t">Gantt Chart</div><div class="ph-s" id="ganttSub">เลือกแปลง</div></div>
+          <div style="padding:10px 16px;background:var(--s2);border-bottom:1px solid var(--b1);flex-shrink:0">
+            <select id="ganttSel" class="msel" style="margin-bottom:0"></select>
+          </div>
+          <div style="flex:1;overflow:auto;padding:14px"><div id="ganttC" style="min-width:520px"></div></div>
+        </div>
+
+        <!-- REPORT -->
+        <div class="screen" id="s-report">
+          <div class="ph"><div class="ph-t">รายงานโครงการ</div><div class="ph-s">Hampton Grove · ทุกโซน</div></div>
+          <div class="slbl">สถิติรวม</div>
+          <div class="rkpi" id="rKpi"></div>
+          <div class="slbl">ความคืบหน้ารายโซน</div>
+          <div class="zprog" id="rZones"></div>
+          <div class="slbl">สถานะการขาย</div>
+          <div class="card" id="rSales"></div>
+          <div class="slbl">Export ข้อมูล</div>
+          <div class="card">
+            <div class="crow" onclick="expCSV()"><div class="crow-l"><div class="crow-t">📄 Export CSV</div><div class="crow-s">ดาวน์โหลดรายแปลงทั้งหมด</div></div><span class="badge badge-gray">CSV</span></div>
+            <div class="crow" onclick="expJSON()"><div class="crow-l"><div class="crow-t">📦 Backup JSON</div><div class="crow-s">สำรองข้อมูลทั้งหมด</div></div><span class="badge badge-gray">JSON</span></div>
+          </div>
+          <div style="height:16px"></div>
+        </div>
+
+        <!-- ALERTS -->
+        <div class="screen" id="s-alerts">
+          <div class="ph"><div class="ph-t">แจ้งเตือน 🔔</div><div class="ph-s" id="aSub">ตรวจสอบ</div></div>
+          <div style="padding-top:8px" id="aFull"></div>
+        </div>
+
+      </div>
+      <div id="bnav">
+        <button class="bni active" onclick="sw('s-home',this)"><span class="bni-ic">🏠</span>หน้าหลัก</button>
+        <button class="bni" onclick="sw('s-plots',this)"><span class="bni-ic">🏗️</span>แปลง</button>
+        <button class="bni" onclick="sw('s-gantt',this)"><span class="bni-ic">📅</span>Gantt</button>
+        <button class="bni" onclick="sw('s-report',this)"><span class="bni-ic">📊</span>รายงาน</button>
+        <button class="bni" onclick="sw('s-alerts',this)"><span class="bni-ic">🔔</span>แจ้งเตือน<span class="nbadge" id="nbb" style="display:none">0</span></button>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="overlay" onclick="closeSB()"></div>
+
+<!-- TASK MODAL -->
+<div class="mo" id="taskM" onclick="closeM('taskM',event)">
+  <div class="ms">
+    <div class="mh"></div>
+    <div class="mt" id="mT">—</div>
+    <div class="msb" id="mS">—</div>
+    <div class="mrow">
+      <div class="mib"><div class="mib-l">แผน เริ่ม</div><div class="mib-v" id="mPS">—</div></div>
+      <div class="mib"><div class="mib-l">แผน จบ</div><div class="mib-v" id="mPE">—</div></div>
+      <div class="mib"><div class="mib-l">สถานะ</div><div class="mib-v" id="mStat">—</div></div>
+    </div>
+    <div class="ml">📅 วันเริ่มจริง</div>
+    <input type="date" class="mi" id="mAS">
+    <div class="ml">🏁 วันจบจริง</div>
+    <input type="date" class="mi" id="mAE">
+    <div class="ml">% ความคืบหน้า</div>
+    <div class="pdisp" id="mPD">0%</div>
+    <input type="range" class="bslider" id="mSl" min="0" max="100" value="0">
+    <div class="qbtns">
+      <button class="qbtn" onclick="sp(0)">0%</button>
+      <button class="qbtn" onclick="sp(25)">25%</button>
+      <button class="qbtn" onclick="sp(50)">50%</button>
+      <button class="qbtn" onclick="sp(75)">75%</button>
+      <button class="qbtn g" onclick="sp(100)">✅ 100%</button>
+    </div>
+    <div class="ml">📸 ภาพถ่ายหน้างาน</div>
+    <div class="pgrid-ph" id="phGrid"></div>
+    <button class="padd" onclick="document.getElementById('phInput').click()"><span style="font-size:22px">📷</span>ถ่ายภาพ / เลือกรูป</button>
+    <input type="file" id="phInput" accept="image/*" multiple capture="environment" onchange="addPhotos(event)" style="display:none">
+    <div class="ml">📝 บันทึกหน้างาน</div>
+    <textarea class="mi" id="mNote" rows="2" placeholder="หมายเหตุ, ปัญหา..." style="resize:none"></textarea>
+    <button class="savebtn" onclick="saveTask()">💾 บันทึกความคืบหน้า</button>
+    <button class="savebtn2" onclick="closeM('taskM')">ยกเลิก</button>
+  </div>
+</div>
+
+<!-- PLOT MODAL -->
+<div class="mo" id="plotM" onclick="closeM('plotM',event)">
+  <div class="ms">
+    <div class="mh"></div>
+    <div class="mt" id="pmT">ตั้งค่าแปลง</div>
+    <div class="msb" id="pmS"></div>
+    <div class="ml">📅 วันเริ่มก่อสร้าง</div>
+    <input type="date" class="mi" id="pmSt">
+    <div class="ml">🏷️ สถานะการขาย</div>
+    <select class="msel" id="pmSale"><option>ว่าง</option><option>จอง</option><option>ขายแล้ว</option><option>โอนแล้ว</option></select>
+    <div class="ml">👷 PM / ผู้รับผิดชอบ</div>
+    <input type="text" class="mi" id="pmResp" placeholder="ชื่อ PM...">
+    <div class="ml">📌 หมายเหตุ</div>
+    <input type="text" class="mi" id="pmNote" placeholder="หมายเหตุ...">
+    <button class="savebtn" onclick="savePlotInfo()">✅ บันทึก</button>
+    <button class="savebtn2" onclick="closeM('plotM')">ยกเลิก</button>
+  </div>
+</div>
+
+<!-- SYNC MODAL -->
+<div class="mo" id="syncM" onclick="closeM('syncM',event)">
+  <div class="ms">
+    <div class="mh"></div>
+    <div class="mt">☁️ สถานะการบันทึกข้อมูล</div>
+    <div class="msb">บันทึกอัตโนมัติทุกครั้งที่แก้ไข + Sync ขึ้น Google Sheets</div>
+    <div style="background:var(--s2);border-radius:10px;padding:14px;margin-bottom:16px;display:flex;align-items:center;gap:10px">
+      <div class="sdot" id="sdot2" style="width:10px;height:10px;border-radius:50%;flex-shrink:0"></div>
+      <div style="flex:1">
+        <div style="font-size:14px;font-weight:600" id="syncT">—</div>
+        <div style="font-size:12px;color:var(--t2);margin-top:2px" id="syncS">—</div>
+      </div>
+    </div>
+    <div style="display:flex;gap:8px;margin-bottom:16px">
+      <div style="flex:1;background:var(--s2);border-radius:10px;padding:12px;text-align:center">
+        <div style="font-size:22px;font-weight:700;font-family:'IBM Plex Mono',monospace;color:var(--blue)" id="stPlots">0</div>
+        <div style="font-size:11px;color:var(--t2);margin-top:3px">แปลงที่มีข้อมูล</div>
+      </div>
+      <div style="flex:1;background:var(--s2);border-radius:10px;padding:12px;text-align:center">
+        <div style="font-size:22px;font-weight:700;font-family:'IBM Plex Mono',monospace;color:var(--green)" id="stTasks">0</div>
+        <div style="font-size:11px;color:var(--t2);margin-top:3px">งานที่อัปเดต</div>
+      </div>
+      <div style="flex:1;background:var(--s2);border-radius:10px;padding:12px;text-align:center">
+        <div style="font-size:13px;font-weight:700;font-family:'IBM Plex Mono',monospace;color:var(--gold)" id="stTime">—</div>
+        <div style="font-size:11px;color:var(--t2);margin-top:3px">บันทึกล่าสุด</div>
+      </div>
+    </div>
+    <div style="display:flex;gap:8px;margin-bottom:14px">
+      <button class="qbtn" style="min-height:44px;border-color:var(--blue);color:var(--blue)" onclick="pullAll()">⬇️ Pull จาก Sheets</button>
+      <button class="qbtn" style="min-height:44px;border-color:var(--green);color:var(--green)" onclick="pushAll()">⬆️ Push ขึ้น Sheets</button>
+    </div>
+    <button class="savebtn2" onclick="closeM('syncM')">ปิด</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+'use strict';
+// ══════════════════════════════
+// GOOGLE SHEETS URL — ใส่ไว้แล้ว
+// ══════════════════════════════
+const SHEET_URL = 'https://script.google.com/macros/s/AKfycbwDaU0WCXzF-lIX1S-u5dOgIPJS-j_My0FhcnrztF0X_yjxrsqeSkX-HDUdU1mONb0i/exec';
+const SAVE_KEY  = 'hg_data_v7';
+
+// ══════════════════════════════
+// MASTER DATA
+// ══════════════════════════════
+// ══════════════════════════════
+// TASKS PER PROJECT TYPE
+// ══════════════════════════════
+
+// งาน 120 วัน — Hampton Grove, Hampton พระราม9, Grand Verona
+const TASKS_120 = [
+  {id:1,cat:"โครงสร้าง",name:"ฐานราก + เสาเข็ม",os:0,oe:13,dur:14,wt:5,crit:true},
+  {id:2,cat:"โครงสร้าง",name:"คานคอดิน Precast",os:14,oe:19,dur:6,wt:3},
+  {id:3,cat:"โครงสร้าง",name:"เทพื้นชั้น 1",os:17,oe:24,dur:8,wt:3,crit:true},
+  {id:4,cat:"โครงสร้าง",name:"เทขอบ/ธรณีประตู",os:22,oe:24,dur:3,wt:1},
+  {id:5,cat:"โครงสร้าง",name:"ดาดรับถังขยะ",os:23,oe:24,dur:2,wt:1},
+  {id:6,cat:"ระบบ",name:"ถังบำบัดน้ำเสีย",os:9,oe:15,dur:7,wt:2},
+  {id:7,cat:"ระบบ",name:"ระบบป้องกันปลวก",os:14,oe:16,dur:3,wt:1},
+  {id:8,cat:"ประปา",name:"ท่อสุขาภิบาล ชั้น 1",os:15,oe:24,dur:10,wt:3},
+  {id:9,cat:"โครงสร้าง",name:"ผนัง Precast ชั้น 1",os:25,oe:37,dur:13,wt:5,crit:true},
+  {id:10,cat:"โครงสร้าง",name:"คาน Precast ชั้น 2",os:35,oe:41,dur:7,wt:3},
+  {id:11,cat:"โครงสร้าง",name:"พื้น Precast ชั้น 2",os:39,oe:47,dur:9,wt:4,crit:true},
+  {id:12,cat:"โครงสร้าง",name:"รั้วแบ่งแปลน",os:37,oe:47,dur:11,wt:3},
+  {id:13,cat:"โครงสร้าง",name:"ผนัง Precast ชั้น 2",os:48,oe:57,dur:10,wt:4,crit:true},
+  {id:14,cat:"โครงสร้าง",name:"Ring Beam/เสารับหลังคา",os:55,oe:61,dur:7,wt:3},
+  {id:15,cat:"โครงสร้าง",name:"บันได Precast",os:57,oe:63,dur:7,wt:2},
+  {id:16,cat:"โครงสร้าง",name:"เทพื้นโรงจอดรถ",os:62,oe:67,dur:6,wt:2},
+  {id:17,cat:"โครงสร้าง",name:"เทแลมป์หน้าบ้าน",os:64,oe:69,dur:6,wt:1},
+  {id:18,cat:"โครงสร้าง",name:"กันซึม หลังคา+พื้น",os:63,oe:69,dur:7,wt:2},
+  {id:19,cat:"โครงสร้าง",name:"แผ่นรั้วหน้าบ้าน",os:67,oe:73,dur:7,wt:2},
+  {id:20,cat:"หลังคา",name:"โครงหลังคา Smart Touch",os:62,oe:71,dur:10,wt:3,crit:true},
+  {id:21,cat:"หลังคา",name:"มุงหลังคา+เชิงชาย",os:69,oe:77,dur:9,wt:3,crit:true},
+  {id:22,cat:"สถาปัตย์",name:"บัวภายนอก",os:71,oe:79,dur:9,wt:2},
+  {id:23,cat:"สี",name:"สกิมขัด+สีรองพื้น",os:77,oe:85,dur:9,wt:3},
+  {id:24,cat:"ประปา",name:"ท่อน้ำ ชั้น 2+ทดสอบ",os:59,oe:69,dur:11,wt:3},
+  {id:25,cat:"ไฟฟ้า",name:"ฝังท่อร้อยไฟ",os:49,oe:64,dur:16,wt:3},
+  {id:26,cat:"ไฟฟ้า",name:"ร้อยสายไฟ",os:64,oe:77,dur:14,wt:3},
+  {id:27,cat:"กระเบื้อง",name:"กระเบื้องผนัง+เคาน์เตอร์",os:81,oe:93,dur:13,wt:4},
+  {id:28,cat:"กระเบื้อง",name:"กระเบื้องพื้น ชั้น 1",os:87,oe:97,dur:11,wt:4},
+  {id:29,cat:"เหล็ก/ฝ้า",name:"ราวบันได+เหล็กดัด",os:79,oe:89,dur:11,wt:2},
+  {id:30,cat:"เหล็ก/ฝ้า",name:"ฝ้าเพดาน",os:83,oe:93,dur:11,wt:3},
+  {id:31,cat:"สี",name:"ทาสีรอบแรก",os:89,oe:97,dur:9,wt:3},
+  {id:32,cat:"ประตู",name:"ติดตั้งวงกบ",os:85,oe:93,dur:9,wt:2},
+  {id:33,cat:"ประตู",name:"ติดตั้งบานประตู",os:91,oe:99,dur:9,wt:2},
+  {id:34,cat:"ไฟฟ้า",name:"โคมไฟ+สวิตช์+ปลั๊ก",os:93,oe:102,dur:10,wt:3},
+  {id:35,cat:"สี",name:"ทาสีรอบสอง เก็บงาน",os:99,oe:107,dur:9,wt:3},
+  {id:36,cat:"ประปา",name:"สุขภัณฑ์+ทดสอบน้ำ",os:97,oe:105,dur:9,wt:2},
+  {id:37,cat:"สถาปัตย์",name:"Top หินเคาน์เตอร์",os:99,oe:105,dur:7,wt:2},
+  {id:38,cat:"สถาปัตย์",name:"กระจกเงา",os:99,oe:105,dur:7,wt:1},
+  {id:39,cat:"สถาปัตย์",name:"ประตู-หน้าต่าง UPVC",os:94,oe:103,dur:10,wt:2},
+  {id:40,cat:"สถาปัตย์",name:"SPC พื้นชั้น 2",os:99,oe:107,dur:9,wt:2},
+  {id:41,cat:"สถาปัตย์",name:"ไม้บันได",os:97,oe:105,dur:9,wt:2},
+  {id:42,cat:"สถาปัตย์",name:"Digital Door Lock",os:103,oe:107,dur:5,wt:1},
+  {id:43,cat:"ภายนอก",name:"ปูหญ้าภายนอก",os:105,oe:111,dur:7,wt:1},
+  {id:44,cat:"ภายนอก",name:"ถังขยะ",os:107,oe:109,dur:3,wt:1},
+  {id:45,cat:"ภายนอก",name:"Stamp Concrete",os:101,oe:109,dur:9,wt:2},
+  {id:46,cat:"สี",name:"สี Texture ภายนอก",os:103,oe:111,dur:9,wt:2},
+  {id:47,cat:"สถาปัตย์",name:"ป้ายบ้านเลขที่",os:109,oe:111,dur:3,wt:1},
+  {id:48,cat:"ปิดโครงการ",name:"ทำความสะอาด",os:111,oe:115,dur:5,wt:1},
+  {id:49,cat:"ปิดโครงการ",name:"QC + Punch List",os:114,oe:117,dur:4,wt:1},
+  {id:50,cat:"ปิดโครงการ",name:"ส่งมอบ → ฝ่ายขาย ✅",os:118,oe:119,dur:2,wt:1},
+];
+
+// งาน 90 วัน — Osaka รามอินทรา, The Nice คลอง3
+const TASKS_90 = [
+  {id:1,cat:"โครงสร้าง",name:"ฐานราก + เสาเข็ม",os:0,oe:9,dur:10,wt:5,crit:true},
+  {id:2,cat:"โครงสร้าง",name:"คานคอดิน Precast",os:10,oe:14,dur:5,wt:3},
+  {id:3,cat:"โครงสร้าง",name:"เทพื้นชั้น 1",os:12,oe:18,dur:7,wt:3,crit:true},
+  {id:4,cat:"โครงสร้าง",name:"เทขอบ/ธรณีประตู",os:16,oe:18,dur:3,wt:1},
+  {id:5,cat:"ระบบ",name:"ถังบำบัดน้ำเสีย",os:6,oe:11,dur:6,wt:2},
+  {id:6,cat:"ระบบ",name:"ระบบป้องกันปลวก",os:10,oe:12,dur:3,wt:1},
+  {id:7,cat:"ประปา",name:"ท่อสุขาภิบาล ชั้น 1",os:11,oe:18,dur:8,wt:3},
+  {id:8,cat:"โครงสร้าง",name:"ผนัง Precast ชั้น 1",os:19,oe:28,dur:10,wt:5,crit:true},
+  {id:9,cat:"โครงสร้าง",name:"คาน Precast ชั้น 2",os:26,oe:31,dur:6,wt:3},
+  {id:10,cat:"โครงสร้าง",name:"พื้น Precast ชั้น 2",os:29,oe:35,dur:7,wt:4,crit:true},
+  {id:11,cat:"โครงสร้าง",name:"ผนัง Precast ชั้น 2",os:36,oe:43,dur:8,wt:4,crit:true},
+  {id:12,cat:"โครงสร้าง",name:"Ring Beam/เสารับหลังคา",os:41,oe:46,dur:6,wt:3},
+  {id:13,cat:"โครงสร้าง",name:"บันได Precast",os:43,oe:47,dur:5,wt:2},
+  {id:14,cat:"โครงสร้าง",name:"กันซึม หลังคา+พื้น",os:47,oe:52,dur:6,wt:2},
+  {id:15,cat:"หลังคา",name:"โครงหลังคา",os:46,oe:53,dur:8,wt:3,crit:true},
+  {id:16,cat:"หลังคา",name:"มุงหลังคา+เชิงชาย",os:52,oe:58,dur:7,wt:3,crit:true},
+  {id:17,cat:"สถาปัตย์",name:"บัวภายนอก",os:54,oe:60,dur:7,wt:2},
+  {id:18,cat:"ประปา",name:"ท่อน้ำ ชั้น 2+ทดสอบ",os:44,oe:52,dur:9,wt:3},
+  {id:19,cat:"ไฟฟ้า",name:"ฝังท่อร้อยไฟ",os:37,oe:48,dur:12,wt:3},
+  {id:20,cat:"ไฟฟ้า",name:"ร้อยสายไฟ",os:48,oe:58,dur:11,wt:3},
+  {id:21,cat:"สี",name:"สกิมขัด+สีรองพื้น",os:58,oe:64,dur:7,wt:3},
+  {id:22,cat:"กระเบื้อง",name:"กระเบื้องผนัง+พื้น",os:62,oe:71,dur:10,wt:4},
+  {id:23,cat:"เหล็ก/ฝ้า",name:"ราวบันได+เหล็กดัด",os:60,oe:67,dur:8,wt:2},
+  {id:24,cat:"เหล็ก/ฝ้า",name:"ฝ้าเพดาน",os:63,oe:70,dur:8,wt:3},
+  {id:25,cat:"สี",name:"ทาสีรอบแรก",os:67,oe:73,dur:7,wt:3},
+  {id:26,cat:"ประตู",name:"ติดตั้งวงกบ+บานประตู",os:64,oe:71,dur:8,wt:2},
+  {id:27,cat:"ไฟฟ้า",name:"โคมไฟ+สวิตช์+ปลั๊ก",os:71,oe:78,dur:8,wt:3},
+  {id:28,cat:"สี",name:"ทาสีรอบสอง เก็บงาน",os:75,oe:81,dur:7,wt:3},
+  {id:29,cat:"ประปา",name:"สุขภัณฑ์+ทดสอบน้ำ",os:74,oe:80,dur:7,wt:2},
+  {id:30,cat:"สถาปัตย์",name:"ประตู-หน้าต่าง UPVC",os:71,oe:78,dur:8,wt:2},
+  {id:31,cat:"สถาปัตย์",name:"Top หินเคาน์เตอร์+กระจก",os:76,oe:81,dur:6,wt:2},
+  {id:32,cat:"สถาปัตย์",name:"พื้น SPC/กระเบื้องชั้น 2",os:76,oe:82,dur:7,wt:2},
+  {id:33,cat:"สถาปัตย์",name:"Digital Door Lock",os:80,oe:83,dur:4,wt:1},
+  {id:34,cat:"ภายนอก",name:"Stamp Concrete+ปูหญ้า",os:78,oe:84,dur:7,wt:2},
+  {id:35,cat:"สี",name:"สี Texture ภายนอก",os:80,oe:86,dur:7,wt:2},
+  {id:36,cat:"สถาปัตย์",name:"ป้ายบ้านเลขที่+ถังขยะ",os:84,oe:86,dur:3,wt:1},
+  {id:37,cat:"ปิดโครงการ",name:"ทำความสะอาด",os:86,oe:88,dur:3,wt:1},
+  {id:38,cat:"ปิดโครงการ",name:"QC + Punch List",os:87,oe:89,dur:3,wt:1},
+  {id:39,cat:"ปิดโครงการ",name:"ส่งมอบ → ฝ่ายขาย ✅",os:89,oe:89,dur:1,wt:1},
+];
+
+// Map project → tasks & duration
+const PROJ_PLAN = {
+  'Hampton Grove':       { tasks: TASKS_120, duration: 120 },
+  'Hampton พระราม9':     { tasks: TASKS_120, duration: 120 },
+  'Grand Verona ร่มเกล้า':{ tasks: TASKS_120, duration: 120 },
+  'Osaka รามอินทรา':     { tasks: TASKS_90,  duration: 90  },
+  'The Nice คลอง3':      { tasks: TASKS_90,  duration: 90  },
+};
+
+// Helper: ดึง tasks และ duration ตาม plotId
+function getPlan(pid) {
+  const proj = getProjectFromPid(pid);
+  return PROJ_PLAN[proj?.name] || { tasks: TASKS_120, duration: 120 };
+}
+
+// ใช้ TASKS_120 เป็น default (backward compat)
+const TASKS = TASKS_120;
+
+// Weighted % คำนวณตาม tasks จริงของแต่ละแปลง
+function wp(pid){
+  const {tasks} = getPlan(pid);
+  const tw = tasks.reduce((a,t)=>a+t.wt,0);
+  let s=0;
+  tasks.forEach(t=>{s+=t.wt*((plots[pid].tasks[t.id])||0);});
+  return Math.round(s*10/tw)/10;
+}
+// ══════════════════════════════
+// PROJECTS & PLOTS
+// ══════════════════════════════
+const PROJECTS = {
+  'Hampton Grove': {
+    color:'#58a6ff', icon:'🏡',
+    zones:['GA','GB','GC','GD','GE','GG','GH','GI'],
+    zoneColors:{GA:'#f59e0b',GB:'#58a6ff',GC:'#3fb950',GD:'#f97316',GE:'#bc8cff',GG:'#39d353',GH:'#f85149',GI:'#06b6d4'}
+  },
+  'Hampton พระราม9': {
+    color:'#f59e0b', icon:'🏘️',
+    zones:['EH','HH'],
+    zoneColors:{EH:'#f59e0b',HH:'#f97316'}
+  },
+  'Osaka รามอินทรา': {
+    color:'#e11d48', icon:'🏯',
+    zones:['CO','DO','EO','IO'],
+    zoneColors:{CO:'#e11d48',DO:'#f43f5e',EO:'#fb7185',IO:'#fda4af'}
+  },
+  'The Nice คลอง3': {
+    color:'#8b5cf6', icon:'🌿',
+    zones:['EQ','SP'],
+    zoneColors:{EQ:'#8b5cf6',SP:'#a78bfa'}
+  },
+  'Grand Verona ร่มเกล้า': {
+    color:'#10b981', icon:'🏰',
+    zones:['GSA','GSB','GSC','GSD','GSE','GSH'],
+    zoneColors:{GSA:'#10b981',GSB:'#34d399',GSC:'#6ee7b7',GSD:'#059669',GSE:'#047857',GSH:'#065f46'}
+  }
+};
+
+// สร้างแปลงทั้งหมด
+function makePlots(zone, prefix, from, to) {
+  const arr = [];
+  for(let i=from;i<=to;i++) arr.push([`${prefix}${i}`, zone]);
+  return arr;
+}
+
+const PR = [
+  // Hampton Grove
+  ...makePlots('GA','GA',1,7),
+  ...makePlots('GB','GB',1,15),
+  ...makePlots('GC','GC',1,16),
+  ...makePlots('GD','GD',1,15),
+  ...makePlots('GE','GE',1,8),
+  ...makePlots('GG','GG',1,9),
+  ...makePlots('GH','GH',1,9),
+  ...makePlots('GI','GI',1,10),
+  // Hampton พระราม9
+  ...makePlots('EH','EH',1,16),
+  ...makePlots('HH','HH',1,12),
+  // Osaka รามอินทรา
+  ...makePlots('CO','CO',1,31),
+  ...makePlots('DO','DO',1,28),
+  ...makePlots('EO','EO',1,28),
+  ...makePlots('IO','IO',1,27),
+  // The Nice คลอง3
+  ...makePlots('EQ','EQ',1,42),
+  ...makePlots('SP','SP',1,28),
+  // Grand Verona ร่มเกล้า
+  ...makePlots('GSA','GSA',1,18),
+  ...makePlots('GSB','GSB',1,21),
+  ...makePlots('GSC','GSC',1,18),
+  ...makePlots('GSD','GSD',1,16),
+  ...makePlots('GSE','GSE',1,14),
+  ...makePlots('GSH','GSH',1,16),
+];
+
+// Zone ทั้งหมด
+const ZONES = [...new Set(PR.map(p=>p[1]))];
+
+// ZC รวมทุกโครงการ
+const ZC = {};
+Object.values(PROJECTS).forEach(proj => Object.assign(ZC, proj.zoneColors));
+
+// หา project จาก zone
+function getProject(zone) {
+  for(const [name,proj] of Object.entries(PROJECTS)) {
+    if(proj.zones.includes(zone)) return { name, ...proj };
+  }
+  return null;
+}
+function getProjectFromPid(pid) {
+  const zone = PR.find(p=>p[0]===pid)?.[1];
+  return zone ? getProject(zone) : null;
+}
+const CC={โครงสร้าง:'#58a6ff',ระบบ:'#3fb950',ประปา:'#06b6d4',ไฟฟ้า:'#d29922',หลังคา:'#f97316',สถาปัตย์:'#bc8cff',กระเบื้อง:'#f59e0b','เหล็ก/ฝ้า':'#8b949e',สี:'#39d353',ประตู:'#f85149',ภายนอก:'#22c55e',ปิดโครงการ:'#f85149'};
+
+// STATE
+let plots={};
+PR.forEach(([pid])=>{
+  const {tasks} = getPlan(pid);
+  plots[pid]={startDate:'',saleStatus:'ว่าง',resp:'',note:'',
+    tasks:{},taskNotes:{},taskPhotos:{},taskActStart:{},taskActEnd:{}};
+  tasks.forEach(t=>{plots[pid].tasks[t.id]=0;});
+});
+let cur=null,prevScr='s-plots',fZone='ALL',fCat='ALL',curTid=null;
+let userName='PM',userRole='admin';
+let syncing=false,syncTimer=null;
+let fProject='ALL'; // กรองโครงการ
+
+// ══════════════════════════════
+// UTILS
+// ══════════════════════════════
+const aD=(s,d)=>{if(!s)return null;const dt=new Date(s);dt.setDate(dt.getDate()+d);return dt;};
+const fmt=(d)=>d?d.toLocaleDateString('th-TH',{day:'2-digit',month:'short'}):'—';
+const fmtF=(d)=>d?d.toLocaleDateString('th-TH',{day:'2-digit',month:'2-digit',year:'numeric'}):'—';
+const dif=(a,b)=>Math.round((b-a)/86400000);
+function wp(pid){let s=0;TASKS.forEach(t=>{s+=t.wt*(plots[pid].tasks[t.id]||0);});return Math.round(s*10/TW)/10;}
+function dc(pid){const p=wp(pid);return p===100?'#3fb950':p>0?'#58a6ff':plots[pid].startDate?'#d29922':'#484f58';}
+function pc(p){return p===100?'#3fb950':p>0?'#58a6ff':'#484f58';}
+function tst(t,s,p){
+  if(p===100)return{txt:'✅ เสร็จ',c:'#3fb950'};
+  if(!s)return{txt:'⬜ ยังไม่มีแผน',c:'#484f58'};
+  const pe=aD(s,t.oe),today=new Date();today.setHours(0,0,0,0);
+  if(p>0)return pe<today?{txt:'🔴 ล่าช้า',c:'#f85149'}:{txt:'🟡 กำลังทำ',c:'#d29922'};
+  if(today>pe)return{txt:'🔴 ล่าช้า',c:'#f85149'};
+  if(today>=aD(s,t.os))return{txt:'⏰ ถึงเวลา',c:'#f97316'};
+  return{txt:'⬜ รอ',c:'#484f58'};
+}
+function canEdit(){return['admin','foreman','qc'].includes(userRole);}
+function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500);}
+
+// ══════════════════════════════
+// SAVE / LOAD LOCAL
+// ══════════════════════════════
+function saveLocal(){
+  try{
+    const slim={};
+    PR.forEach(([pid])=>{
+      slim[pid]={
+        startDate:plots[pid].startDate||'',
+        saleStatus:plots[pid].saleStatus||'ว่าง',
+        resp:plots[pid].resp||'',
+        note:plots[pid].note||'',
+        tasks:{...plots[pid].tasks},
+        taskNotes:{...plots[pid].taskNotes},
+        taskActStart:{...plots[pid].taskActStart},
+        taskActEnd:{...plots[pid].taskActEnd},
+      };
+    });
+    localStorage.setItem(SAVE_KEY,JSON.stringify({data:slim,at:new Date().toISOString(),by:userName}));
+    PR.forEach(([pid])=>{
+      try{
+        const ph=plots[pid].taskPhotos;
+        if(ph&&Object.keys(ph).length>0)
+          localStorage.setItem('hg_ph7_'+pid,JSON.stringify(ph));
+      }catch{}
+    });
+    setSS('ok','บันทึกแล้ว · '+new Date().toLocaleTimeString('th-TH',{hour:'2-digit',minute:'2-digit'}));
+  }catch(e){setSS('err','Storage เต็ม');}
+}
+
+function loadLocal(){
+  try{
+    const raw=localStorage.getItem(SAVE_KEY);
+    if(raw){
+      const {data}=JSON.parse(raw);
+      if(data) Object.keys(data).forEach(pid=>{
+        if(plots[pid]) plots[pid]={...plots[pid],...data[pid]};
+      });
+    }
+    PR.forEach(([pid])=>{
+      try{const ph=localStorage.getItem('hg_ph7_'+pid);if(ph)plots[pid].taskPhotos=JSON.parse(ph);}catch{}
+    });
+  }catch{}
+}
+
+// ══════════════════════════════
+// GOOGLE SHEETS SYNC
+// ══════════════════════════════
+async function gsf(params){
+  const url=SHEET_URL+'?'+new URLSearchParams(params);
+  const r=await fetch(url,{mode:'cors'});
+  return r.json();
+}
+
+async function pullAll(){
+  setSS('ing','⬇️ กำลัง Pull...');syncing=true;
+  try{
+    const d=await gsf({action:'getAll'});
+    if(!d||d.error)throw new Error(d?.error||'ไม่ได้รับข้อมูล');
+    let n=0;
+    Object.keys(d).forEach(pid=>{
+      if(plots[pid]){
+        const{_updatedAt,_updatedBy,...data}=d[pid];
+        plots[pid]={...plots[pid],...data};n++;
+      }
+    });
+    saveLocal();renderHome();renderPlots();
+    if(cur&&document.getElementById('s-detail').classList.contains('active'))renderDetail();
+    setSS('ok','✅ Pull '+n+' แปลงแล้ว · '+new Date().toLocaleTimeString('th-TH',{hour:'2-digit',minute:'2-digit'}));
+    toast('✅ Pull '+n+' แปลงสำเร็จ');
+  }catch(e){setSS('err','❌ Pull ล้มเหลว: '+e.message);toast('❌ '+e.message);}
+  syncing=false;
+}
+
+async function pushAll(){
+  setSS('ing','⬆️ กำลัง Push...');syncing=true;
+  try{
+    const slim={};PR.forEach(([pid])=>{slim[pid]={...plots[pid],taskPhotos:{}};});
+    const d=await gsf({action:'saveAll',allJson:JSON.stringify(slim)});
+    if(!d||d.error)throw new Error(d?.error||'ล้มเหลว');
+    setSS('ok','✅ Push '+d.saved+' แปลงแล้ว');toast('✅ Push สำเร็จ');
+  }catch(e){setSS('err','❌ Push ล้มเหลว');toast('❌ '+e.message);}
+  syncing=false;
+}
+
+async function pushOne(pid){
+  if(syncing)return;syncing=true;
+  try{
+    const slim={...plots[pid],taskPhotos:{}};
+    await gsf({action:'savePlot',plotId:pid,dataJson:JSON.stringify(slim),updatedBy:userName,updatedAt:new Date().toISOString()});
+    setSS('ok','☁️ Synced · '+new Date().toLocaleTimeString('th-TH',{hour:'2-digit',minute:'2-digit'}));
+  }catch{}
+  syncing=false;
+}
+
+function schedSync(){
+  if(!cur)return;
+  clearTimeout(syncTimer);
+  syncTimer=setTimeout(()=>pushOne(cur),2000);
+}
+
+function setSS(s,m){
+  const c={ok:'#3fb950',err:'#f85149',ing:'#d29922','':'#484f58'}[s]||'#484f58';
+  ['sdot','sdot2'].forEach(id=>{const el=document.getElementById(id);if(el)el.style.background=c;});
+  const ti=document.getElementById('tb-sync');if(ti)ti.textContent=s==='ok'?'✅':s==='err'?'❌':s==='ing'?'🔄':'☁️';
+  const st=document.getElementById('stxt');if(st&&m)st.textContent=m;
+  const syncT=document.getElementById('syncT');
+  const syncS=document.getElementById('syncS');
+  if(syncT)syncT.textContent=s==='ok'?'✅ บันทึกและ Sync แล้ว':s==='err'?'❌ เกิดข้อผิดพลาด':s==='ing'?'🔄 กำลังดำเนินการ...':'💾 พร้อมใช้งาน';
+  if(syncS&&m)syncS.textContent=m;
+}
+
+// ══════════════════════════════
+// SETUP / LOGIN
+// ══════════════════════════════
+function doEnter(){
+  const name=document.getElementById('su-name').value.trim();
+  if(!name){toast('⚠️ กรุณาใส่ชื่อก่อน');return;}
+  const role=document.getElementById('su-role').value;
+  userName=name;userRole=role;
+  try{localStorage.setItem('hg_sess7',JSON.stringify({name,role,at:Date.now()}));}catch{}
+  document.getElementById('setup').style.display='none';
+  document.getElementById('app').style.display='block';
+  loadLocal();
+  document.getElementById('sb-role').textContent={admin:'👑 Admin',foreman:'👷 โฟร์แมน',qc:'🔍 QC',sales:'💼 ฝ่ายขาย',viewer:'👁️ ผู้บริหาร'}[role]||role;
+  document.getElementById('sb-uname').textContent=name;
+  document.getElementById('hGreet').textContent='สวัสดีครับ '+name+' 👋';
+  setSS('ok','เชื่อม Sheets แล้ว');
+  tickClock();renderHome();renderPlots();
+  setTimeout(()=>pullAll(),800);
+  setInterval(()=>{if(!syncing)pullAll();},60000);
+  toast('👋 ยินดีต้อนรับ '+name);
+}
+
+function doLogout(){
+  try{localStorage.removeItem('hg_sess7');}catch{}
+  document.getElementById('app').style.display='none';
+  document.getElementById('setup').style.display='flex';
+  document.getElementById('su-name').value='';
+}
+
+// ══════════════════════════════
+// UI HELPERS
+// ══════════════════════════════
+function tickClock(){
+  const n=new Date();
+  const c=document.getElementById('clk');if(c)c.textContent=n.toLocaleTimeString('th-TH',{hour:'2-digit',minute:'2-digit'});
+  const d=document.getElementById('dateTxt');if(d)d.textContent=n.toLocaleDateString('th-TH',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+}
+setInterval(tickClock,1000);
+
+function togSB(){const s=document.getElementById('sb'),o=document.getElementById('overlay');s.classList.toggle('open');o.style.display=s.classList.contains('open')?'block':'none';}
+function closeSB(){document.getElementById('sb').classList.remove('open');document.getElementById('overlay').style.display='none';}
+
+function sw(id,btn){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.sni,.bni').forEach(b=>b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelectorAll(`.sni[onclick*="${id}"],.bni[onclick*="${id}"]`).forEach(b=>b.classList.add('active'));
+  closeSB();
+  if(id==='s-home')renderHome();
+  if(id==='s-plots')renderPlots();
+  if(id==='s-gantt')renderGantt();
+  if(id==='s-report')renderReport();
+  if(id==='s-alerts')renderAlerts();
+}
+function goBack(){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(prevScr).classList.add('active');
+  document.querySelectorAll('.sni,.bni').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll(`.sni[onclick*="${prevScr}"],.bni[onclick*="${prevScr}"]`).forEach(b=>b.classList.add('active'));
+  if(prevScr==='s-plots')renderPlots();else renderHome();
+}
+function closeM(id,e){if(!e||e.target===document.getElementById(id))document.getElementById(id).classList.remove('open');}
+
+function openSyncM(){
+  const wd=PR.filter(([pid])=>plots[pid].startDate||Object.values(plots[pid].tasks).some(v=>v>0)).length;
+  const td=PR.reduce((t,[pid])=>t+Object.values(plots[pid].tasks).filter(v=>v>0).length,0);
+  document.getElementById('stPlots').textContent=wd;
+  document.getElementById('stTasks').textContent=td;
+  try{const r=JSON.parse(localStorage.getItem(SAVE_KEY)||'null');if(r?.at)document.getElementById('stTime').textContent=new Date(r.at).toLocaleTimeString('th-TH',{hour:'2-digit',minute:'2-digit'});}catch{}
+  document.getElementById('syncM').classList.add('open');
+}
+
+// ══════════════════════════════
+// HOME
+// ══════════════════════════════
+function renderProjChips(elId, onClick) {
+  const el = document.getElementById(elId);
+  if(!el) return;
+  el.innerHTML = ['ALL', ...Object.keys(PROJECTS)].map(p => {
+    const proj = p === 'ALL' ? null : PROJECTS[p];
+    const isActive = fProject === p;
+    return `<button onclick="${onClick}('${p}')" style="
+      padding:6px 14px;border-radius:20px;font-size:12px;font-weight:600;
+      border:1px solid ${isActive ? (proj?.color||'#58a6ff') : 'var(--b2)'};
+      background:${isActive ? (proj?.color||'#58a6ff')+'22' : 'transparent'};
+      color:${isActive ? (proj?.color||'#58a6ff') : 'var(--t2)'};
+      cursor:pointer;white-space:nowrap;font-family:'IBM Plex Sans Thai',sans-serif;
+      flex-shrink:0;transition:all .15s;
+    ">${p==='ALL'?'🏢 ทั้งหมด':proj.icon+' '+p}</button>`;
+  }).join('');
+}
+
+function setProjFilter(p) { fProject=p; renderHome(); }
+function setProjFilterPlots(p) { fProject=p; fZone='ALL'; renderPlots(); }
+
+function getFilteredPR() {
+  if(fProject==='ALL') return PR;
+  const proj = PROJECTS[fProject];
+  return PR.filter(([,zone]) => proj.zones.includes(zone));
+}
+
+function renderHome(){
+  renderProjChips('projChips','setProjFilter');
+  const filtered = getFilteredPR();
+  const allP = filtered.map(([pid])=>wp(pid));
+  const bld=allP.filter(p=>p>0&&p<100).length,
+        avg=allP.length?(allP.reduce((a,b)=>a+b,0)/allP.length).toFixed(1):0,
+        d100=allP.filter(p=>p===100).length;
+  const sold=filtered.filter(([pid])=>['ขายแล้ว','โอนแล้ว'].includes(plots[pid].saleStatus)).length;
+  const alerts=getAlerts(filtered);const late=alerts.filter(a=>a.type==='late').length;
+
+  // Project name display
+  const projName = fProject==='ALL'?`ทั้งหมด ${Object.keys(PROJECTS).length} โครงการ (${PR.length} แปลง)`:
+    `${PROJECTS[fProject].icon} ${fProject} (${filtered.length} แปลง)`;
+  document.getElementById('hKpi').innerHTML=`
+    <div class="kbox"><div class="knum" style="color:var(--blue)">${filtered.length}</div><div class="klbl">แปลงทั้งหมด</div></div>
+    <div class="kbox"><div class="knum" style="color:var(--green)">${bld}</div><div class="klbl">กำลังก่อสร้าง</div></div>
+    <div class="kbox"><div class="knum" style="color:var(--gold)">${avg}%</div><div class="klbl">เฉลี่ยรวม</div></div>
+    <div class="kbox"><div class="knum" style="color:var(--red)">${late}</div><div class="klbl">งานล่าช้า</div></div>
+    <div class="kbox"><div class="knum" style="color:var(--purple)">${sold}</div><div class="klbl">ขายแล้ว</div></div>
+    <div class="kbox"><div class="knum" style="color:var(--teal)">${d100}</div><div class="klbl">เสร็จ 100%</div></div>`;
+
+  const nb=alerts.length;
+  ['nbb','snb'].forEach(id=>{const el=document.getElementById(id);if(el){el.textContent=nb;el.style.display=nb>0?'block':'none';}});
+  document.getElementById('aLbl').textContent=nb>0?`แจ้งเตือน (${nb})`:'แจ้งเตือน';
+  const hA=document.getElementById('hAlerts');
+  hA.innerHTML=!alerts.length
+    ?`<div class="aitem"><span class="aicon">✅</span><div><div class="a-title">ไม่มีแจ้งเตือน</div><div class="a-sub">ทุกงานเป็นปกติ</div></div></div>`
+    :alerts.slice(0,3).map(a=>`<div class="aitem" style="border-left:3px solid ${a.c}" onclick="prevScr='s-home';selPlot('${a.pid}')"><span class="aicon">${a.icon}</span><div><div class="a-title">${a.title}</div><div class="a-sub">${a.sub}</div></div></div>`).join('');
+
+  // Zones
+  const zEl=document.getElementById('hZones');zEl.innerHTML='';
+  const zd=document.createElement('div');zd.className='zprog';
+
+  // กลุ่มตาม Project
+  const projectsToShow = fProject==='ALL' ? Object.entries(PROJECTS) : [[fProject, PROJECTS[fProject]]];
+  projectsToShow.forEach(([pname,proj])=>{
+    // Project header
+    zd.innerHTML+=`<div style="padding:10px 16px 4px;background:var(--s2);border-bottom:1px solid var(--b1);font-size:12px;font-weight:700;color:${proj.color}">${proj.icon} ${pname}</div>`;
+    proj.zones.forEach(z=>{
+      const zp=PR.filter(p=>p[1]===z);
+      const zpcts=zp.map(([pid])=>wp(pid));
+      const za=zpcts.length?(zpcts.reduce((a,b)=>a+b,0)/zpcts.length).toFixed(1):0;
+      const zc=ZC[z]||proj.color;
+      zd.innerHTML+=`<div class="zrow"><div class="zrow-top"><div class="zname" style="color:${zc}">${z}</div><div class="zpct" style="color:${zc}">${za}%</div></div><div class="zbar"><div class="zfill" style="width:${za}%;background:${zc}"></div></div><div class="zstat">${zp.length} แปลง · ทำอยู่ ${zpcts.filter(p=>p>0&&p<100).length} · เสร็จ ${zpcts.filter(p=>p===100).length}</div></div>`;
+    });
+  });
+  zEl.appendChild(zd);
+}
+
+// ══════════════════════════════
+// PLOTS LIST
+// ══════════════════════════════
+function renderPlots(){
+  renderProjChips('plotProjChips','setProjFilterPlots');
+  const filtered = getFilteredPR();
+  const projZones = [...new Set(filtered.map(p=>p[1]))];
+  const cEl=document.getElementById('zChips');
+  cEl.innerHTML=['ALL',...projZones].map(z=>`<button class="chip ${fZone===z?'on':''}" onclick="setZ('${z}')">${z==='ALL'?'ทั้งหมด':z}</button>`).join('');
+  const q=document.getElementById('srch').value.toLowerCase();
+  const el=document.getElementById('plotList');el.innerHTML='';
+  filtered.filter(([pid,z])=>(fZone==='ALL'||z===fZone)&&(!q||pid.toLowerCase().includes(q))).forEach(([pid,zone])=>{
+    const pd=plots[pid];const p=wp(pid);
+    const {duration}=getPlan(pid);
+    const end=pd.startDate?aD(pd.startDate,duration-1):null;
+    const today=new Date();today.setHours(0,0,0,0);const dl=end?dif(today,end):null;
+    const proj=getProject(zone);
+    const zc=ZC[zone]||proj?.color||'#58a6ff';
+    const div=document.createElement('div');div.className='pcard';div.onclick=()=>{prevScr='s-plots';selPlot(pid);};
+    div.innerHTML=`
+      <div style="background:${zc}18;padding:4px 13px;font-size:10px;font-weight:700;color:${zc}">${proj?.icon||''} ${proj?.name||''}</div>
+      <div class="pcard-top"><div class="pdot" style="background:${dc(pid)}"></div><div style="flex:1;min-width:0"><div class="pc-id">${pid}</div><div class="pc-sub">โซน ${zone} · ${pd.saleStatus}${pd.resp?' · '+pd.resp:''}</div></div><div class="pc-pct" style="color:${pc(p)}">${p}%</div></div>
+      <div class="pbar"><div class="pbar-fill" style="width:${p}%;background:${pc(p)}"></div></div>
+      <div class="pcard-bot"><span>เริ่ม: <b>${pd.startDate?fmtF(new Date(pd.startDate)):'ยังไม่กำหนด'}</b></span><span>ส่งมอบ: <b style="color:${dl!==null&&dl<0?'#f85149':'#3fb950'}">${end?fmt(end):'—'}</b></span></div>`;
+    el.appendChild(div);
+  });
+}
+function setZ(z){fZone=z;renderPlots();}
+document.getElementById('srch').oninput=()=>renderPlots();
+
+// ══════════════════════════════
+// DETAIL
+// ══════════════════════════════
+function selPlot(pid){cur=pid;fCat='ALL';document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById('s-detail').classList.add('active');renderDetail();}
+function renderDetail(){
+  const pid=cur,pd=plots[pid];
+  const {tasks, duration} = getPlan(pid);
+  const tw = tasks.reduce((a,t)=>a+t.wt,0);
+  const p=wp(pid), done=tasks.filter(t=>(pd.tasks[t.id]||0)===100).length;
+  const today=new Date();today.setHours(0,0,0,0);const zone=PR.find(r=>r[0]===pid)[1];
+  const end=pd.startDate?aD(pd.startDate,duration-1):null;const dl=end?dif(today,end):null;
+  const proj=getProject(zone);
+  const zc=ZC[zone]||proj?.color||'#58a6ff';
+  document.getElementById('dId').textContent=pid;
+  document.getElementById('dZone').textContent=`${proj?.icon||''} ${proj?.name||''} · โซน ${zone} · ${pd.saleStatus}${pd.resp?' · '+pd.resp:''}`;
+  document.getElementById('dPct').textContent=p+'%';document.getElementById('dPct').style.color=pc(p);
+  document.getElementById('dDone').textContent=`${done}/${tasks.length}`;
+  document.getElementById('dBar').style.cssText=`width:${p}%;background:${pc(p)}`;
+  document.getElementById('dSale').textContent=pd.saleStatus;
+  document.getElementById('dStart').textContent=pd.startDate?fmtF(new Date(pd.startDate)):'ตั้งค่า';
+  document.getElementById('dDeliv').textContent=end?fmtF(end):'—';
+  document.getElementById('dResp').textContent=pd.resp||'ตั้งค่า';
+  const lEl=document.getElementById('dLeft');
+  if(dl!==null){if(dl<0){lEl.textContent=`เกิน ${Math.abs(dl)} วัน`;lEl.style.color='#f85149';}else if(dl===0){lEl.textContent='วันนี้!';lEl.style.color='#d29922';}else{lEl.textContent=dl+' วัน';lEl.style.color='#3fb950';}}
+  else lEl.textContent='—';
+  document.getElementById('dEndInfo').textContent=end?`🏁 ส่งมอบ ${fmtF(end)} (${duration} วัน)`:`ยังไม่กำหนดวัน`;
+
+  const cats=['ALL',...new Set(tasks.map(t=>t.cat))];
+  document.getElementById('catChips').innerHTML=cats.map(c=>`<button class="chip ${fCat===c?'on':''}" onclick="setC('${c}')">${c==='ALL'?`ทั้งหมด (${tasks.length})`:c}</button>`).join('');
+
+  const el=document.getElementById('taskList');el.innerHTML='';
+  (fCat==='ALL'?tasks:tasks.filter(t=>t.cat===fCat)).forEach(task=>{
+    const tp=pd.tasks[task.id]||0,st=tst(task,pd.startDate,tp),cc=CC[task.cat]||'#8b949e';
+    const ps=pd.startDate?aD(pd.startDate,task.os):null,pe=pd.startDate?aD(pd.startDate,task.oe):null;
+    const photos=pd.taskPhotos?.[task.id]||[];
+    const phEl=photos.length>0?`<img class="tph" src="${photos[photos.length-1]}">`:`<div class="tph-ph">📷</div>`;
+    const div=document.createElement('div');div.className='titem';div.onclick=()=>openTaskM(task.id);
+    div.innerHTML=`<div class="tck ${tp===100?'done':tp>0?'part':''}">${tp===100?'✓':''}</div><div class="tinfo"><div class="tname ${tp===100?'done':''}">${task.crit?'🔴 ':''}${task.name}</div><div class="tmeta"><span class="tcb" style="background:${cc}22;color:${cc}">${task.cat}</span><span class="td">${ps?fmt(ps)+'→'+fmt(pe):'ไม่มีแผน'}</span><span class="ts" style="color:${st.c}">${st.txt}</span></div></div>${phEl}<div class="tpct" style="color:${pc(tp)}">${tp}%</div>`;
+    el.appendChild(div);
+  });
+}
+function setC(c){fCat=c;renderDetail();}
+
+// ══════════════════════════════
+// TASK MODAL
+// ══════════════════════════════
+function openTaskM(tid){
+  const {tasks} = getPlan(cur);
+  const task=tasks.find(t=>t.id===tid),pd=plots[cur];
+  const tp=pd.tasks[tid]||0,st=tst(task,pd.startDate,tp);
+  const ps=pd.startDate?aD(pd.startDate,task.os):null,pe=pd.startDate?aD(pd.startDate,task.oe):null;
+  curTid=tid;
+  document.getElementById('mT').textContent=task.name;
+  document.getElementById('mS').textContent=`${task.cat} · ${task.dur} วัน`;
+  document.getElementById('mPS').textContent=ps?fmt(ps):'—';
+  document.getElementById('mPE').textContent=pe?fmt(pe):'—';
+  document.getElementById('mStat').textContent=st.txt;document.getElementById('mStat').style.color=st.c;
+  document.getElementById('mAS').value=pd.taskActStart?.[tid]||'';
+  document.getElementById('mAE').value=pd.taskActEnd?.[tid]||'';
+  document.getElementById('mNote').value=pd.taskNotes?.[tid]||'';
+  sp(tp);renderPhGrid(tid);
+  document.getElementById('taskM').classList.add('open');
+}
+function sp(v){
+  v=parseInt(v);
+  document.getElementById('mSl').value=v;
+  document.getElementById('mPD').textContent=v+'%';
+  document.getElementById('mPD').style.color=pc(v);
+  document.getElementById('mSl').style.background=`linear-gradient(to right,${pc(v)} ${v}%,var(--b2) ${v}%)`;
+}
+document.getElementById('mSl').oninput=function(){sp(this.value);};
+
+function saveTask(){
+  if(!canEdit()){toast('🔒 ไม่มีสิทธิ์แก้ไข');return;}
+  const v=parseInt(document.getElementById('mSl').value),pd=plots[cur];
+  const {tasks}=getPlan(cur);
+  pd.tasks[curTid]=v;
+  if(!pd.taskNotes)pd.taskNotes={};pd.taskNotes[curTid]=document.getElementById('mNote').value;
+  if(!pd.taskActStart)pd.taskActStart={};pd.taskActStart[curTid]=document.getElementById('mAS').value;
+  if(!pd.taskActEnd)pd.taskActEnd={};pd.taskActEnd[curTid]=document.getElementById('mAE').value;
+  saveLocal();schedSync();renderDetail();
+  document.getElementById('taskM').classList.remove('open');
+  toast(v===100?'✅ งานเสร็จแล้ว!':'💾 บันทึกแล้ว');
+}
+
+function renderPhGrid(tid){
+  const photos=plots[cur]?.taskPhotos?.[tid]||[];
+  document.getElementById('phGrid').innerHTML=photos.map((src,i)=>`<div class="pthumb"><img src="${src}" loading="lazy"><button class="pdel" onclick="delPh(${tid},${i},event)">✕</button></div>`).join('');
+}
+function addPhotos(e){
+  if(!canEdit()){toast('🔒 ไม่มีสิทธิ์');return;}
+  const files=[...e.target.files];if(!files.length)return;
+  const pd=plots[cur];if(!pd.taskPhotos)pd.taskPhotos={};if(!pd.taskPhotos[curTid])pd.taskPhotos[curTid]=[];
+  let done=0;
+  files.slice(0,6).forEach(f=>{
+    const r=new FileReader();r.onload=ev=>{
+      const img=new Image();img.onload=()=>{
+        const c=document.createElement('canvas');const mx=900;let w=img.width,h=img.height;
+        if(w>mx){h=h*(mx/w);w=mx;}c.width=w;c.height=h;c.getContext('2d').drawImage(img,0,0,w,h);
+        pd.taskPhotos[curTid].push(c.toDataURL('image/jpeg',.72));
+        done++;if(done===Math.min(files.length,6)){renderPhGrid(curTid);toast('📸 เพิ่มรูปแล้ว');}
+      };img.src=ev.target.result;
+    };r.readAsDataURL(f);
+  });
+  e.target.value='';
+}
+function delPh(tid,i,e){e.stopPropagation();plots[cur].taskPhotos[tid].splice(i,1);renderPhGrid(tid);}
+
+// ══════════════════════════════
+// PLOT MODAL
+// ══════════════════════════════
+function openPlotM(){
+  const pd=plots[cur];
+  document.getElementById('pmT').textContent='ตั้งค่า '+cur;
+  document.getElementById('pmS').textContent='ข้อมูลพื้นฐาน — วันเริ่มคำนวณแผนทุกงานอัตโนมัติ';
+  document.getElementById('pmSt').value=pd.startDate||'';
+  document.getElementById('pmSale').value=pd.saleStatus||'ว่าง';
+  document.getElementById('pmResp').value=pd.resp||'';
+  document.getElementById('pmNote').value=pd.note||'';
+  document.getElementById('plotM').classList.add('open');
+}
+function savePlotInfo(){
+  if(!canEdit()&&userRole!=='sales'){toast('🔒 ไม่มีสิทธิ์');return;}
+  const pd=plots[cur];
+  pd.startDate=document.getElementById('pmSt').value;
+  pd.saleStatus=document.getElementById('pmSale').value;
+  pd.resp=document.getElementById('pmResp').value;
+  pd.note=document.getElementById('pmNote').value;
+  saveLocal();schedSync();renderDetail();renderPlots();
+  document.getElementById('plotM').classList.remove('open');toast('📅 บันทึกแล้ว');
+}
+
+// ══════════════════════════════
+// GANTT
+// ══════════════════════════════
+function renderGantt(){
+  const sel=document.getElementById('ganttSel');
+  if(!sel.options.length){PR.forEach(([pid])=>{sel.add(new Option(pid,pid));});if(cur)sel.value=cur;sel.onchange=renderGC;}
+  renderGC();
+}
+function renderGC(){
+  const pid=document.getElementById('ganttSel').value;if(!pid)return;
+  const pd=plots[pid];
+  const {tasks, duration}=getPlan(pid);
+  const today=new Date();today.setHours(0,0,0,0);
+  const st=pd.startDate?new Date(pd.startDate):null;
+  const tP=st?Math.max(0,Math.min(100,(dif(st,today)/duration)*100)):50;
+  const proj=getProjectFromPid(pid);
+  document.getElementById('ganttSub').textContent=`${proj?.icon||''} ${proj?.name||''} · ${pid} · ${duration} วัน${pd.startDate?` · เริ่ม ${fmtF(new Date(pd.startDate))}`:' · ยังไม่กำหนด'}`;
+  let h=`<div style="font-size:10px;color:var(--t2);margin-bottom:8px">🟦 แผน &nbsp;🟩 จริง &nbsp;🟨 วันนี้ &nbsp;<span style="color:${proj?.color||'#58a6ff'};font-weight:700">${duration} วัน</span></div>`;
+  tasks.forEach(task=>{
+    const tp=pd.tasks[task.id]||0,cc=CC[task.cat]||'#58a6ff';
+    const pL=(task.os/duration)*100,pW=(task.dur/duration)*100,aW=(task.dur*(tp/100)/duration)*100;
+    h+=`<div class="grow"><div class="glbl" title="${task.name}">${task.id}. ${task.name}</div><div class="gtl">${st?`<div class="gplan" style="left:${pL}%;width:${pW}%;border-color:${cc};background:${cc}22"></div><div class="gact" style="left:${pL}%;width:${aW}%;background:${tp===100?'#3fb950':cc}"></div><div class="gtoday" style="left:${tP}%"></div>`:`<div style="font-size:9px;color:var(--t3);position:absolute;top:2px">ยังไม่มีแผน</div>`}</div></div>`;
+  });
+  document.getElementById('ganttC').innerHTML=h;
+}
+
+// ══════════════════════════════
+// REPORT
+// ══════════════════════════════
+function renderReport(){
+  const filtered = getFilteredPR();
+  const allP=filtered.map(([pid])=>wp(pid));
+  const avg=allP.length?(allP.reduce((a,b)=>a+b,0)/allP.length).toFixed(1):0,
+        bld=allP.filter(p=>p>0&&p<100).length,
+        d100=allP.filter(p=>p===100).length;
+  const allS=filtered.map(([pid])=>plots[pid].saleStatus);
+  document.getElementById('rKpi').innerHTML=`
+    <div class="rbox"><div class="rnum" style="color:var(--blue)">${avg}%</div><div class="rlbl">เฉลี่ยรวม</div></div>
+    <div class="rbox"><div class="rnum" style="color:var(--green)">${bld}</div><div class="rlbl">กำลังก่อสร้าง</div></div>
+    <div class="rbox"><div class="rnum" style="color:var(--gold)">${d100}</div><div class="rlbl">เสร็จแล้ว</div></div>
+    <div class="rbox"><div class="rnum" style="color:var(--blue)">${filtered.length}</div><div class="rlbl">แปลงทั้งหมด</div></div>`;
+  const zEl=document.getElementById('rZones');zEl.innerHTML='';
+  const projectsToShow = fProject==='ALL' ? Object.entries(PROJECTS) : [[fProject, PROJECTS[fProject]]];
+  projectsToShow.forEach(([pname,proj])=>{
+    zEl.innerHTML+=`<div style="padding:10px 16px 4px;background:var(--s2);border-bottom:1px solid var(--b1);font-size:12px;font-weight:700;color:${proj.color}">${proj.icon} ${pname}</div>`;
+    proj.zones.forEach(z=>{
+      const zp=PR.filter(p=>p[1]===z);const zpcts=zp.map(([pid])=>wp(pid));
+      if(!zp.length)return;
+      const za=(zpcts.reduce((a,b)=>a+b,0)/zpcts.length).toFixed(1);const zc=ZC[z]||proj.color;
+      zEl.innerHTML+=`<div class="zrow"><div class="zrow-top"><div class="zname" style="color:${zc}">${z}</div><div class="zpct" style="color:${zc}">${za}%</div></div><div class="zbar"><div class="zfill" style="width:${za}%;background:${zc}"></div></div><div class="zstat">${zp.length} แปลง · ทำอยู่ ${zpcts.filter(p=>p>0&&p<100).length} · เสร็จ ${zpcts.filter(p=>p===100).length}</div></div>`;
+    });
+  });
+  const v=allS.filter(s=>s==='ว่าง').length,rs=allS.filter(s=>s==='จอง').length,
+        sl=allS.filter(s=>s==='ขายแล้ว').length,tr=allS.filter(s=>s==='โอนแล้ว').length;
+  document.getElementById('rSales').innerHTML=`
+    <div class="crow"><div class="crow-l"><div class="crow-t">ว่าง</div></div><span class="badge badge-gray">${v} แปลง</span></div>
+    <div class="crow"><div class="crow-l"><div class="crow-t">จอง</div></div><span class="badge badge-gold">${rs} แปลง</span></div>
+    <div class="crow"><div class="crow-l"><div class="crow-t">ขายแล้ว</div></div><span class="badge badge-blue">${sl} แปลง</span></div>
+    <div class="crow"><div class="crow-l"><div class="crow-t">โอนแล้ว</div></div><span class="badge badge-green">${tr} แปลง</span></div>`;
+}
+
+// ══════════════════════════════
+// EXPORT
+// ══════════════════════════════
+function expCSV(){
+  let csv='แปลง,โซน,สถานะขาย,PM,วันเริ่ม,ส่งมอบ,% รวม';
+  TASKS.forEach(t=>csv+=`,${t.id}.${t.name}`);csv+='\n';
+  PR.forEach(([pid,zone])=>{
+    const pd=plots[pid];const p=wp(pid);const end=pd.startDate?fmtF(aD(pd.startDate,119)):'—';
+    csv+=`${pid},${zone},${pd.saleStatus},${pd.resp||''},${pd.startDate||''},${end},${p}%`;
+    TASKS.forEach(t=>csv+=`,${pd.tasks[t.id]||0}%`);csv+='\n';
+  });
+  dlf(csv,'hampton_grove.csv','text/csv');toast('📄 Export CSV แล้ว');
+}
+function expJSON(){dlf(JSON.stringify({plots,at:new Date().toISOString()},null,2),'hampton_backup.json','application/json');toast('📦 Backup แล้ว');}
+function dlf(c,n,m){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([c],{type:m}));a.download=n;a.click();}
+
+// ══════════════════════════════
+// ALERTS
+// ══════════════════════════════
+function getAlerts(filteredPR){
+  const plist = filteredPR || PR;
+  const today=new Date();today.setHours(0,0,0,0);const alerts=[];
+  plist.forEach(([pid])=>{
+    const pd=plots[pid];if(!pd.startDate)return;
+    const {tasks,duration}=getPlan(pid);
+    tasks.forEach(task=>{
+      const tp=pd.tasks[task.id]||0;if(tp===100)return;
+      const pe=aD(pd.startDate,task.oe),ps=aD(pd.startDate,task.os);
+      if(today>pe)alerts.push({pid,type:'late',icon:'🔴',c:'#f85149',title:`${pid} · ${task.name}`,sub:`ล่าช้า ${dif(pe,today)} วัน`,time:fmt(pe)});
+      else if(today>=ps&&tp===0)alerts.push({pid,type:'due',icon:'⏰',c:'#f97316',title:`${pid} · ${task.name}`,sub:'ถึงเวลาเริ่มงาน',time:fmt(ps)});
+    });
+    const end=aD(pd.startDate,duration-1);const dl=dif(today,end);
+    if(dl>=0&&dl<=14)alerts.push({pid,type:'delivery',icon:'🏁',c:'#d29922',title:`${pid} · ใกล้ส่งมอบ`,sub:`เหลืออีก ${dl} วัน`,time:fmt(end)});
+  });
+  return alerts;
+}
+function renderAlerts(){
+  const alerts=getAlerts(getFilteredPR());
+  document.getElementById('aSub').textContent=`พบ ${alerts.length} รายการ`;
+  const el=document.getElementById('aFull');
+  if(!alerts.length){el.innerHTML=`<div class="aitem"><span class="aicon">✅</span><div><div class="a-title">ไม่มีแจ้งเตือน</div></div></div>`;return;}
+  el.innerHTML=alerts.map(a=>`<div class="aitem" style="border-left:3px solid ${a.c}" onclick="prevScr='s-alerts';selPlot('${a.pid}')"><span class="aicon">${a.icon}</span><div style="flex:1"><div class="a-title">${a.title}</div><div class="a-sub">${a.sub}</div><div class="a-time" style="color:${a.c}">${a.time}</div></div></div>`).join('');
+}
+
+// ══════════════════════════════
+// INIT
+// ══════════════════════════════
+(function init(){
+  try{
+    const sess=JSON.parse(localStorage.getItem('hg_sess7')||'null');
+    // session หมดอายุ 12 ชั่วโมง
+    if(sess&&sess.name&&(Date.now()-sess.at)<12*3600*1000){
+      userName=sess.name;userRole=sess.role||'admin';
+      document.getElementById('setup').style.display='none';
+      document.getElementById('app').style.display='block';
+      document.getElementById('sb-role').textContent={admin:'👑 Admin',foreman:'👷 โฟร์แมน',qc:'🔍 QC',sales:'💼 ฝ่ายขาย',viewer:'👁️ ผู้บริหาร'}[userRole]||userRole;
+      document.getElementById('sb-uname').textContent=userName;
+      document.getElementById('hGreet').textContent='สวัสดีครับ '+userName+' 👋';
+      loadLocal();
+      setSS('ok','เชื่อม Sheets แล้ว');
+      tickClock();renderHome();renderPlots();
+      setTimeout(()=>pullAll(),1000);
+      setInterval(()=>{if(!syncing)pullAll();},60000);
+      return;
+    }
+  }catch{}
+  // ไม่มี session → แสดงหน้า setup
+  document.getElementById('setup').style.display='flex';
+})();
+</script>
+</body>
+</html>
