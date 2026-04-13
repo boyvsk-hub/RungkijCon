@@ -288,7 +288,7 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--t1);font-
   <div class="setup-box">
     <div class="setup-logo">
       <div style="font-size:52px;margin-bottom:10px">🏗️</div>
-      <div style="font-size:24px;font-weight:700">Hampton <span style="color:var(--blue)">Grove</span></div>
+      <div style="font-size:24px;font-weight:700">Rungkij <span style="color:var(--blue)">Con</span></div>
       <div style="font-size:12px;color:var(--t2);margin-top:4px">Construction PM System</div>
     </div>
     <div class="setup-card">
@@ -318,7 +318,7 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--t1);font-
   <div class="app-wrap">
     <nav id="sb">
       <div id="sb-hdr">
-        <div id="sb-logo">Hampton <span>Grove</span></div>
+        <div id="sb-logo">Rungkij <span>Con</span></div>
         <div id="sb-role"></div>
         <div id="sb-uname"></div>
       </div>
@@ -343,7 +343,7 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--t1);font-
     <div id="main">
       <div id="topbar">
         <button id="hbtn" onclick="togSB()">☰</button>
-        <div id="tb-title">Hampton <span>Grove</span></div>
+        <div id="tb-title">Rungkij <span>Con</span></div>
         <button id="tb-sync" onclick="openSyncM()">☁️</button>
       </div>
       <div id="screens">
@@ -413,7 +413,7 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--t1);font-
 
         <!-- REPORT -->
         <div class="screen" id="s-report">
-          <div class="ph"><div class="ph-t">รายงานโครงการ</div><div class="ph-s">Hampton Grove · ทุกโซน</div></div>
+          <div class="ph"><div class="ph-t">รายงานโครงการ</div><div class="ph-s">Rungkij Con · ทุกโซน</div></div>
           <div class="slbl">สถิติรวม</div>
           <div class="rkpi" id="rKpi"></div>
           <div class="slbl">ความคืบหน้ารายโซน</div>
@@ -887,7 +887,7 @@ function sw(id,btn){
   document.querySelectorAll('.sni,.bni').forEach(b=>b.classList.remove('active'));
   const scr=document.getElementById(id);scr.classList.add('active');scr.scrollTop=0;
   document.querySelectorAll(`.sni[onclick*="${id}"],.bni[onclick*="${id}"]`).forEach(b=>b.classList.add('active'));
-  const tt=document.getElementById('tb-title');if(tt)tt.textContent=SCR_TITLES[id]||'Hampton Grove';
+  const tt=document.getElementById('tb-title');if(tt)tt.textContent=SCR_TITLES[id]||'Rungkij Con';
   closeSB();
   if(id==='s-home')renderHome();
   if(id==='s-plots')renderPlots();
@@ -900,7 +900,7 @@ function goBack(){
   document.getElementById(prevScr).classList.add('active');
   document.querySelectorAll('.sni,.bni').forEach(b=>b.classList.remove('active'));
   document.querySelectorAll(`.sni[onclick*="${prevScr}"],.bni[onclick*="${prevScr}"]`).forEach(b=>b.classList.add('active'));
-  const tt=document.getElementById('tb-title');if(tt)tt.textContent=SCR_TITLES[prevScr]||'Hampton Grove';
+  const tt=document.getElementById('tb-title');if(tt)tt.textContent=SCR_TITLES[prevScr]||'Rungkij Con';
   if(prevScr==='s-plots')renderPlots();else renderHome();
 }
 function closeM(id,e){if(!e||e.target===document.getElementById(id))document.getElementById(id).classList.remove('open');}
