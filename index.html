@@ -234,6 +234,51 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--t1);font-
 .toast{position:fixed;bottom:calc(76px + var(--safe-b));left:50%;transform:translateX(-50%) translateY(20px);background:var(--s2);border:1px solid var(--b2);color:var(--t1);padding:10px 20px;border-radius:24px;font-size:14px;font-weight:500;z-index:999;opacity:0;transition:all .25s;white-space:nowrap;pointer-events:none;}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
 @media(min-width:768px){.toast{bottom:24px;}}
+
+/* ════ MOBILE ENHANCEMENTS ════ */
+/* Bottom nav active indicator */
+.bni{transition:color .15s;}
+.bni.active::after{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:28px;height:3px;background:var(--blue);border-radius:0 0 4px 4px;}
+
+/* Active press states for touch screens */
+@media(hover:none){
+  .crow:hover,.titem:hover{background:transparent;}
+  .pcard:hover,.aitem:hover{border-color:var(--b1);}
+  .chip:hover{border-color:var(--b2);color:var(--t2);}
+  .sni:hover{background:transparent;color:var(--t2);}
+  .crow:active{background:var(--s2);}
+  .titem:active{background:var(--s2);}
+  .pcard:active{border-color:var(--blue);}
+  .aitem:active{border-color:var(--blue);}
+  .chip.on:hover,.chip.on:active{border-color:var(--blue);color:#fff;}
+}
+
+/* Small phones ≤ 380px */
+@media(max-width:380px){
+  .kgrid{grid-template-columns:repeat(2,1fr);padding:0 12px;}
+  .knum{font-size:22px;}
+  .kbox{padding:11px 10px;}
+  .ph-t{font-size:17px;}
+  .bigpct{font-size:36px;}
+  .did{font-size:22px;}
+  .card,.aitem,.zprog{margin-left:12px;margin-right:12px;}
+  .titem{padding:0 12px;}
+  .dhero{padding:12px;}
+  .mpill{min-width:80px;padding:7px 9px;}
+  .mp-v{font-size:12px;}
+  .slbl{padding:10px 12px 6px;}
+}
+
+/* Medium phones ≥ 480px: 2-column plot cards */
+@media(min-width:480px) and (max-width:767px){
+  .pgrid{grid-template-columns:1fr 1fr!important;}
+}
+
+/* Mobile: smaller Gantt labels for more chart space */
+@media(max-width:767px){
+  .glbl{width:88px;font-size:8px;}
+  .rbox{min-width:60px;}
+}
 </style>
 </head>
 <body>
@@ -836,11 +881,13 @@ setInterval(tickClock,1000);
 function togSB(){const s=document.getElementById('sb'),o=document.getElementById('overlay');s.classList.toggle('open');o.style.display=s.classList.contains('open')?'block':'none';}
 function closeSB(){document.getElementById('sb').classList.remove('open');document.getElementById('overlay').style.display='none';}
 
+const SCR_TITLES={'s-home':'หน้าหลัก','s-plots':'รายการแปลง','s-gantt':'Gantt Chart','s-report':'รายงาน','s-alerts':'แจ้งเตือน'};
 function sw(id,btn){
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
   document.querySelectorAll('.sni,.bni').forEach(b=>b.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
+  const scr=document.getElementById(id);scr.classList.add('active');scr.scrollTop=0;
   document.querySelectorAll(`.sni[onclick*="${id}"],.bni[onclick*="${id}"]`).forEach(b=>b.classList.add('active'));
+  const tt=document.getElementById('tb-title');if(tt)tt.textContent=SCR_TITLES[id]||'Hampton Grove';
   closeSB();
   if(id==='s-home')renderHome();
   if(id==='s-plots')renderPlots();
@@ -853,6 +900,7 @@ function goBack(){
   document.getElementById(prevScr).classList.add('active');
   document.querySelectorAll('.sni,.bni').forEach(b=>b.classList.remove('active'));
   document.querySelectorAll(`.sni[onclick*="${prevScr}"],.bni[onclick*="${prevScr}"]`).forEach(b=>b.classList.add('active'));
+  const tt=document.getElementById('tb-title');if(tt)tt.textContent=SCR_TITLES[prevScr]||'Hampton Grove';
   if(prevScr==='s-plots')renderPlots();else renderHome();
 }
 function closeM(id,e){if(!e||e.target===document.getElementById(id))document.getElementById(id).classList.remove('open');}
@@ -975,7 +1023,7 @@ document.getElementById('srch').oninput=()=>renderPlots();
 // ══════════════════════════════
 // DETAIL
 // ══════════════════════════════
-function selPlot(pid){cur=pid;fCat='ALL';document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById('s-detail').classList.add('active');renderDetail();}
+function selPlot(pid){cur=pid;fCat='ALL';document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));const scr=document.getElementById('s-detail');scr.classList.add('active');scr.scrollTop=0;const tt=document.getElementById('tb-title');if(tt)tt.textContent=pid;renderDetail();}
 function renderDetail(){
   const pid=cur,pd=plots[pid];const p=wp(pid),done=TASKS.filter(t=>(pd.tasks[t.id]||0)===100).length;
   const today=new Date();today.setHours(0,0,0,0);const zone=PR.find(r=>r[0]===pid)[1];
