@@ -279,6 +279,37 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--t1);font-
   .glbl{width:88px;font-size:8px;}
   .rbox{min-width:60px;}
 }
+
+/* ════ VISUAL POLISH ════ */
+/* Card depth & shadows */
+.card,.zprog{box-shadow:0 4px 20px rgba(0,0,0,.45);}
+.kbox{box-shadow:0 2px 12px rgba(0,0,0,.35);}
+.pcard{box-shadow:0 3px 14px rgba(0,0,0,.35);}
+.pcard:hover{box-shadow:0 4px 20px rgba(88,166,255,.18);}
+.aitem{box-shadow:0 2px 10px rgba(0,0,0,.3);}
+.ms{box-shadow:0 -8px 40px rgba(0,0,0,.7)!important;}
+
+/* Section label left accent */
+.slbl{border-left:3px solid var(--blue);}
+
+/* Thicker progress bars */
+.pbar{height:7px;}
+.pbar-fill,.zfill,.bigfill{border-radius:10px;}
+.bigbar{height:11px;border-radius:6px;margin-bottom:14px;}
+.zbar{height:8px;border-radius:4px;}
+
+/* Setup page gradient */
+#setup{background:radial-gradient(ellipse at 40% 0%,#1c2b3a 0%,var(--bg) 55%);}
+.setup-card{box-shadow:0 8px 32px rgba(0,0,0,.55);}
+
+/* App chrome depth */
+#topbar{box-shadow:0 2px 16px rgba(0,0,0,.5);border-bottom-color:rgba(88,166,255,.2);}
+#sb-hdr{border-bottom:2px solid rgba(88,166,255,.25);}
+.ph{background:linear-gradient(to bottom,var(--s2),var(--s1));border-bottom:2px solid rgba(88,166,255,.12);}
+#bnav{box-shadow:0 -4px 24px rgba(0,0,0,.6);border-top-color:rgba(88,166,255,.12);}
+
+/* Task done glow */
+.tck.done{box-shadow:0 0 8px rgba(63,185,80,.4);}
 </style>
 </head>
 <body>
@@ -289,7 +320,7 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--t1);font-
     <div class="setup-logo">
       <div style="font-size:52px;margin-bottom:10px">🏗️</div>
       <div style="font-size:24px;font-weight:700">Rungkij <span style="color:var(--blue)">Con</span></div>
-      <div style="font-size:12px;color:var(--t2);margin-top:4px">Construction PM System</div>
+      <div style="font-size:12px;color:var(--t2);margin-top:4px">ระบบบริหารโครงการก่อสร้าง</div>
     </div>
     <div class="setup-card">
       <div class="sc-title">👤 ชื่อของคุณ</div>
@@ -343,7 +374,7 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--t1);font-
     <div id="main">
       <div id="topbar">
         <button id="hbtn" onclick="togSB()">☰</button>
-        <div id="tb-title">Rungkij <span>Con</span></div>
+        <div id="tb-title">หน้าหลัก</div>
         <button id="tb-sync" onclick="openSyncM()">☁️</button>
       </div>
       <div id="screens">
@@ -357,7 +388,8 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--t1);font-
             <div style="display:flex;gap:8px;overflow-x:auto;padding-bottom:2px;" id="projChips"></div>
           </div>
 
-          <div class="slbl">ภาพรวมโครงการที่เลือก</div>
+          <div id="execSum" style="padding:12px 16px 0"></div>
+          <div class="slbl">ตัวเลขสำคัญ</div>
           <div class="kgrid" id="hKpi" style="margin-bottom:4px"></div>
           <div class="slbl" id="aLbl">แจ้งเตือน</div>
           <div id="hAlerts"></div>
@@ -953,16 +985,43 @@ function renderHome(){
   const sold=filtered.filter(([pid])=>['ขายแล้ว','โอนแล้ว'].includes(plots[pid].saleStatus)).length;
   const alerts=getAlerts(filtered);const late=alerts.filter(a=>a.type==='late').length;
 
-  // Project name display
-  const projName = fProject==='ALL'?`ทั้งหมด ${Object.keys(PROJECTS).length} โครงการ (${PR.length} แปลง)`:
-    `${PROJECTS[fProject].icon} ${fProject} (${filtered.length} แปลง)`;
+  // Executive summary card
+  const execEl=document.getElementById('execSum');
+  if(execEl){
+    const avf=parseFloat(avg);
+    let hlt,hlc,hli,hlmsg;
+    if(late===0){hlt='ดำเนินการตามแผน';hlc='#3fb950';hli='✅';hlmsg=bld>0?`กำลังก่อสร้าง ${bld} แปลง — ทุกงานเป็นปกติ`:d100>0?`สร้างเสร็จแล้ว ${d100} แปลง`:'ยังไม่มีงานเริ่มต้น';}
+    else if(late<=5){hlt='มีงานที่ต้องติดตาม';hlc='#d29922';hli='⚠️';hlmsg=`พบงานล่าช้า ${late} รายการ — กรุณาติดตามด่วน`;}
+    else{hlt='ต้องแก้ไขด่วน';hlc='#f85149';hli='🚨';hlmsg=`พบงานล่าช้า ${late} รายการ — ต้องประชุมแก้ไขทันที`;}
+    execEl.innerHTML=`<div style="background:linear-gradient(135deg,${hlc}1a 0%,${hlc}08 100%);border:1px solid ${hlc}40;border-left:4px solid ${hlc};border-radius:14px;padding:14px 16px">
+      <div style="display:flex;align-items:center;gap:10px">
+        <div style="font-size:30px;flex-shrink:0">${hli}</div>
+        <div style="flex:1;min-width:0">
+          <div style="font-size:16px;font-weight:700;color:${hlc}">${hlt}</div>
+          <div style="font-size:12px;color:var(--t2);margin-top:3px;line-height:1.5">${hlmsg}</div>
+        </div>
+        <div style="text-align:right;flex-shrink:0">
+          <div style="font-size:34px;font-weight:700;font-family:'IBM Plex Mono',monospace;color:${hlc};line-height:1">${avg}%</div>
+          <div style="font-size:10px;color:var(--t2);margin-top:2px">ความคืบหน้ารวม</div>
+        </div>
+      </div>
+      <div style="height:9px;background:var(--b2);border-radius:5px;overflow:hidden;margin:12px 0 9px">
+        <div style="width:${avf}%;height:100%;background:linear-gradient(to right,${hlc}99,${hlc});border-radius:5px;transition:width .7s ease"></div>
+      </div>
+      <div style="display:flex;justify-content:space-around;font-size:12px;color:var(--t2)">
+        <span>🏗️ กำลังสร้าง <b style="color:var(--t1);font-size:14px">${bld}</b></span>
+        <span>✅ สร้างเสร็จ <b style="color:var(--t1);font-size:14px">${d100}</b></span>
+        <span>📋 ทั้งหมด <b style="color:var(--t1);font-size:14px">${filtered.length}</b> แปลง</span>
+      </div>
+    </div>`;
+  }
   document.getElementById('hKpi').innerHTML=`
-    <div class="kbox"><div class="knum" style="color:var(--blue)">${filtered.length}</div><div class="klbl">แปลงทั้งหมด</div></div>
-    <div class="kbox"><div class="knum" style="color:var(--green)">${bld}</div><div class="klbl">กำลังก่อสร้าง</div></div>
-    <div class="kbox"><div class="knum" style="color:var(--gold)">${avg}%</div><div class="klbl">เฉลี่ยรวม</div></div>
-    <div class="kbox"><div class="knum" style="color:var(--red)">${late}</div><div class="klbl">งานล่าช้า</div></div>
-    <div class="kbox"><div class="knum" style="color:var(--purple)">${sold}</div><div class="klbl">ขายแล้ว</div></div>
-    <div class="kbox"><div class="knum" style="color:var(--teal)">${d100}</div><div class="klbl">เสร็จ 100%</div></div>`;
+    <div class="kbox" style="border-top:3px solid var(--blue)"><div class="knum" style="color:var(--blue)">${filtered.length}</div><div class="klbl">แปลงทั้งหมด</div></div>
+    <div class="kbox" style="border-top:3px solid var(--green)"><div class="knum" style="color:var(--green)">${bld}</div><div class="klbl">กำลังสร้าง</div></div>
+    <div class="kbox" style="border-top:3px solid var(--gold)"><div class="knum" style="color:var(--gold)">${avg}%</div><div class="klbl">คืบหน้าเฉลี่ย</div></div>
+    <div class="kbox" style="border-top:3px solid var(--red)"><div class="knum" style="color:var(--red)">${late}</div><div class="klbl">⚠ ล่าช้า</div></div>
+    <div class="kbox" style="border-top:3px solid var(--purple)"><div class="knum" style="color:var(--purple)">${sold}</div><div class="klbl">ขาย/โอน</div></div>
+    <div class="kbox" style="border-top:3px solid var(--teal)"><div class="knum" style="color:var(--teal)">${d100}</div><div class="klbl">สร้างเสร็จ</div></div>`;
 
   const nb=alerts.length;
   ['nbb','snb'].forEach(id=>{const el=document.getElementById(id);if(el){el.textContent=nb;el.style.display=nb>0?'block':'none';}});
@@ -1179,10 +1238,10 @@ function renderReport(){
         d100=allP.filter(p=>p===100).length;
   const allS=filtered.map(([pid])=>plots[pid].saleStatus);
   document.getElementById('rKpi').innerHTML=`
-    <div class="rbox"><div class="rnum" style="color:var(--blue)">${avg}%</div><div class="rlbl">เฉลี่ยรวม</div></div>
-    <div class="rbox"><div class="rnum" style="color:var(--green)">${bld}</div><div class="rlbl">กำลังก่อสร้าง</div></div>
-    <div class="rbox"><div class="rnum" style="color:var(--gold)">${d100}</div><div class="rlbl">เสร็จแล้ว</div></div>
-    <div class="rbox"><div class="rnum" style="color:var(--blue)">${filtered.length}</div><div class="rlbl">แปลงทั้งหมด</div></div>`;
+    <div class="rbox" style="border-top:3px solid var(--gold)"><div class="rnum" style="color:var(--gold)">${avg}%</div><div class="rlbl">คืบหน้าเฉลี่ย</div></div>
+    <div class="rbox" style="border-top:3px solid var(--green)"><div class="rnum" style="color:var(--green)">${bld}</div><div class="rlbl">กำลังสร้าง</div></div>
+    <div class="rbox" style="border-top:3px solid var(--teal)"><div class="rnum" style="color:var(--teal)">${d100}</div><div class="rlbl">สร้างเสร็จ</div></div>
+    <div class="rbox" style="border-top:3px solid var(--blue)"><div class="rnum" style="color:var(--blue)">${filtered.length}</div><div class="rlbl">แปลงทั้งหมด</div></div>`;
   const zEl=document.getElementById('rZones');zEl.innerHTML='';
   const projectsToShow = fProject==='ALL' ? Object.entries(PROJECTS) : [[fProject, PROJECTS[fProject]]];
   projectsToShow.forEach(([pname,proj])=>{
