@@ -1319,5 +1319,205 @@ function renderAlerts(){
   document.getElementById('setup').style.display='flex';
 })();
 </script>
-</body>
+<!-- ===== Bulk Update Feature ===== -->
+<style>
+  #bulkBtn{position:fixed;right:20px;bottom:20px;z-index:998;background:linear-gradient(135deg,#58a6ff,#3fb950);color:#fff;border:none;padding:12px 18px;border-radius:24px;font-family:'IBM Plex Sans Thai',sans-serif;font-weight:700;font-size:14px;cursor:pointer;box-shadow:0 6px 20px rgba(0,0,0,.4);display:none}
+  #bulkBtn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.5)}
+  #bulkBtn.show{display:block}
+  #bulkModal{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:10000;display:none;align-items:center;justify-content:center;font-family:'IBM Plex Sans Thai',sans-serif}
+  #bulkModal.open{display:flex}
+  #bulkModal .box{background:#0d1117;border:1px solid #30363d;border-radius:12px;width:90%;max-width:720px;max-height:85vh;display:flex;flex-direction:column;color:#e6edf3}
+  #bulkModal .bh{padding:14px 18px;border-bottom:1px solid #30363d;display:flex;justify-content:space-between;align-items:center}
+  #bulkModal .bh h3{margin:0;font-size:16px}
+  #bulkModal .bh button{background:transparent;border:none;color:#7d8590;font-size:20px;cursor:pointer}
+  #bulkModal .bb{padding:14px 18px;overflow-y:auto;flex:1}
+  #bulkModal .sec{margin-bottom:14px}
+  #bulkModal label{display:block;font-size:12px;color:#7d8590;margin-bottom:6px}
+  #bulkModal select,#bulkModal input[type=number]{background:#161b22;border:1px solid #30363d;color:#e6edf3;padding:8px 10px;border-radius:6px;font-family:inherit;width:100%;box-sizing:border-box}
+  #bulkModal .plotGrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:6px;max-height:260px;overflow-y:auto;padding:8px;background:#161b22;border:1px solid #30363d;border-radius:8px}
+  #bulkModal .plotChip{padding:6px 8px;background:#0d1117;border:1px solid #30363d;border-radius:6px;font-size:12px;cursor:pointer;display:flex;align-items:center;gap:6px;user-select:none}
+  #bulkModal .plotChip.on{background:#58a6ff22;border-color:#58a6ff;color:#58a6ff}
+  #bulkModal .plotChip input{margin:0}
+  #bulkModal .bf{padding:12px 18px;border-top:1px solid #30363d;display:flex;gap:8px;justify-content:flex-end}
+  #bulkModal .bf button{padding:8px 16px;border-radius:6px;font-family:inherit;font-weight:600;cursor:pointer;border:1px solid #30363d;background:transparent;color:#e6edf3}
+  #bulkModal .bf .apply{background:linear-gradient(135deg,#58a6ff,#3fb950);border:none;color:#fff}
+  #bulkModal .bf button:disabled{opacity:.5;cursor:not-allowed}
+  #bulkModal .row{display:flex;gap:10px;margin-bottom:10px;flex-wrap:wrap}
+  #bulkModal .row>div{flex:1;min-width:180px}
+  #bulkModal .selInfo{font-size:12px;color:#7d8590;margin:6px 0}
+  #bulkModal .quickBtn{background:#161b22;border:1px solid #30363d;color:#e6edf3;padding:4px 10px;border-radius:4px;font-size:11px;cursor:pointer;font-family:inherit}
+  #bulkModal .quickBtn:hover{background:#1f252e}
+</style>
+
+<button id="bulkBtn" onclick="openBulkUpdate()">⚡ Update หลายแปลง</button>
+
+<div id="bulkModal">
+  <div class="box">
+    <div class="bh">
+      <h3>⚡ Update % งาน หลายแปลงพร้อมกัน</h3>
+      <button onclick="closeBulkUpdate()">✕</button>
+    </div>
+    <div class="bb">
+      <div class="sec">
+        <label>1) เลือกโครงการ / โซน (กรองแปลง)</label>
+        <div class="row">
+          <div><select id="bkProj"></select></div>
+          <div><select id="bkZone"></select></div>
+        </div>
+      </div>
+      <div class="sec">
+        <label>2) เลือกแปลงที่ต้องการอัปเดต</label>
+        <div class="selInfo">
+          <button class="quickBtn" onclick="bulkSelAll(true)">✅ เลือกทั้งหมด</button>
+          <button class="quickBtn" onclick="bulkSelAll(false)">❎ ล้าง</button>
+          <span id="bkCount" style="margin-left:10px"></span>
+        </div>
+        <div class="plotGrid" id="bkPlots"></div>
+      </div>
+      <div class="sec">
+        <label>3) เลือกงาน (Task) ที่จะอัปเดต</label>
+        <select id="bkTask"></select>
+      </div>
+      <div class="sec">
+        <label>4) ตั้งค่า % งาน (0–100)</label>
+        <input type="number" id="bkPct" min="0" max="100" step="5" value="100" />
+      </div>
+    </div>
+    <div class="bf">
+      <button onclick="closeBulkUpdate()">ยกเลิก</button>
+      <button class="apply" id="bkApply" onclick="applyBulkUpdate()">💾 บันทึก</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  window.bulkSel = new Set();
+
+  window.openBulkUpdate = function() {
+    if (typeof canEdit === 'function' && !canEdit()) { toast('🔒 ไม่มีสิทธิ์แก้ไข'); return; }
+    window.bulkSel.clear();
+    const projSel = document.getElementById('bkProj');
+    projSel.innerHTML = '<option value="ALL">🏢 ทุกโครงการ</option>' +
+      Object.keys(PROJECTS).map(p => `<option value="${p}">${PROJECTS[p].icon} ${p}</option>`).join('');
+    const taskSel = document.getElementById('bkTask');
+    taskSel.innerHTML = TASKS.map(t =>
+      `<option value="${t.id}">#${t.id} • ${t.cat} • ${t.name} (น้ำหนัก ${t.wt})</option>`
+    ).join('');
+    projSel.onchange = window.bulkRefreshZones;
+    document.getElementById('bkZone').onchange = window.bulkRenderPlots;
+    window.bulkRefreshZones();
+    document.getElementById('bulkModal').classList.add('open');
+  };
+
+  window.closeBulkUpdate = function() {
+    document.getElementById('bulkModal').classList.remove('open');
+  };
+
+  window.bulkRefreshZones = function() {
+    const proj = document.getElementById('bkProj').value;
+    const zoneSel = document.getElementById('bkZone');
+    let zones = new Set();
+    PR.forEach(([pid, z]) => {
+      if (proj === 'ALL' || getProject(z)?.name === proj) zones.add(z);
+    });
+    zoneSel.innerHTML = '<option value="ALL">📍 ทุกโซน</option>' +
+      Array.from(zones).map(z => `<option value="${z}">${z}</option>`).join('');
+    window.bulkRenderPlots();
+  };
+
+  window.bulkRenderPlots = function() {
+    const proj = document.getElementById('bkProj').value;
+    const zone = document.getElementById('bkZone').value;
+    const grid = document.getElementById('bkPlots');
+    const list = PR.filter(([pid, z]) =>
+      (proj === 'ALL' || getProject(z)?.name === proj) &&
+      (zone === 'ALL' || z === zone)
+    );
+    grid.innerHTML = list.map(([pid, z]) => {
+      const pct = wp(pid);
+      const on = window.bulkSel.has(pid);
+      return `<label class="plotChip ${on ? 'on' : ''}" data-pid="${pid}">
+        <input type="checkbox" ${on ? 'checked' : ''} onchange="bulkTogglePlot('${pid}', this.checked)"/>
+        <span><b>${pid}</b> • ${pct}%</span>
+      </label>`;
+    }).join('') || '<div style="color:#7d8590;padding:10px">ไม่มีแปลง</div>';
+    window.bulkUpdateCount();
+  };
+
+  window.bulkTogglePlot = function(pid, on) {
+    if (on) window.bulkSel.add(pid); else window.bulkSel.delete(pid);
+    const chip = document.querySelector(`#bkPlots .plotChip[data-pid="${pid}"]`);
+    if (chip) chip.classList.toggle('on', on);
+    window.bulkUpdateCount();
+  };
+
+  window.bulkSelAll = function(on) {
+    document.querySelectorAll('#bkPlots .plotChip').forEach(c => {
+      const pid = c.dataset.pid;
+      const cb = c.querySelector('input');
+      cb.checked = on;
+      if (on) window.bulkSel.add(pid); else window.bulkSel.delete(pid);
+      c.classList.toggle('on', on);
+    });
+    window.bulkUpdateCount();
+  };
+
+  window.bulkUpdateCount = function() {
+    const n = window.bulkSel.size;
+    document.getElementById('bkCount').textContent = `เลือก ${n} แปลง`;
+    document.getElementById('bkApply').disabled = n === 0;
+  };
+
+  window.applyBulkUpdate = function() {
+    if (typeof canEdit === 'function' && !canEdit()) { toast('🔒 ไม่มีสิทธิ์แก้ไข'); return; }
+    const sel = Array.from(window.bulkSel);
+    if (!sel.length) { toast('⚠️ กรุณาเลือกแปลง'); return; }
+    const tid = parseInt(document.getElementById('bkTask').value);
+    let pct = parseInt(document.getElementById('bkPct').value);
+    if (isNaN(pct)) pct = 0;
+    pct = Math.max(0, Math.min(100, pct));
+    if (!confirm(`ยืนยันอัปเดต "งาน #${tid}" เป็น ${pct}% สำหรับ ${sel.length} แปลง?`)) return;
+    sel.forEach(pid => {
+      const pd = plots[pid];
+      if (!pd) return;
+      if (!pd.tasks) pd.tasks = {};
+      pd.tasks[tid] = pct;
+    });
+    saveLocal();
+    sel.forEach(pid => { try { pushOne(pid); } catch(e){} });
+    toast(`✅ อัปเดต ${sel.length} แปลง → งาน#${tid} = ${pct}%`);
+    window.closeBulkUpdate();
+    try { renderPlots(); } catch(e){}
+    try { renderHome(); } catch(e){}
+  };
+
+  function bulkVisibilityCheck() {
+    const btn = document.getElementById('bulkBtn');
+    if (!btn) return;
+    const plotsScreen = document.getElementById('s-plots');
+    const visible = plotsScreen && plotsScreen.classList.contains('active') && (typeof canEdit !== 'function' || canEdit());
+    btn.classList.toggle('show', !!visible);
+  }
+
+  function installHook() {
+    if (typeof window.sw === 'function' && !window._swBulkHook) {
+      const orig = window.sw;
+      window.sw = function(){ const r = orig.apply(this, arguments); bulkVisibilityCheck(); return r; };
+      window._swBulkHook = true;
+    }
+    document.querySelectorAll('.screen').forEach(s => {
+      new MutationObserver(bulkVisibilityCheck).observe(s, { attributes: true, attributeFilter: ['class'] });
+    });
+    bulkVisibilityCheck();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => setTimeout(installHook, 500));
+  } else {
+    setTimeout(installHook, 500);
+  }
+})();
+</script>
+<!-- ===== End Bulk Update Feature ===== --></body>
 </html>
