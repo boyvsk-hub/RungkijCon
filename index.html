@@ -9,19 +9,19 @@
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#0d1117;--s1:#161b22;--s2:#21262d;--s3:#30363d;
-  --b1:#21262d;--b2:#30363d;--b3:#484f58;
-  --t1:#f0f6fc;--t2:#8b949e;--t3:#484f58;
-  --blue:#58a6ff;--green:#3fb950;--gold:#d29922;
-  --red:#f85149;--purple:#bc8cff;--teal:#39d353;
-  --r:12px;--r2:8px;--tap:48px;--sidebar:260px;
+  --bg:#f0f4f8;--s1:#ffffff;--s2:#f8fafc;--s3:#e2e8f0;
+  --b1:#e2e8f0;--b2:#cbd5e1;--b3:#94a3b8;
+  --t1:#0f172a;--t2:#475569;--t3:#94a3b8;
+  --blue:#1d4ed8;--green:#16a34a;--gold:#d97706;
+  --red:#dc2626;--purple:#7c3aed;--teal:#0891b2;
+  --r:10px;--r2:6px;--tap:48px;--sidebar:260px;
   --safe-t:env(safe-area-inset-top,0px);
   --safe-b:env(safe-area-inset-bottom,0px);
 }
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;-webkit-text-size-adjust:100%;}
 html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--t1);font-family:'IBM Plex Sans Thai',sans-serif;font-size:15px;}
 
-/* ════ SETUP ════ */
+/* ââââ SETUP ââââ */
 #setup{position:fixed;inset:0;z-index:3000;background:var(--bg);display:flex;align-items:center;justify-content:center;padding:20px;overflow-y:auto;}
 .setup-box{width:100%;max-width:420px;}
 .setup-logo{text-align:center;margin-bottom:28px;}
@@ -40,7 +40,7 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--t1);font-
 .setup-hint b{color:var(--t1);}
 .setup-hint a{color:var(--blue);text-decoration:none;}
 
-/* ════ APP LAYOUT ════ */
+/* ââââ APP LAYOUT ââââ */
 #app{display:none;height:100%;width:100%;overflow:hidden;}
 .app-wrap{display:flex;height:100%;width:100%;}
 #sb{width:var(--sidebar);flex-shrink:0;background:var(--s1);border-right:1px solid var(--b1);display:flex;flex-direction:column;padding-top:var(--safe-t);z-index:100;transition:transform .25s;}
@@ -320,7 +320,7 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--t1);font-
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
 @media(min-width:768px){.toast{bottom:24px;}}
 
-/* ══ GLOBAL IMPROVEMENTS ══ */
+/* ââ GLOBAL IMPROVEMENTS ââ */
 .chip.on{background:rgba(88,166,255,.15)!important;border-color:rgba(88,166,255,.5)!important;color:var(--blue)!important;font-weight:700!important;}
 .pcard,.aitem,.chip,.kbox,.bni,.sni,.mpill{will-change:transform;}
 .pcard:hover{border-color:rgba(88,166,255,.5)!important;box-shadow:0 4px 20px rgba(0,0,0,.3);}
@@ -329,6 +329,152 @@ html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--t1);font-
 .toast{background:rgba(33,38,45,.97)!important;border:1px solid rgba(88,166,255,.2)!important;box-shadow:0 8px 32px rgba(0,0,0,.5)!important;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);}
 .bigfill,.pbar-fill,.zfill{transition:width .5s cubic-bezier(.4,0,.2,1)!important;}
 input:focus,select:focus,textarea:focus{outline:none!important;border-color:var(--blue)!important;box-shadow:0 0 0 3px rgba(88,166,255,.12)!important;}
+
+
+/* ═══════════════════════════════════════════
+   THEME 3 — DATA-FIRST EXECUTIVE DASHBOARD
+   Corporate Light · Blue Accent
+═══════════════════════════════════════════ */
+html,body{background:var(--bg)!important;color:var(--t1)!important;}
+.screen::-webkit-scrollbar{width:6px;}
+.screen::-webkit-scrollbar-thumb{background:var(--b2);border-radius:3px;}
+#sb{background:#1e3a5f!important;border-right:none!important;box-shadow:4px 0 16px rgba(0,0,0,.12)!important;}
+#sb-hdr{background:#162d4a!important;border-bottom:1px solid rgba(255,255,255,.1)!important;padding:20px 18px 16px!important;}
+#sb-logo{color:#ffffff!important;font-size:17px!important;font-weight:800!important;}
+#sb-logo span{color:#60a5fa!important;}
+#sb-role{color:#fbbf24!important;font-size:11px!important;font-weight:700!important;}
+#sb-uname{color:rgba(255,255,255,.65)!important;}
+#sb-nav{background:#1e3a5f!important;}
+.sni{color:rgba(255,255,255,.65)!important;font-size:14px!important;border-radius:8px!important;margin:2px 10px!important;width:calc(100% - 20px)!important;}
+.sni:hover{background:rgba(255,255,255,.1)!important;color:#ffffff!important;}
+.sni.active{background:rgba(96,165,250,.2)!important;color:#60a5fa!important;font-weight:700!important;}
+#sb-ftr{background:#162d4a!important;border-top:1px solid rgba(255,255,255,.1)!important;}
+.ph{background:#ffffff!important;border-bottom:2px solid var(--b1)!important;padding:18px 24px 14px!important;box-shadow:0 1px 4px rgba(0,0,0,.06)!important;}
+.ph-t{font-size:22px!important;font-weight:800!important;color:var(--t1)!important;}
+.ph-s{font-size:13px!important;color:var(--t2)!important;margin-top:3px!important;}
+.slbl{font-size:11px!important;font-weight:800!important;color:#1d4ed8!important;letter-spacing:1.5px!important;text-transform:uppercase!important;padding:16px 24px 8px!important;border-top:1px solid var(--b1)!important;}
+.kgrid{display:grid!important;gap:12px!important;padding:0 20px!important;}
+.kbox{background:#ffffff!important;border:1px solid var(--b1)!important;border-radius:var(--r)!important;padding:18px 16px 16px!important;box-shadow:0 1px 4px rgba(0,0,0,.06)!important;transition:box-shadow .15s,transform .15s!important;}
+.kbox:hover{box-shadow:0 4px 16px rgba(0,0,0,.1)!important;transform:translateY(-1px)!important;}
+.knum{font-size:32px!important;font-weight:800!important;font-family:'IBM Plex Mono',monospace!important;line-height:1!important;margin-bottom:6px!important;}
+.klbl{font-size:11px!important;font-weight:600!important;color:var(--t2)!important;text-transform:uppercase!important;}
+.aitem{background:#ffffff!important;border:1px solid var(--b1)!important;border-radius:var(--r)!important;padding:14px 16px!important;margin:0 20px 10px!important;box-shadow:0 1px 3px rgba(0,0,0,.05)!important;}
+.aitem:hover{box-shadow:0 3px 12px rgba(0,0,0,.09)!important;border-color:var(--blue)!important;}
+.a-title{color:var(--t1)!important;font-weight:700!important;}
+.a-sub{color:var(--t2)!important;}
+.zprog{background:#ffffff!important;border:1px solid var(--b1)!important;border-radius:var(--r)!important;margin:0 20px 10px!important;box-shadow:0 1px 3px rgba(0,0,0,.05)!important;overflow:hidden!important;}
+.zrow{padding:12px 16px!important;border-bottom:1px solid #f1f5f9!important;}
+.zrow:hover{background:#f8fafc!important;}
+.zrow:last-child{border-bottom:none!important;}
+.zname{font-size:14px!important;font-weight:700!important;color:var(--t1)!important;font-family:'IBM Plex Mono',monospace!important;}
+.zpct{font-size:13px!important;font-weight:700!important;font-family:'IBM Plex Mono',monospace!important;}
+.zbar{height:8px!important;background:#e2e8f0!important;border-radius:4px!important;}
+.zstat{font-size:11px!important;color:var(--t2)!important;margin-top:5px!important;}
+.pcard{background:#ffffff!important;border:1px solid var(--b1)!important;border-radius:var(--r)!important;box-shadow:0 1px 3px rgba(0,0,0,.05)!important;}
+.pcard:hover{border-color:var(--blue)!important;box-shadow:0 4px 16px rgba(29,78,216,.12)!important;}
+.pc-id{color:var(--t1)!important;font-weight:800!important;}
+.pc-sub{color:var(--t2)!important;}
+.pbar{background:#e2e8f0!important;}
+.pcard-bot{background:#f8fafc!important;color:var(--t2)!important;}
+.chips{padding:12px 20px!important;gap:8px!important;background:var(--bg)!important;}
+.chip{background:#ffffff!important;border:1.5px solid var(--b1)!important;border-radius:20px!important;color:var(--t2)!important;font-weight:600!important;font-size:12px!important;padding:0 14px!important;min-height:34px!important;}
+.chip:hover{border-color:var(--blue)!important;color:var(--blue)!important;}
+.chip.on{background:var(--blue)!important;border-color:var(--blue)!important;color:#ffffff!important;}
+.rbox{background:#ffffff!important;border:1px solid var(--b1)!important;border-radius:var(--r)!important;padding:14px!important;}
+.rnum{color:var(--blue)!important;font-size:24px!important;font-weight:800!important;}
+.rlbl{color:var(--t2)!important;}
+.crow{background:#ffffff!important;color:var(--t1)!important;}
+.crow:hover{background:#f8fafc!important;}
+.crow-t{color:var(--t1)!important;font-weight:600!important;}
+.badge{background:#e2e8f0!important;color:var(--t2)!important;border-radius:12px!important;}
+.grow{background:#ffffff!important;color:var(--t1)!important;border-bottom:1px solid #f1f5f9!important;}
+.grow:hover{background:#f8fafc!important;}
+#ganttSel{background:#ffffff!important;color:#0f172a!important;border:1.5px solid #e2e8f0!important;border-radius:8px!important;}
+.dhero{background:#ffffff!important;border-bottom:2px solid var(--b1)!important;}
+.dback{color:var(--blue)!important;}
+.bigbar{background:#e2e8f0!important;}
+.mpill{background:#f8fafc!important;border:1px solid var(--b1)!important;border-radius:8px!important;}
+.titem{background:#ffffff!important;color:#0f172a!important;border-bottom:1px solid #f1f5f9!important;}
+.titem:hover{background:#f8fafc!important;}
+.tname{color:#0f172a!important;}
+#srch{background:#ffffff!important;border:1.5px solid #e2e8f0!important;color:#0f172a!important;border-radius:10px!important;}
+.card{background:#ffffff!important;border:1px solid var(--b1)!important;border-radius:var(--r)!important;margin:0 20px 10px!important;}
+.ms{background:#ffffff!important;color:#0f172a!important;}
+.mo{background:rgba(15,23,42,.6)!important;}
+select,input,textarea{background:#ffffff!important;border:1.5px solid var(--b1)!important;color:var(--t1)!important;border-radius:8px!important;}
+.toast{background:#1e3a5f!important;color:#ffffff!important;border:none!important;}
+#overlay{background:rgba(15,23,42,.5)!important;}
+/* Executive Banner */
+#exec-banner{background:linear-gradient(135deg,#1e3a5f 0%,#1d4ed8 100%);color:#ffffff;flex-shrink:0;}
+#exec-banner-inner{display:flex;align-items:center;gap:24px;padding:14px 24px;flex-wrap:wrap;}
+.exec-left{flex:1;min-width:200px;}
+.exec-company{font-size:16px;font-weight:800;}
+.exec-date{font-size:11px;color:rgba(255,255,255,.7);margin-top:2px;}
+.exec-health{min-width:200px;}
+.exec-health-label{font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,.7);margin-bottom:4px;}
+.exec-health-score{display:flex;align-items:baseline;gap:6px;margin-bottom:6px;}
+.exec-score-num{font-size:28px;font-weight:800;font-family:'IBM Plex Mono',monospace;line-height:1;}
+.exec-score-grade{font-size:14px;color:rgba(255,255,255,.6);}
+.exec-score-badge{font-size:11px;background:rgba(255,255,255,.15);padding:2px 8px;border-radius:10px;font-weight:600;}
+.exec-health-bar{height:5px;background:rgba(255,255,255,.2);border-radius:3px;overflow:hidden;}
+.exec-health-fill{height:100%;background:linear-gradient(90deg,#86efac,#fbbf24);border-radius:3px;}
+.exec-stats{display:flex;gap:16px;flex-wrap:wrap;}
+.exec-stat{display:flex;flex-direction:column;align-items:center;background:rgba(255,255,255,.1);border-radius:8px;padding:8px 14px;min-width:80px;}
+.exec-stat-v{font-size:18px;font-weight:800;font-family:'IBM Plex Mono',monospace;line-height:1;}
+.exec-stat-l{font-size:10px;color:rgba(255,255,255,.7);margin-top:3px;white-space:nowrap;}
+/* Project Chart */
+#proj-comparison{flex-shrink:0;}
+.chart-card{background:#ffffff;border:1px solid #e2e8f0;border-radius:10px;margin:0 20px 10px;padding:16px 20px;box-shadow:0 1px 4px rgba(0,0,0,.06);}
+.chart-legend{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid #f1f5f9;}
+.legend-item{display:flex;align-items:center;gap:5px;font-size:11px;color:#475569;font-weight:500;}
+.leg-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+.pc-bars{display:flex;flex-direction:column;gap:10px;}
+.pc-row{display:grid;grid-template-columns:200px 1fr 120px 42px;align-items:center;gap:12px;}
+.pc-proj-name{font-size:13px;font-weight:700;color:#0f172a;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.pc-bar-wrap{display:flex;align-items:center;gap:10px;}
+.pc-bar-track{flex:1;height:20px;background:#f1f5f9;border-radius:4px;overflow:hidden;}
+.pc-bar-fill{height:100%;border-radius:4px;min-width:3px;}
+.pc-pct-label{font-size:13px;font-weight:800;font-family:'IBM Plex Mono',monospace;min-width:46px;text-align:right;}
+.pc-meta{font-size:11px;color:#64748b;text-align:right;white-space:nowrap;}
+.pc-grade{width:36px;height:36px;border-radius:8px;font-size:14px;font-weight:900;display:flex;align-items:center;justify-content:center;}
+/* Timeline */
+#timeline-milestone{flex-shrink:0;}
+.ms-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;padding:0 20px;margin-bottom:4px;}
+.ms-card{border-radius:10px;padding:14px 16px;box-shadow:0 1px 3px rgba(0,0,0,.06);}
+.ms-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;}
+.ms-days{font-size:11px;font-weight:800;text-transform:uppercase;}
+.ms-deadline{font-size:10px;color:#64748b;background:rgba(255,255,255,.6);padding:2px 7px;border-radius:8px;font-weight:600;}
+.ms-title{font-size:13px;font-weight:700;color:#0f172a;margin-bottom:5px;line-height:1.3;}
+.ms-meta{font-size:11px;color:#64748b;}
+@media(max-width:900px){.ms-grid{grid-template-columns:repeat(2,1fr);}}
+/* Zone Grid */
+#zone-status-grid{flex-shrink:0;margin-bottom:20px;}
+.zg-card{background:#ffffff;border:1px solid #e2e8f0;border-radius:10px;margin:0 20px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.06);}
+.zg-table{width:100%;border-collapse:collapse;font-size:13px;}
+.zg-head th{background:#f8fafc;color:#64748b;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;padding:10px 14px;border-bottom:2px solid #e2e8f0;text-align:left;white-space:nowrap;}
+.zg-row td{padding:10px 14px;border-bottom:1px solid #f1f5f9;vertical-align:middle;}
+.zg-row:last-child td{border-bottom:none;}
+.zg-row:hover td{background:#f8fafc;}
+.zg-zone{font-weight:800;font-family:'IBM Plex Mono',monospace;font-size:14px;color:#0f172a;}
+.zg-proj{color:#475569;font-size:12px;}
+.zg-pct{font-weight:800;font-family:'IBM Plex Mono',monospace;font-size:14px;}
+.zg-plots,.zg-active,.zg-done{text-align:center;font-weight:600;color:#475569;font-family:'IBM Plex Mono',monospace;}
+.zg-badge{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:12px;font-size:11px;font-weight:700;white-space:nowrap;}
+/* Donut */
+#exec-donut{flex-shrink:0;}
+.donut-row{display:flex;justify-content:center;gap:20px;padding:16px 20px;background:#ffffff;border:1px solid #e2e8f0;border-radius:10px;margin:0 20px 4px;box-shadow:0 1px 4px rgba(0,0,0,.06);flex-wrap:wrap;}
+.donut-item{display:flex;flex-direction:column;align-items:center;gap:6px;}
+.donut-label{font-size:11px;font-weight:700;text-align:center;}
+.report-insight{display:flex;flex-direction:column;gap:8px;margin:0 20px 4px;}
+.insight-item{display:flex;align-items:flex-start;gap:12px;padding:12px 16px;border-radius:10px;border:1px solid;}
+.insight-warn{background:#fff7ed;border-color:#fed7aa;}
+.insight-good{background:#f0fdf4;border-color:#bbf7d0;}
+.insight-info{background:#eff6ff;border-color:#bfdbfe;}
+.ins-icon{font-size:20px;flex-shrink:0;}
+.ins-title{font-size:13px;font-weight:700;color:#0f172a;margin-bottom:3px;}
+.ins-sub{font-size:12px;color:#475569;}
+#sales-visual{padding:12px 16px;background:#f8fafc;border-top:1px solid #e2e8f0;}
+@media print{#sb,#topbar,#bnav{display:none!important;}.screen{overflow:visible!important;}}
 </style>
 </head>
 <body>
@@ -337,28 +483,28 @@ input:focus,select:focus,textarea:focus{outline:none!important;border-color:var(
 <div id="setup">
   <div class="setup-box">
     <div class="setup-logo">
-      <div style="font-size:52px;margin-bottom:10px">🏗️</div>
+      <div style="font-size:52px;margin-bottom:10px">ðï¸</div>
       <div style="font-size:24px;font-weight:700">Hampton <span style="color:var(--blue)">Grove</span></div>
       <div style="font-size:12px;color:var(--t2);margin-top:4px">Construction PM System</div>
     </div>
     <div class="setup-card">
-      <div class="sc-title">👤 ชื่อของคุณ</div>
-      <div class="sc-sub">ระบุชื่อหรือตำแหน่งเพื่อแสดงในระบบ</div>
-      <div class="lbl">ชื่อ / ตำแหน่ง</div>
-      <input class="inp" id="su-name" type="text" placeholder="เช่น PM-วุฒิชัย, โฟร์แมน-ก่อสร้าง">
-      <div class="lbl">สิทธิ์การใช้งาน</div>
+      <div class="sc-title">ð¤ à¸à¸·à¹à¸­à¸à¸­à¸à¸à¸¸à¸</div>
+      <div class="sc-sub">à¸£à¸°à¸à¸¸à¸à¸·à¹à¸­à¸«à¸£à¸·à¸­à¸à¸³à¹à¸«à¸à¹à¸à¹à¸à¸·à¹à¸­à¹à¸ªà¸à¸à¹à¸à¸£à¸°à¸à¸</div>
+      <div class="lbl">à¸à¸·à¹à¸­ / à¸à¸³à¹à¸«à¸à¹à¸</div>
+      <input class="inp" id="su-name" type="text" placeholder="à¹à¸à¹à¸ PM-à¸§à¸¸à¸à¸´à¸à¸±à¸¢, à¹à¸à¸£à¹à¹à¸¡à¸-à¸à¹à¸­à¸ªà¸£à¹à¸²à¸">
+      <div class="lbl">à¸ªà¸´à¸à¸à¸´à¹à¸à¸²à¸£à¹à¸à¹à¸à¸²à¸</div>
       <select class="inp" id="su-role">
-        <option value="admin">👑 Admin — แก้ไขได้ทุกอย่าง</option>
-        <option value="foreman">👷 โฟร์แมน — อัปเดต % งาน + ถ่ายรูป</option>
-        <option value="qc">🔍 QC — อัปเดต % งาน + ถ่ายรูป</option>
-        <option value="sales">💼 ฝ่ายขาย — ดูข้อมูล + Export</option>
-        <option value="viewer">👁️ ผู้บริหาร — ดูอย่างเดียว</option>
+        <option value="admin">ð Admin â à¹à¸à¹à¹à¸à¹à¸à¹à¸à¸¸à¸à¸­à¸¢à¹à¸²à¸</option>
+        <option value="foreman">ð· à¹à¸à¸£à¹à¹à¸¡à¸ â à¸­à¸±à¸à¹à¸à¸ % à¸à¸²à¸ + à¸à¹à¸²à¸¢à¸£à¸¹à¸</option>
+        <option value="qc">ð QC â à¸­à¸±à¸à¹à¸à¸ % à¸à¸²à¸ + à¸à¹à¸²à¸¢à¸£à¸¹à¸</option>
+        <option value="sales">ð¼ à¸à¹à¸²à¸¢à¸à¸²à¸¢ â à¸à¸¹à¸à¹à¸­à¸¡à¸¹à¸¥ + Export</option>
+        <option value="viewer">ðï¸ à¸à¸¹à¹à¸à¸£à¸´à¸«à¸²à¸£ â à¸à¸¹à¸­à¸¢à¹à¸²à¸à¹à¸à¸µà¸¢à¸§</option>
       </select>
-      <button class="pbtn pbtn-blue" onclick="doEnter()">✅ เข้าใช้งาน →</button>
+      <button class="pbtn pbtn-blue" onclick="doEnter()">â à¹à¸à¹à¸²à¹à¸à¹à¸à¸²à¸ â</button>
     </div>
     <div class="setup-hint">
-      ☁️ <b>Google Sheets Sync:</b> ข้อมูลจะ sync กับ Sheets โดยอัตโนมัติ<br>
-      URL ถูกตั้งค่าไว้แล้ว — เพียงใส่ชื่อแล้วกดเข้าใช้งาน
+      âï¸ <b>Google Sheets Sync:</b> à¸à¹à¸­à¸¡à¸¹à¸¥à¸à¸° sync à¸à¸±à¸ Sheets à¹à¸à¸¢à¸­à¸±à¸à¹à¸à¸¡à¸±à¸à¸´<br>
+      URL à¸à¸¹à¸à¸à¸±à¹à¸à¸à¹à¸²à¹à¸§à¹à¹à¸¥à¹à¸§ â à¹à¸à¸µà¸¢à¸à¹à¸ªà¹à¸à¸·à¹à¸­à¹à¸¥à¹à¸§à¸à¸à¹à¸à¹à¸²à¹à¸à¹à¸à¸²à¸
     </div>
   </div>
 </div>
@@ -373,52 +519,133 @@ input:focus,select:focus,textarea:focus{outline:none!important;border-color:var(
         <div id="sb-uname"></div>
       </div>
       <div id="sb-nav">
-        <button class="sni active" onclick="sw('s-home',this)"><span class="sni-ic">🏠</span>หน้าหลัก</button>
-        <button class="sni" onclick="sw('s-plots',this)"><span class="sni-ic">🏗️</span>รายการแปลง</button>
-        <button class="sni" onclick="sw('s-gantt',this)"><span class="sni-ic">📅</span>Gantt Chart</button>
-        <button class="sni" onclick="sw('s-report',this)"><span class="sni-ic">📊</span>รายงาน</button>
-        <button class="sni" onclick="sw('s-alerts',this)"><span class="sni-ic">🔔</span>แจ้งเตือน<span class="sni-badge" id="snb" style="display:none">0</span></button>
+        <button class="sni active" onclick="sw('s-home',this)"><span class="sni-ic">ð </span>à¸«à¸à¹à¸²à¸«à¸¥à¸±à¸</button>
+        <button class="sni" onclick="sw('s-plots',this)"><span class="sni-ic">ðï¸</span>à¸£à¸²à¸¢à¸à¸²à¸£à¹à¸à¸¥à¸</button>
+        <button class="sni" onclick="sw('s-gantt',this)"><span class="sni-ic">ð</span>Gantt Chart</button>
+        <button class="sni" onclick="sw('s-report',this)"><span class="sni-ic">ð</span>à¸£à¸²à¸¢à¸à¸²à¸</button>
+        <button class="sni" onclick="sw('s-alerts',this)"><span class="sni-ic">ð</span>à¹à¸à¹à¸à¹à¸à¸·à¸­à¸<span class="sni-badge" id="snb" style="display:none">0</span></button>
       </div>
       <div id="sb-ftr">
         <div class="sync-row" onclick="openSyncM()">
           <div class="sdot" id="sdot"></div>
           <div class="stxt" id="stxt">Google Sheets Sync</div>
-          <span style="font-size:13px;color:var(--t3)">☁️</span>
+          <span style="font-size:13px;color:var(--t3)">âï¸</span>
         </div>
         <div style="font-size:11px;color:var(--t3);margin-top:4px" id="clk"></div>
-        <button class="sb-logout" onclick="doLogout()">🚪 ออกจากระบบ</button>
+        <button class="sb-logout" onclick="doLogout()">ðª à¸­à¸­à¸à¸à¸²à¸à¸£à¸°à¸à¸</button>
       </div>
     </nav>
 
     <div id="main">
       <div id="topbar">
-        <button id="hbtn" onclick="togSB()">☰</button>
+        <button id="hbtn" onclick="togSB()">â°</button>
         <div id="tb-title">Hampton <span>Grove</span></div>
-        <button id="tb-sync" onclick="openSyncM()">☁️</button>
+        <button id="tb-sync" onclick="openSyncM()">âï¸</button>
       </div>
       <div id="screens">
 
         <!-- HOME -->
         <div class="screen active" id="s-home">
-          <div class="ph"><div class="ph-t" id="hGreet">สวัสดีครับ 👋</div><div class="ph-s" id="dateTxt"></div></div>
+          <div class="ph"><div class="ph-t" id="hGreet">à¸ªà¸§à¸±à¸ªà¸à¸µà¸à¸£à¸±à¸ ð</div><div class="ph-s" id="dateTxt"></div></div>
 
           <!-- Project selector -->
           <div style="padding:10px 16px;background:var(--s1);border-bottom:1px solid var(--b1);flex-shrink:0;">
             <div style="display:flex;gap:8px;overflow-x:auto;padding-bottom:2px;" id="projChips"></div>
           </div>
 
-          <div class="slbl">ภาพรวมโครงการที่เลือก</div>
+          
+          <!-- ═══ EXECUTIVE SUMMARY BANNER ═══ -->
+          <div id="exec-banner">
+            <div id="exec-banner-inner">
+              <div class="exec-left">
+                <div class="exec-company">🏗️ รุ่งกิจ คอนสตรัคชั่น</div>
+                <div class="exec-date" id="execDate">รายงาน ณ วันที่ 21 เมษายน 2569 · อัปเดตอัตโนมัติ</div>
+              </div>
+              <div class="exec-health">
+                <div class="exec-health-label">Overall Health Score</div>
+                <div class="exec-health-score"><span class="exec-score-num" id="execScore">72</span><span class="exec-score-grade">/100</span><span class="exec-score-badge">⚡ ปานกลาง</span></div>
+                <div class="exec-health-bar"><div class="exec-health-fill" style="width:72%"></div></div>
+              </div>
+              <div class="exec-stats">
+                <div class="exec-stat"><span class="exec-stat-v" style="color:#86efac" id="execPctDone">15.8%</span><span class="exec-stat-l">โซนเสร็จสมบูรณ์</span></div>
+                <div class="exec-stat"><span class="exec-stat-v" style="color:#fca5a5" id="execPctLate">13.9%</span><span class="exec-stat-l">แปลงล่าช้า</span></div>
+                <div class="exec-stat"><span class="exec-stat-v" style="color:#c4b5fd" id="execPctSold">12.1%</span><span class="exec-stat-l">ขายแล้ว</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="slbl">à¸ à¸²à¸à¸£à¸§à¸¡à¹à¸à¸£à¸à¸à¸²à¸£à¸à¸µà¹à¹à¸¥à¸·à¸­à¸</div>
           <div class="kgrid" id="hKpi" style="margin-bottom:4px"></div>
-          <div class="slbl" id="aLbl">แจ้งเตือน</div>
+          
+          <!-- ═══ PROJECT COMPARISON CHART ═══ -->
+          <div id="proj-comparison">
+            <div class="slbl">📊 เปรียบเทียบความคืบหน้าตามโครงการ</div>
+            <div class="chart-card">
+              <div class="chart-legend">
+                <span class="legend-item"><span class="leg-dot" style="background:#16a34a"></span>ดีมาก (≥70%)</span>
+                <span class="legend-item"><span class="leg-dot" style="background:#d97706"></span>ปานกลาง (40–69%)</span>
+                <span class="legend-item"><span class="leg-dot" style="background:#f97316"></span>ต้องติดตาม (15–39%)</span>
+                <span class="legend-item"><span class="leg-dot" style="background:#dc2626"></span>ต้องเร่งรัด (&lt;15%)</span>
+              </div>
+              <div class="pc-bars" id="projCompBars">
+                <div class="pc-row"><div class="pc-proj-name">🏡 Hampton Grove</div><div class="pc-bar-wrap"><div class="pc-bar-track"><div class="pc-bar-fill" style="width:0.5%;background:#dc2626"></div></div><span class="pc-pct-label" style="color:#dc2626">0%</span></div><div class="pc-meta">89 แปลง · 8 โซน</div><div class="pc-grade" style="background:#fee2e220;color:#dc2626;border:1px solid #dc262640">F</div></div>
+                <div class="pc-row"><div class="pc-proj-name">🏘️ Hampton พระราม9</div><div class="pc-bar-wrap"><div class="pc-bar-track"><div class="pc-bar-fill" style="width:81.3%;background:#16a34a"></div></div><span class="pc-pct-label" style="color:#16a34a">81.3%</span></div><div class="pc-meta">28 แปลง · 2 โซน</div><div class="pc-grade" style="background:#dcfce720;color:#16a34a;border:1px solid #16a34a40">B</div></div>
+                <div class="pc-row"><div class="pc-proj-name">🏯 Osaka รามอินทรา</div><div class="pc-bar-wrap"><div class="pc-bar-track"><div class="pc-bar-fill" style="width:29.4%;background:#f97316"></div></div><span class="pc-pct-label" style="color:#f97316">29.4%</span></div><div class="pc-meta">114 แปลง · 4 โซน</div><div class="pc-grade" style="background:#fff7ed20;color:#f97316;border:1px solid #f9731640">D</div></div>
+                <div class="pc-row"><div class="pc-proj-name">🌿 The Nice คลอง3</div><div class="pc-bar-wrap"><div class="pc-bar-track"><div class="pc-bar-fill" style="width:14.5%;background:#dc2626"></div></div><span class="pc-pct-label" style="color:#dc2626">14.5%</span></div><div class="pc-meta">70 แปลง · 2 โซน</div><div class="pc-grade" style="background:#fee2e220;color:#dc2626;border:1px solid #dc262640">D</div></div>
+                <div class="pc-row"><div class="pc-proj-name">🏰 Grand Verona ร่มเกล้า</div><div class="pc-bar-wrap"><div class="pc-bar-track"><div class="pc-bar-fill" style="width:32%;background:#f97316"></div></div><span class="pc-pct-label" style="color:#f97316">32%</span></div><div class="pc-meta">103 แปลง · 6 โซน</div><div class="pc-grade" style="background:#fff7ed20;color:#f97316;border:1px solid #f9731640">D</div></div>
+              </div>
+            </div>
+          </div>
+          <div class="slbl" id="aLbl">à¹à¸à¹à¸à¹à¸à¸·à¸­à¸</div>
           <div id="hAlerts"></div>
-          <div class="slbl">สถานะรายโซน</div>
+          <div class="slbl">à¸ªà¸à¸²à¸à¸°à¸£à¸²à¸¢à¹à¸à¸</div>
           <div id="hZones"></div>
           <div style="height:16px"></div>
         </div>
 
+          <!-- ═══ TIMELINE MILESTONE ═══ -->
+          <div id="timeline-milestone">
+            <div class="slbl">📅 Timeline สำคัญที่ต้องติดตาม</div>
+            <div class="ms-grid">
+              <div class="ms-card" style="border-left:3px solid #dc2626;background:#fee2e2"><div class="ms-header"><span class="ms-days" style="color:#dc2626">ใน 9 วัน</span><span class="ms-deadline">30 เม.ย. 2569</span></div><div class="ms-title">ส่งมอบบ้าน</div><div class="ms-meta">Hampton ร.9 · โซน EH7</div></div>
+              <div class="ms-card" style="border-left:3px solid #d97706;background:#fef3c7"><div class="ms-header"><span class="ms-days" style="color:#d97706">ใน 30 วัน</span><span class="ms-deadline">21 พ.ค. 2569</span></div><div class="ms-title">ติดตามความคืบหน้า (60.6%)</div><div class="ms-meta">Hampton ร.9 · โซน HH</div></div>
+              <div class="ms-card" style="border-left:3px solid #1d4ed8;background:#dbeafe"><div class="ms-header"><span class="ms-days" style="color:#1d4ed8">ใน 60 วัน</span><span class="ms-deadline">20 มิ.ย. 2569</span></div><div class="ms-title">เป้าหมายเสร็จ 50% (ปัจจุบัน 11.1%)</div><div class="ms-meta">Osaka รามอินทรา · โซน DO</div></div>
+              <div class="ms-card" style="border-left:3px solid #7c3aed;background:#ede9fe"><div class="ms-header"><span class="ms-days" style="color:#7c3aed">ใน 90 วัน</span><span class="ms-deadline">19 ก.ค. 2569</span></div><div class="ms-title">เป้าหมายเสร็จ 100% (ปัจจุบัน 71.4%)</div><div class="ms-meta">Grand Verona ร่มเกล้า · โซน GSB</div></div>
+            </div>
+          </div>
+
+          <!-- ═══ ZONE STATUS GRID ═══ -->
+          <div id="zone-status-grid">
+            <div class="slbl">📋 ตารางสรุปสถานะทุกโซน</div>
+            <div class="zg-card"><table class="zg-table"><thead><tr class="zg-head"><th>โซน</th><th>โครงการ</th><th>ความคืบหน้า</th><th>แปลงทั้งหมด</th><th>กำลังทำ</th><th>เสร็จแล้ว</th><th>สถานะ</th></tr></thead><tbody>
+              <tr class="zg-row"><td class="zg-zone">GA</td><td class="zg-proj">Hampton Grove</td><td class="zg-pct" style="color:#d97706">0.6%</td><td class="zg-plots">7</td><td class="zg-active">2</td><td class="zg-done">0</td><td><span class="zg-badge" style="background:#fef3c7;color:#d97706">🟡 กำลังดำเนินการ</span></td></tr>
+              <tr class="zg-row"><td class="zg-zone">GB</td><td class="zg-proj">Hampton Grove</td><td class="zg-pct" style="color:#64748b">0%</td><td class="zg-plots">15</td><td class="zg-active">0</td><td class="zg-done">0</td><td><span class="zg-badge" style="background:#f1f5f9;color:#64748b">⚪ ยังไม่เริ่ม</span></td></tr>
+              <tr class="zg-row"><td class="zg-zone">GC</td><td class="zg-proj">Hampton Grove</td><td class="zg-pct" style="color:#64748b">0%</td><td class="zg-plots">16</td><td class="zg-active">0</td><td class="zg-done">0</td><td><span class="zg-badge" style="background:#f1f5f9;color:#64748b">⚪ ยังไม่เริ่ม</span></td></tr>
+              <tr class="zg-row"><td class="zg-zone">GD</td><td class="zg-proj">Hampton Grove</td><td class="zg-pct" style="color:#64748b">0%</td><td class="zg-plots">15</td><td class="zg-active">0</td><td class="zg-done">0</td><td><span class="zg-badge" style="background:#f1f5f9;color:#64748b">⚪ ยังไม่เริ่ม</span></td></tr>
+              <tr class="zg-row"><td class="zg-zone">GE</td><td class="zg-proj">Hampton Grove</td><td class="zg-pct" style="color:#64748b">0%</td><td class="zg-plots">8</td><td class="zg-active">0</td><td class="zg-done">0</td><td><span class="zg-badge" style="background:#f1f5f9;color:#64748b">⚪ ยังไม่เริ่ม</span></td></tr>
+              <tr class="zg-row"><td class="zg-zone">GG</td><td class="zg-proj">Hampton Grove</td><td class="zg-pct" style="color:#64748b">0%</td><td class="zg-plots">9</td><td class="zg-active">0</td><td class="zg-done">0</td><td><span class="zg-badge" style="background:#f1f5f9;color:#64748b">⚪ ยังไม่เริ่ม</span></td></tr>
+              <tr class="zg-row"><td class="zg-zone">GH</td><td class="zg-proj">Hampton Grove</td><td class="zg-pct" style="color:#64748b">0%</td><td class="zg-plots">9</td><td class="zg-active">0</td><td class="zg-done">0</td><td><span class="zg-badge" style="background:#f1f5f9;color:#64748b">⚪ ยังไม่เริ่ม</span></td></tr>
+              <tr class="zg-row"><td class="zg-zone">GI</td><td class="zg-proj">Hampton Grove</td><td class="zg-pct" style="color:#64748b">0%</td><td class="zg-plots">10</td><td class="zg-active">0</td><td class="zg-done">0</td><td><span class="zg-badge" style="background:#f1f5f9;color:#64748b">⚪ ยังไม่เริ่ม</span></td></tr>
+              <tr class="zg-row"><td class="zg-zone">EH</td><td class="zg-proj">Hampton ร.9</td><td class="zg-pct" style="color:#16a34a">96.8%</td><td class="zg-plots">16</td><td class="zg-active">4</td><td class="zg-done">12</td><td><span class="zg-badge" style="background:#dcfce7;color:#16a34a">🟢 เสร็จเกือบหมด</span></td></tr>
+              <tr class="zg-row"><td class="zg-zone">HH</td><td class="zg-proj">Hampton ร.9</td><td class="zg-pct" style="color:#1d4ed8">60.6%</td><td class="zg-plots">12</td><td class="zg-active">12</td><td class="zg-done">0</td><td><span class="zg-badge" style="background:#dbeafe;color:#1d4ed8">🔵 ดำเนินการดี</span></td></tr>
+              <tr class="zg-row"><td class="zg-zone">CO</td><td class="zg-proj">Osaka รามอินทรา</td><td class="zg-pct" style="color:#16a34a">98%</td><td class="zg-plots">31</td><td class="zg-active">11</td><td class="zg-done">20</td><td><span class="zg-badge" style="background:#dcfce7;color:#16a34a">🟢 เสร็จเกือบหมด</span></td></tr>
+              <tr class="zg-row"><td class="zg-zone">DO</td><td class="zg-proj">Osaka รามอินทรา</td><td class="zg-pct" style="color:#d97706">11.1%</td><td class="zg-plots">28</td><td class="zg-active">14</td><td class="zg-done">0</td><td><span class="zg-badge" style="background:#fef3c7;color:#d97706">🟡 กำลังดำเนินการ</span></td></tr>
+              <tr class="zg-row"><td class="zg-zone">EO</td><td class="zg-proj">Osaka รามอินทรา</td><td class="zg-pct" style="color:#64748b">0%</td><td class="zg-plots">28</td><td class="zg-active">0</td><td class="zg-done">0</td><td><span class="zg-badge" style="background:#f1f5f9;color:#64748b">⚪ ยังไม่เริ่ม</span></td></tr>
+              <tr class="zg-row"><td class="zg-zone">IO</td><td class="zg-proj">Osaka รามอินทรา</td><td class="zg-pct" style="color:#64748b">0%</td><td class="zg-plots">27</td><td class="zg-active">0</td><td class="zg-done">0</td><td><span class="zg-badge" style="background:#f1f5f9;color:#64748b">⚪ ยังไม่เริ่ม</span></td></tr>
+              <tr class="zg-row"><td class="zg-zone">EQ</td><td class="zg-proj">The Nice คลอง3</td><td class="zg-pct" style="color:#d97706">24.1%</td><td class="zg-plots">42</td><td class="zg-active">1</td><td class="zg-done">10</td><td><span class="zg-badge" style="background:#fef3c7;color:#d97706">🟡 กำลังดำเนินการ</span></td></tr>
+              <tr class="zg-row"><td class="zg-zone">SP</td><td class="zg-proj">The Nice คลอง3</td><td class="zg-pct" style="color:#64748b">0%</td><td class="zg-plots">28</td><td class="zg-active">0</td><td class="zg-done">0</td><td><span class="zg-badge" style="background:#f1f5f9;color:#64748b">⚪ ยังไม่เริ่ม</span></td></tr>
+              <tr class="zg-row"><td class="zg-zone">GSA</td><td class="zg-proj">Grand Verona</td><td class="zg-pct" style="color:#16a34a">99.9%</td><td class="zg-plots">18</td><td class="zg-active">2</td><td class="zg-done">16</td><td><span class="zg-badge" style="background:#dcfce7;color:#16a34a">🟢 เสร็จเกือบหมด</span></td></tr>
+              <tr class="zg-row"><td class="zg-zone">GSB</td><td class="zg-proj">Grand Verona</td><td class="zg-pct" style="color:#1d4ed8">71.4%</td><td class="zg-plots">21</td><td class="zg-active">11</td><td class="zg-done">6</td><td><span class="zg-badge" style="background:#dbeafe;color:#1d4ed8">🔵 ดำเนินการดี</span></td></tr>
+              <tr class="zg-row"><td class="zg-zone">GSC</td><td class="zg-proj">Grand Verona</td><td class="zg-pct" style="color:#64748b">0%</td><td class="zg-plots">18</td><td class="zg-active">0</td><td class="zg-done">0</td><td><span class="zg-badge" style="background:#f1f5f9;color:#64748b">⚪ ยังไม่เริ่ม</span></td></tr>
+              <tr class="zg-row"><td class="zg-zone">GSD</td><td class="zg-proj">Grand Verona</td><td class="zg-pct" style="color:#64748b">0%</td><td class="zg-plots">16</td><td class="zg-active">0</td><td class="zg-done">0</td><td><span class="zg-badge" style="background:#f1f5f9;color:#64748b">⚪ ยังไม่เริ่ม</span></td></tr>
+              <tr class="zg-row"><td class="zg-zone">GSE</td><td class="zg-proj">Grand Verona</td><td class="zg-pct" style="color:#64748b">0%</td><td class="zg-plots">14</td><td class="zg-active">0</td><td class="zg-done">0</td><td><span class="zg-badge" style="background:#f1f5f9;color:#64748b">⚪ ยังไม่เริ่ม</span></td></tr>
+              <tr class="zg-row"><td class="zg-zone">GSH</td><td class="zg-proj">Grand Verona</td><td class="zg-pct" style="color:#64748b">0%</td><td class="zg-plots">16</td><td class="zg-active">0</td><td class="zg-done">0</td><td><span class="zg-badge" style="background:#f1f5f9;color:#64748b">⚪ ยังไม่เริ่ม</span></td></tr>
+            </tbody></table></div>
+          </div>
+          
+
         <!-- PLOTS -->
         <div class="screen" id="s-plots">
-          <div class="swrap"><div class="sbar"><span style="font-size:17px;color:var(--t3)">🔍</span><input id="srch" placeholder="ค้นหาแปลง เช่น GA1, CO5..." type="search" autocomplete="off"></div></div>
+          <div class="swrap"><div class="sbar"><span style="font-size:17px;color:var(--t3)">ð</span><input id="srch" placeholder="à¸à¹à¸à¸«à¸²à¹à¸à¸¥à¸ à¹à¸à¹à¸ GA1, CO5..." type="search" autocomplete="off"></div></div>
           <!-- Project filter -->
           <div style="display:flex;gap:8px;padding:8px 16px;overflow-x:auto;flex-shrink:0;border-bottom:1px solid var(--b1);" id="plotProjChips"></div>
           <div class="chips" id="zChips"></div>
@@ -429,23 +656,23 @@ input:focus,select:focus,textarea:focus{outline:none!important;border-color:var(
         <!-- DETAIL -->
         <div class="screen" id="s-detail">
           <div class="dhero">
-            <button class="dback" onclick="goBack()">‹ กลับ</button>
-            <div class="did" id="dId">—</div>
-            <div class="dzone" id="dZone">—</div>
+            <button class="dback" onclick="goBack()">â¹ à¸à¸¥à¸±à¸</button>
+            <div class="did" id="dId">â</div>
+            <div class="dzone" id="dZone">â</div>
             <div style="display:flex;align-items:center;gap:16px;margin-bottom:12px">
               <div class="bigpct" id="dPct">0%</div>
               <div style="display:flex;flex-direction:column;gap:5px">
                 <span style="font-size:12px;color:var(--t2)" id="dDone">0/50</span>
-                <span class="badge badge-gray" id="dSale">ว่าง</span>
+                <span class="badge badge-gray" id="dSale">à¸§à¹à¸²à¸</span>
                 <span style="font-size:11px;color:var(--gold)" id="dEndInfo"></span>
               </div>
             </div>
             <div class="bigbar"><div class="bigfill" id="dBar" style="width:0%"></div></div>
             <div class="dmeta">
-              <div class="mpill" onclick="openPlotM()"><div class="mp-l">📅 เริ่ม</div><div class="mp-v" id="dStart" style="color:var(--gold)">ตั้งค่า</div></div>
-              <div class="mpill" onclick="openPlotM()"><div class="mp-l">🏁 ส่งมอบ</div><div class="mp-v" id="dDeliv" style="color:var(--green)">—</div></div>
-              <div class="mpill"><div class="mp-l">⏱ เหลือ</div><div class="mp-v" id="dLeft">—</div></div>
-              <div class="mpill" onclick="openPlotM()"><div class="mp-l">👷 PM</div><div class="mp-v" id="dResp" style="color:var(--purple)">ตั้งค่า</div></div>
+              <div class="mpill" onclick="openPlotM()"><div class="mp-l">ð à¹à¸£à¸´à¹à¸¡</div><div class="mp-v" id="dStart" style="color:var(--gold)">à¸à¸±à¹à¸à¸à¹à¸²</div></div>
+              <div class="mpill" onclick="openPlotM()"><div class="mp-l">ð à¸ªà¹à¸à¸¡à¸­à¸</div><div class="mp-v" id="dDeliv" style="color:var(--green)">â</div></div>
+              <div class="mpill"><div class="mp-l">â± à¹à¸«à¸¥à¸·à¸­</div><div class="mp-v" id="dLeft">â</div></div>
+              <div class="mpill" onclick="openPlotM()"><div class="mp-l">ð· PM</div><div class="mp-v" id="dResp" style="color:var(--purple)">à¸à¸±à¹à¸à¸à¹à¸²</div></div>
             </div>
           </div>
           <div class="chips" id="catChips" style="border-bottom:1px solid var(--b1)"></div>
@@ -454,7 +681,7 @@ input:focus,select:focus,textarea:focus{outline:none!important;border-color:var(
 
         <!-- GANTT -->
         <div class="screen" id="s-gantt">
-          <div class="ph"><div class="ph-t">Gantt Chart</div><div class="ph-s" id="ganttSub">เลือกแปลง</div></div>
+          <div class="ph"><div class="ph-t">Gantt Chart</div><div class="ph-s" id="ganttSub">à¹à¸¥à¸·à¸­à¸à¹à¸à¸¥à¸</div></div>
           <div style="padding:10px 16px;background:var(--s2);border-bottom:1px solid var(--b1);flex-shrink:0">
             <select id="ganttSel" class="msel" style="margin-bottom:0"></select>
           </div>
@@ -463,34 +690,61 @@ input:focus,select:focus,textarea:focus{outline:none!important;border-color:var(
 
         <!-- REPORT -->
         <div class="screen" id="s-report">
-          <div class="ph"><div class="ph-t">รายงานโครงการ</div><div class="ph-s">Hampton Grove · ทุกโซน</div></div>
-          <div class="slbl">สถิติรวม</div>
+          <div class="ph"><div class="ph-t">à¸£à¸²à¸¢à¸à¸²à¸à¹à¸à¸£à¸à¸à¸²à¸£</div><div class="ph-s">Hampton Grove Â· à¸à¸¸à¸à¹à¸à¸</div></div>
+          
+          <!-- ═══ EXECUTIVE SUMMARY DONUT ═══ -->
+          <div id="exec-donut">
+            <div class="slbl">🎯 สรุปภาพรวมเชิงผู้บริหาร</div>
+            <div class="donut-row">
+              <div class="donut-item"><svg width="90" height="90" viewBox="0 0 90 90"><circle cx="45" cy="45" r="36" fill="none" stroke="#e2e8f0" stroke-width="8"/><circle cx="45" cy="45" r="36" fill="none" stroke="#1d4ed8" stroke-width="8" stroke-dasharray="32.1 194" stroke-dashoffset="56.5" stroke-linecap="round"/><text x="45" y="43" text-anchor="middle" font-size="14" font-weight="800" fill="#1d4ed8" font-family="IBM Plex Mono">14.1%</text><text x="45" y="57" text-anchor="middle" font-size="8" fill="#94a3b8">57 แปลง</text></svg><div class="donut-label" style="color:#1d4ed8">กำลังก่อสร้าง</div></div>
+              <div class="donut-item"><svg width="90" height="90" viewBox="0 0 90 90"><circle cx="45" cy="45" r="36" fill="none" stroke="#e2e8f0" stroke-width="8"/><circle cx="45" cy="45" r="36" fill="none" stroke="#16a34a" stroke-width="8" stroke-dasharray="35.6 190.5" stroke-dashoffset="56.5" stroke-linecap="round"/><text x="45" y="43" text-anchor="middle" font-size="14" font-weight="800" fill="#16a34a" font-family="IBM Plex Mono">15.8%</text><text x="45" y="57" text-anchor="middle" font-size="8" fill="#94a3b8">64 แปลง</text></svg><div class="donut-label" style="color:#16a34a">เสร็จ 100%</div></div>
+              <div class="donut-item"><svg width="90" height="90" viewBox="0 0 90 90"><circle cx="45" cy="45" r="36" fill="none" stroke="#e2e8f0" stroke-width="8"/><circle cx="45" cy="45" r="36" fill="none" stroke="#7c3aed" stroke-width="8" stroke-dasharray="27.3 198.8" stroke-dashoffset="56.5" stroke-linecap="round"/><text x="45" y="43" text-anchor="middle" font-size="14" font-weight="800" fill="#7c3aed" font-family="IBM Plex Mono">12.1%</text><text x="45" y="57" text-anchor="middle" font-size="8" fill="#94a3b8">49 แปลง</text></svg><div class="donut-label" style="color:#7c3aed">ขายแล้ว</div></div>
+              <div class="donut-item"><svg width="90" height="90" viewBox="0 0 90 90"><circle cx="45" cy="45" r="36" fill="none" stroke="#e2e8f0" stroke-width="8"/><circle cx="45" cy="45" r="36" fill="none" stroke="#dc2626" stroke-width="8" stroke-dasharray="31.3 194.8" stroke-dashoffset="56.5" stroke-linecap="round"/><text x="45" y="43" text-anchor="middle" font-size="14" font-weight="800" fill="#dc2626" font-family="IBM Plex Mono">13.9%</text><text x="45" y="57" text-anchor="middle" font-size="8" fill="#94a3b8">56 รายการ</text></svg><div class="donut-label" style="color:#dc2626">งานล่าช้า</div></div>
+            </div>
+            <div class="report-insight">
+              <div class="insight-item insight-warn"><span class="ins-icon">⚠️</span><div><div class="ins-title">ต้องเร่งรัด: Hampton Grove ยังไม่เริ่ม 87.5% ของโซน</div><div class="ins-sub">GA เป็นโซนเดียวที่กำลังดำเนินการ (0.6%) จาก 8 โซน</div></div></div>
+              <div class="insight-item insight-good"><span class="ins-icon">✅</span><div><div class="ins-title">Hampton พระราม9 ผลงานดีที่สุด: 81.3% เฉลี่ย</div><div class="ins-sub">EH: 96.8% | HH: 60.6% — เป็นตัวอย่างที่ดีของโครงการ</div></div></div>
+              <div class="insight-item insight-info"><span class="ins-icon">📌</span><div><div class="ins-title">Grand Verona GSA เกือบเสร็จสมบูรณ์ 99.9%</div><div class="ins-sub">พร้อมส่งมอบ 16 แปลง · GSB อยู่ที่ 71.4%</div></div></div>
+            </div>
+          </div>
+          <div class="slbl">à¸ªà¸à¸´à¸à¸´à¸£à¸§à¸¡</div>
           <div class="rkpi" id="rKpi"></div>
-          <div class="slbl">ความคืบหน้ารายโซน</div>
+          <div class="slbl">à¸à¸§à¸²à¸¡à¸à¸·à¸à¸«à¸à¹à¸²à¸£à¸²à¸¢à¹à¸à¸</div>
           <div class="zprog" id="rZones"></div>
-          <div class="slbl">สถานะการขาย</div>
+          <div class="slbl">à¸ªà¸à¸²à¸à¸°à¸à¸²à¸£à¸à¸²à¸¢</div>
           <div class="card" id="rSales"></div>
-          <div class="slbl">Export ข้อมูล</div>
+          <div class="slbl">Export à¸à¹à¸­à¸¡à¸¹à¸¥</div>
+
+          <!-- ═══ SALES VISUAL ═══ -->
+          <div id="sales-visual">
+            <div style="height:16px;border-radius:8px;overflow:hidden;display:flex;margin-bottom:10px;background:#e2e8f0"><div title="ว่าง: 349" style="height:100%;width:86.4%;background:#94a3b8;min-width:3px"></div><div title="จอง: 6" style="height:100%;width:1.5%;background:#d97706;min-width:3px"></div><div title="ขายแล้ว: 38" style="height:100%;width:9.4%;background:#7c3aed;min-width:3px"></div><div title="โอนแล้ว: 11" style="height:100%;width:2.7%;background:#16a34a;min-width:3px"></div></div>
+            <div style="display:flex;gap:16px;flex-wrap:wrap">
+              <div style="display:flex;align-items:center;gap:5px;font-size:11px;color:#475569;font-weight:600"><span style="width:10px;height:10px;border-radius:50%;background:#94a3b8;flex-shrink:0"></span>ว่าง <span style="font-family:IBM Plex Mono,monospace;font-weight:800;color:#94a3b8">349</span></div>
+              <div style="display:flex;align-items:center;gap:5px;font-size:11px;color:#475569;font-weight:600"><span style="width:10px;height:10px;border-radius:50%;background:#d97706;flex-shrink:0"></span>จอง <span style="font-family:IBM Plex Mono,monospace;font-weight:800;color:#d97706">6</span></div>
+              <div style="display:flex;align-items:center;gap:5px;font-size:11px;color:#475569;font-weight:600"><span style="width:10px;height:10px;border-radius:50%;background:#7c3aed;flex-shrink:0"></span>ขายแล้ว <span style="font-family:IBM Plex Mono,monospace;font-weight:800;color:#7c3aed">38</span></div>
+              <div style="display:flex;align-items:center;gap:5px;font-size:11px;color:#475569;font-weight:600"><span style="width:10px;height:10px;border-radius:50%;background:#16a34a;flex-shrink:0"></span>โอนแล้ว <span style="font-family:IBM Plex Mono,monospace;font-weight:800;color:#16a34a">11</span></div>
+            </div>
+          </div>
           <div class="card">
-            <div class="crow" onclick="expCSV()"><div class="crow-l"><div class="crow-t">📄 Export CSV</div><div class="crow-s">ดาวน์โหลดรายแปลงทั้งหมด</div></div><span class="badge badge-gray">CSV</span></div>
-            <div class="crow" onclick="expJSON()"><div class="crow-l"><div class="crow-t">📦 Backup JSON</div><div class="crow-s">สำรองข้อมูลทั้งหมด</div></div><span class="badge badge-gray">JSON</span></div>
+            <div class="crow" onclick="expCSV()"><div class="crow-l"><div class="crow-t">ð Export CSV</div><div class="crow-s">à¸à¸²à¸§à¸à¹à¹à¸«à¸¥à¸à¸£à¸²à¸¢à¹à¸à¸¥à¸à¸à¸±à¹à¸à¸«à¸¡à¸</div></div><span class="badge badge-gray">CSV</span></div>
+            <div class="crow" onclick="expJSON()"><div class="crow-l"><div class="crow-t">ð¦ Backup JSON</div><div class="crow-s">à¸ªà¸³à¸£à¸­à¸à¸à¹à¸­à¸¡à¸¹à¸¥à¸à¸±à¹à¸à¸«à¸¡à¸</div></div><span class="badge badge-gray">JSON</span></div>
           </div>
           <div style="height:16px"></div>
         </div>
 
         <!-- ALERTS -->
         <div class="screen" id="s-alerts">
-          <div class="ph"><div class="ph-t">แจ้งเตือน 🔔</div><div class="ph-s" id="aSub">ตรวจสอบ</div></div>
+          <div class="ph"><div class="ph-t">à¹à¸à¹à¸à¹à¸à¸·à¸­à¸ ð</div><div class="ph-s" id="aSub">à¸à¸£à¸§à¸à¸ªà¸­à¸</div></div>
           <div style="padding-top:8px" id="aFull"></div>
         </div>
 
       </div>
       <div id="bnav">
-        <button class="bni active" onclick="sw('s-home',this)"><span class="bni-ic">🏠</span>หน้าหลัก</button>
-        <button class="bni" onclick="sw('s-plots',this)"><span class="bni-ic">🏗️</span>แปลง</button>
-        <button class="bni" onclick="sw('s-gantt',this)"><span class="bni-ic">📅</span>Gantt</button>
-        <button class="bni" onclick="sw('s-report',this)"><span class="bni-ic">📊</span>รายงาน</button>
-        <button class="bni" onclick="sw('s-alerts',this)"><span class="bni-ic">🔔</span>แจ้งเตือน<span class="nbadge" id="nbb" style="display:none">0</span></button>
+        <button class="bni active" onclick="sw('s-home',this)"><span class="bni-ic">ð </span>à¸«à¸à¹à¸²à¸«à¸¥à¸±à¸</button>
+        <button class="bni" onclick="sw('s-plots',this)"><span class="bni-ic">ðï¸</span>à¹à¸à¸¥à¸</button>
+        <button class="bni" onclick="sw('s-gantt',this)"><span class="bni-ic">ð</span>Gantt</button>
+        <button class="bni" onclick="sw('s-report',this)"><span class="bni-ic">ð</span>à¸£à¸²à¸¢à¸à¸²à¸</button>
+        <button class="bni" onclick="sw('s-alerts',this)"><span class="bni-ic">ð</span>à¹à¸à¹à¸à¹à¸à¸·à¸­à¸<span class="nbadge" id="nbb" style="display:none">0</span></button>
       </div>
     </div>
   </div>
@@ -501,18 +755,18 @@ input:focus,select:focus,textarea:focus{outline:none!important;border-color:var(
 <div class="mo" id="taskM" onclick="closeM('taskM',event)">
   <div class="ms">
     <div class="mh"></div>
-    <div class="mt" id="mT">—</div>
-    <div class="msb" id="mS">—</div>
+    <div class="mt" id="mT">â</div>
+    <div class="msb" id="mS">â</div>
     <div class="mrow">
-      <div class="mib"><div class="mib-l">แผน เริ่ม</div><div class="mib-v" id="mPS">—</div></div>
-      <div class="mib"><div class="mib-l">แผน จบ</div><div class="mib-v" id="mPE">—</div></div>
-      <div class="mib"><div class="mib-l">สถานะ</div><div class="mib-v" id="mStat">—</div></div>
+      <div class="mib"><div class="mib-l">à¹à¸à¸ à¹à¸£à¸´à¹à¸¡</div><div class="mib-v" id="mPS">â</div></div>
+      <div class="mib"><div class="mib-l">à¹à¸à¸ à¸à¸</div><div class="mib-v" id="mPE">â</div></div>
+      <div class="mib"><div class="mib-l">à¸ªà¸à¸²à¸à¸°</div><div class="mib-v" id="mStat">â</div></div>
     </div>
-    <div class="ml">📅 วันเริ่มจริง</div>
+    <div class="ml">ð à¸§à¸±à¸à¹à¸£à¸´à¹à¸¡à¸à¸£à¸´à¸</div>
     <input type="date" class="mi" id="mAS">
-    <div class="ml">🏁 วันจบจริง</div>
+    <div class="ml">ð à¸§à¸±à¸à¸à¸à¸à¸£à¸´à¸</div>
     <input type="date" class="mi" id="mAE">
-    <div class="ml">% ความคืบหน้า</div>
+    <div class="ml">% à¸à¸§à¸²à¸¡à¸à¸·à¸à¸«à¸à¹à¸²</div>
     <div class="pdisp" id="mPD">0%</div>
     <input type="range" class="bslider" id="mSl" min="0" max="100" value="0">
     <div class="qbtns">
@@ -520,16 +774,16 @@ input:focus,select:focus,textarea:focus{outline:none!important;border-color:var(
       <button class="qbtn" onclick="sp(25)">25%</button>
       <button class="qbtn" onclick="sp(50)">50%</button>
       <button class="qbtn" onclick="sp(75)">75%</button>
-      <button class="qbtn g" onclick="sp(100)">✅ 100%</button>
+      <button class="qbtn g" onclick="sp(100)">â 100%</button>
     </div>
-    <div class="ml">📸 ภาพถ่ายหน้างาน</div>
+    <div class="ml">ð¸ à¸ à¸²à¸à¸à¹à¸²à¸¢à¸«à¸à¹à¸²à¸à¸²à¸</div>
     <div class="pgrid-ph" id="phGrid"></div>
-    <button class="padd" onclick="document.getElementById('phInput').click()"><span style="font-size:22px">📷</span>ถ่ายภาพ / เลือกรูป</button>
+    <button class="padd" onclick="document.getElementById('phInput').click()"><span style="font-size:22px">ð·</span>à¸à¹à¸²à¸¢à¸ à¸²à¸ / à¹à¸¥à¸·à¸­à¸à¸£à¸¹à¸</button>
     <input type="file" id="phInput" accept="image/*" multiple capture="environment" onchange="addPhotos(event)" style="display:none">
-    <div class="ml">📝 บันทึกหน้างาน</div>
-    <textarea class="mi" id="mNote" rows="2" placeholder="หมายเหตุ, ปัญหา..." style="resize:none"></textarea>
-    <button class="savebtn" onclick="saveTask()">💾 บันทึกความคืบหน้า</button>
-    <button class="savebtn2" onclick="closeM('taskM')">ยกเลิก</button>
+    <div class="ml">ð à¸à¸±à¸à¸à¸¶à¸à¸«à¸à¹à¸²à¸à¸²à¸</div>
+    <textarea class="mi" id="mNote" rows="2" placeholder="à¸«à¸¡à¸²à¸¢à¹à¸«à¸à¸¸, à¸à¸±à¸à¸«à¸²..." style="resize:none"></textarea>
+    <button class="savebtn" onclick="saveTask()">ð¾ à¸à¸±à¸à¸à¸¶à¸à¸à¸§à¸²à¸¡à¸à¸·à¸à¸«à¸à¹à¸²</button>
+    <button class="savebtn2" onclick="closeM('taskM')">à¸¢à¸à¹à¸¥à¸´à¸</button>
   </div>
 </div>
 
@@ -537,18 +791,18 @@ input:focus,select:focus,textarea:focus{outline:none!important;border-color:var(
 <div class="mo" id="plotM" onclick="closeM('plotM',event)">
   <div class="ms">
     <div class="mh"></div>
-    <div class="mt" id="pmT">ตั้งค่าแปลง</div>
+    <div class="mt" id="pmT">à¸à¸±à¹à¸à¸à¹à¸²à¹à¸à¸¥à¸</div>
     <div class="msb" id="pmS"></div>
-    <div class="ml">📅 วันเริ่มก่อสร้าง</div>
+    <div class="ml">ð à¸§à¸±à¸à¹à¸£à¸´à¹à¸¡à¸à¹à¸­à¸ªà¸£à¹à¸²à¸</div>
     <input type="date" class="mi" id="pmSt">
-    <div class="ml">🏷️ สถานะการขาย</div>
-    <select class="msel" id="pmSale"><option>ว่าง</option><option>จอง</option><option>ขายแล้ว</option><option>โอนแล้ว</option></select>
-    <div class="ml">👷 PM / ผู้รับผิดชอบ</div>
-    <input type="text" class="mi" id="pmResp" placeholder="ชื่อ PM...">
-    <div class="ml">📌 หมายเหตุ</div>
-    <input type="text" class="mi" id="pmNote" placeholder="หมายเหตุ...">
-    <button class="savebtn" onclick="savePlotInfo()">✅ บันทึก</button>
-    <button class="savebtn2" onclick="closeM('plotM')">ยกเลิก</button>
+    <div class="ml">ð·ï¸ à¸ªà¸à¸²à¸à¸°à¸à¸²à¸£à¸à¸²à¸¢</div>
+    <select class="msel" id="pmSale"><option>à¸§à¹à¸²à¸</option><option>à¸à¸­à¸</option><option>à¸à¸²à¸¢à¹à¸¥à¹à¸§</option><option>à¹à¸­à¸à¹à¸¥à¹à¸§</option></select>
+    <div class="ml">ð· PM / à¸à¸¹à¹à¸£à¸±à¸à¸à¸´à¸à¸à¸­à¸</div>
+    <input type="text" class="mi" id="pmResp" placeholder="à¸à¸·à¹à¸­ PM...">
+    <div class="ml">ð à¸«à¸¡à¸²à¸¢à¹à¸«à¸à¸¸</div>
+    <input type="text" class="mi" id="pmNote" placeholder="à¸«à¸¡à¸²à¸¢à¹à¸«à¸à¸¸...">
+    <button class="savebtn" onclick="savePlotInfo()">â à¸à¸±à¸à¸à¸¶à¸</button>
+    <button class="savebtn2" onclick="closeM('plotM')">à¸¢à¸à¹à¸¥à¸´à¸</button>
   </div>
 </div>
 
@@ -556,34 +810,34 @@ input:focus,select:focus,textarea:focus{outline:none!important;border-color:var(
 <div class="mo" id="syncM" onclick="closeM('syncM',event)">
   <div class="ms">
     <div class="mh"></div>
-    <div class="mt">☁️ สถานะการบันทึกข้อมูล</div>
-    <div class="msb">บันทึกอัตโนมัติทุกครั้งที่แก้ไข + Sync ขึ้น Google Sheets</div>
+    <div class="mt">âï¸ à¸ªà¸à¸²à¸à¸°à¸à¸²à¸£à¸à¸±à¸à¸à¸¶à¸à¸à¹à¸­à¸¡à¸¹à¸¥</div>
+    <div class="msb">à¸à¸±à¸à¸à¸¶à¸à¸­à¸±à¸à¹à¸à¸¡à¸±à¸à¸´à¸à¸¸à¸à¸à¸£à¸±à¹à¸à¸à¸µà¹à¹à¸à¹à¹à¸ + Sync à¸à¸¶à¹à¸ Google Sheets</div>
     <div style="background:var(--s2);border-radius:10px;padding:14px;margin-bottom:16px;display:flex;align-items:center;gap:10px">
       <div class="sdot" id="sdot2" style="width:10px;height:10px;border-radius:50%;flex-shrink:0"></div>
       <div style="flex:1">
-        <div style="font-size:14px;font-weight:600" id="syncT">—</div>
-        <div style="font-size:12px;color:var(--t2);margin-top:2px" id="syncS">—</div>
+        <div style="font-size:14px;font-weight:600" id="syncT">â</div>
+        <div style="font-size:12px;color:var(--t2);margin-top:2px" id="syncS">â</div>
       </div>
     </div>
     <div style="display:flex;gap:8px;margin-bottom:16px">
       <div style="flex:1;background:var(--s2);border-radius:10px;padding:12px;text-align:center">
         <div style="font-size:22px;font-weight:700;font-family:'IBM Plex Mono',monospace;color:var(--blue)" id="stPlots">0</div>
-        <div style="font-size:11px;color:var(--t2);margin-top:3px">แปลงที่มีข้อมูล</div>
+        <div style="font-size:11px;color:var(--t2);margin-top:3px">à¹à¸à¸¥à¸à¸à¸µà¹à¸¡à¸µà¸à¹à¸­à¸¡à¸¹à¸¥</div>
       </div>
       <div style="flex:1;background:var(--s2);border-radius:10px;padding:12px;text-align:center">
         <div style="font-size:22px;font-weight:700;font-family:'IBM Plex Mono',monospace;color:var(--green)" id="stTasks">0</div>
-        <div style="font-size:11px;color:var(--t2);margin-top:3px">งานที่อัปเดต</div>
+        <div style="font-size:11px;color:var(--t2);margin-top:3px">à¸à¸²à¸à¸à¸µà¹à¸­à¸±à¸à¹à¸à¸</div>
       </div>
       <div style="flex:1;background:var(--s2);border-radius:10px;padding:12px;text-align:center">
-        <div style="font-size:13px;font-weight:700;font-family:'IBM Plex Mono',monospace;color:var(--gold)" id="stTime">—</div>
-        <div style="font-size:11px;color:var(--t2);margin-top:3px">บันทึกล่าสุด</div>
+        <div style="font-size:13px;font-weight:700;font-family:'IBM Plex Mono',monospace;color:var(--gold)" id="stTime">â</div>
+        <div style="font-size:11px;color:var(--t2);margin-top:3px">à¸à¸±à¸à¸à¸¶à¸à¸¥à¹à¸²à¸ªà¸¸à¸</div>
       </div>
     </div>
     <div style="display:flex;gap:8px;margin-bottom:14px">
-      <button class="qbtn" style="min-height:44px;border-color:var(--blue);color:var(--blue)" onclick="pullAll()">⬇️ Pull จาก Sheets</button>
-      <button class="qbtn" style="min-height:44px;border-color:var(--green);color:var(--green)" onclick="pushAll()">⬆️ Push ขึ้น Sheets</button>
+      <button class="qbtn" style="min-height:44px;border-color:var(--blue);color:var(--blue)" onclick="pullAll()">â¬ï¸ Pull à¸à¸²à¸ Sheets</button>
+      <button class="qbtn" style="min-height:44px;border-color:var(--green);color:var(--green)" onclick="pushAll()">â¬ï¸ Push à¸à¸¶à¹à¸ Sheets</button>
     </div>
-    <button class="savebtn2" onclick="closeM('syncM')">ปิด</button>
+    <button class="savebtn2" onclick="closeM('syncM')">à¸à¸´à¸</button>
   </div>
 </div>
 
@@ -591,100 +845,100 @@ input:focus,select:focus,textarea:focus{outline:none!important;border-color:var(
 
 <script>
 'use strict';
-// ══════════════════════════════
-// GOOGLE SHEETS URL — ใส่ไว้แล้ว
-// ══════════════════════════════
+// ââââââââââââââââââââââââââââââ
+// GOOGLE SHEETS URL â à¹à¸ªà¹à¹à¸§à¹à¹à¸¥à¹à¸§
+// ââââââââââââââââââââââââââââââ
 const SHEET_URL = 'https://script.google.com/macros/s/AKfycbwDaU0WCXzF-lIX1S-u5dOgIPJS-j_My0FhcnrztF0X_yjxrsqeSkX-HDUdU1mONb0i/exec';
 const SAVE_KEY  = 'hg_data_v7';
 
-// ══════════════════════════════
+// ââââââââââââââââââââââââââââââ
 // MASTER DATA
-// ══════════════════════════════
+// ââââââââââââââââââââââââââââââ
 const TASKS=[
-  {id:1,cat:"โครงสร้าง",name:"ฐานราก + เสาเข็ม",os:0,oe:13,dur:14,wt:5,crit:true},
-  {id:2,cat:"โครงสร้าง",name:"คานคอดิน Precast",os:14,oe:19,dur:6,wt:3},
-  {id:3,cat:"โครงสร้าง",name:"เทพื้นชั้น 1",os:17,oe:24,dur:8,wt:3,crit:true},
-  {id:4,cat:"โครงสร้าง",name:"เทขอบ/ธรณีประตู",os:22,oe:24,dur:3,wt:1},
-  {id:5,cat:"โครงสร้าง",name:"ดาดรับถังขยะ",os:23,oe:24,dur:2,wt:1},
-  {id:6,cat:"ระบบ",name:"ถังบำบัดน้ำเสีย",os:9,oe:15,dur:7,wt:2},
-  {id:7,cat:"ระบบ",name:"ระบบป้องกันปลวก",os:14,oe:16,dur:3,wt:1},
-  {id:8,cat:"ประปา",name:"ท่อสุขาภิบาล ชั้น 1",os:15,oe:24,dur:10,wt:3},
-  {id:9,cat:"โครงสร้าง",name:"ผนัง Precast ชั้น 1",os:25,oe:37,dur:13,wt:5,crit:true},
-  {id:10,cat:"โครงสร้าง",name:"คาน Precast ชั้น 2",os:35,oe:41,dur:7,wt:3},
-  {id:11,cat:"โครงสร้าง",name:"พื้น Precast ชั้น 2",os:39,oe:47,dur:9,wt:4,crit:true},
-  {id:12,cat:"โครงสร้าง",name:"รั้วแบ่งแปลน",os:37,oe:47,dur:11,wt:3},
-  {id:13,cat:"โครงสร้าง",name:"ผนัง Precast ชั้น 2",os:48,oe:57,dur:10,wt:4,crit:true},
-  {id:14,cat:"โครงสร้าง",name:"Ring Beam/เสารับหลังคา",os:55,oe:61,dur:7,wt:3},
-  {id:15,cat:"โครงสร้าง",name:"บันได Precast",os:57,oe:63,dur:7,wt:2},
-  {id:16,cat:"โครงสร้าง",name:"เทพื้นโรงจอดรถ",os:62,oe:67,dur:6,wt:2},
-  {id:17,cat:"โครงสร้าง",name:"เทแลมป์หน้าบ้าน",os:64,oe:69,dur:6,wt:1},
-  {id:18,cat:"โครงสร้าง",name:"กันซึม หลังคา+พื้น",os:63,oe:69,dur:7,wt:2},
-  {id:19,cat:"โครงสร้าง",name:"แผ่นรั้วหน้าบ้าน",os:67,oe:73,dur:7,wt:2},
-  {id:20,cat:"หลังคา",name:"โครงหลังคา Smart Touch",os:62,oe:71,dur:10,wt:3,crit:true},
-  {id:21,cat:"หลังคา",name:"มุงหลังคา+เชิงชาย",os:69,oe:77,dur:9,wt:3,crit:true},
-  {id:22,cat:"สถาปัตย์",name:"บัวภายนอก",os:71,oe:79,dur:9,wt:2},
-  {id:23,cat:"สี",name:"สกิมขัด+สีรองพื้น",os:77,oe:85,dur:9,wt:3},
-  {id:24,cat:"ประปา",name:"ท่อน้ำ ชั้น 2+ทดสอบ",os:59,oe:69,dur:11,wt:3},
-  {id:25,cat:"ไฟฟ้า",name:"ฝังท่อร้อยไฟ",os:49,oe:64,dur:16,wt:3},
-  {id:26,cat:"ไฟฟ้า",name:"ร้อยสายไฟ",os:64,oe:77,dur:14,wt:3},
-  {id:27,cat:"กระเบื้อง",name:"กระเบื้องผนัง+เคาน์เตอร์",os:81,oe:93,dur:13,wt:4},
-  {id:28,cat:"กระเบื้อง",name:"กระเบื้องพื้น ชั้น 1",os:87,oe:97,dur:11,wt:4},
-  {id:29,cat:"เหล็ก/ฝ้า",name:"ราวบันได+เหล็กดัด",os:79,oe:89,dur:11,wt:2},
-  {id:30,cat:"เหล็ก/ฝ้า",name:"ฝ้าเพดาน",os:83,oe:93,dur:11,wt:3},
-  {id:31,cat:"สี",name:"ทาสีรอบแรก",os:89,oe:97,dur:9,wt:3},
-  {id:32,cat:"ประตู",name:"ติดตั้งวงกบ",os:85,oe:93,dur:9,wt:2},
-  {id:33,cat:"ประตู",name:"ติดตั้งบานประตู",os:91,oe:99,dur:9,wt:2},
-  {id:34,cat:"ไฟฟ้า",name:"โคมไฟ+สวิตช์+ปลั๊ก",os:93,oe:102,dur:10,wt:3},
-  {id:35,cat:"สี",name:"ทาสีรอบสอง เก็บงาน",os:99,oe:107,dur:9,wt:3},
-  {id:36,cat:"ประปา",name:"สุขภัณฑ์+ทดสอบน้ำ",os:97,oe:105,dur:9,wt:2},
-  {id:37,cat:"สถาปัตย์",name:"Top หินเคาน์เตอร์",os:99,oe:105,dur:7,wt:2},
-  {id:38,cat:"สถาปัตย์",name:"กระจกเงา",os:99,oe:105,dur:7,wt:1},
-  {id:39,cat:"สถาปัตย์",name:"ประตู-หน้าต่าง UPVC",os:94,oe:103,dur:10,wt:2},
-  {id:40,cat:"สถาปัตย์",name:"SPC พื้นชั้น 2",os:99,oe:107,dur:9,wt:2},
-  {id:41,cat:"สถาปัตย์",name:"ไม้บันได",os:97,oe:105,dur:9,wt:2},
-  {id:42,cat:"สถาปัตย์",name:"Digital Door Lock",os:103,oe:107,dur:5,wt:1},
-  {id:43,cat:"ภายนอก",name:"ปูหญ้าภายนอก",os:105,oe:111,dur:7,wt:1},
-  {id:44,cat:"ภายนอก",name:"ถังขยะ",os:107,oe:109,dur:3,wt:1},
-  {id:45,cat:"ภายนอก",name:"Stamp Concrete",os:101,oe:109,dur:9,wt:2},
-  {id:46,cat:"สี",name:"สี Texture ภายนอก",os:103,oe:111,dur:9,wt:2},
-  {id:47,cat:"สถาปัตย์",name:"ป้ายบ้านเลขที่",os:109,oe:111,dur:3,wt:1},
-  {id:48,cat:"ปิดโครงการ",name:"ทำความสะอาด",os:111,oe:115,dur:5,wt:1},
-  {id:49,cat:"ปิดโครงการ",name:"QC + Punch List",os:114,oe:117,dur:4,wt:1},
-  {id:50,cat:"ปิดโครงการ",name:"ส่งมอบ → ฝ่ายขาย ✅",os:118,oe:119,dur:2,wt:1},
+  {id:1,cat:"à¹à¸à¸£à¸à¸ªà¸£à¹à¸²à¸",name:"à¸à¸²à¸à¸£à¸²à¸ + à¹à¸ªà¸²à¹à¸à¹à¸¡",os:0,oe:13,dur:14,wt:5,crit:true},
+  {id:2,cat:"à¹à¸à¸£à¸à¸ªà¸£à¹à¸²à¸",name:"à¸à¸²à¸à¸à¸­à¸à¸´à¸ Precast",os:14,oe:19,dur:6,wt:3},
+  {id:3,cat:"à¹à¸à¸£à¸à¸ªà¸£à¹à¸²à¸",name:"à¹à¸à¸à¸·à¹à¸à¸à¸±à¹à¸ 1",os:17,oe:24,dur:8,wt:3,crit:true},
+  {id:4,cat:"à¹à¸à¸£à¸à¸ªà¸£à¹à¸²à¸",name:"à¹à¸à¸à¸­à¸/à¸à¸£à¸à¸µà¸à¸£à¸°à¸à¸¹",os:22,oe:24,dur:3,wt:1},
+  {id:5,cat:"à¹à¸à¸£à¸à¸ªà¸£à¹à¸²à¸",name:"à¸à¸²à¸à¸£à¸±à¸à¸à¸±à¸à¸à¸¢à¸°",os:23,oe:24,dur:2,wt:1},
+  {id:6,cat:"à¸£à¸°à¸à¸",name:"à¸à¸±à¸à¸à¸³à¸à¸±à¸à¸à¹à¸³à¹à¸ªà¸µà¸¢",os:9,oe:15,dur:7,wt:2},
+  {id:7,cat:"à¸£à¸°à¸à¸",name:"à¸£à¸°à¸à¸à¸à¹à¸­à¸à¸à¸±à¸à¸à¸¥à¸§à¸",os:14,oe:16,dur:3,wt:1},
+  {id:8,cat:"à¸à¸£à¸°à¸à¸²",name:"à¸à¹à¸­à¸ªà¸¸à¸à¸²à¸ à¸´à¸à¸²à¸¥ à¸à¸±à¹à¸ 1",os:15,oe:24,dur:10,wt:3},
+  {id:9,cat:"à¹à¸à¸£à¸à¸ªà¸£à¹à¸²à¸",name:"à¸à¸à¸±à¸ Precast à¸à¸±à¹à¸ 1",os:25,oe:37,dur:13,wt:5,crit:true},
+  {id:10,cat:"à¹à¸à¸£à¸à¸ªà¸£à¹à¸²à¸",name:"à¸à¸²à¸ Precast à¸à¸±à¹à¸ 2",os:35,oe:41,dur:7,wt:3},
+  {id:11,cat:"à¹à¸à¸£à¸à¸ªà¸£à¹à¸²à¸",name:"à¸à¸·à¹à¸ Precast à¸à¸±à¹à¸ 2",os:39,oe:47,dur:9,wt:4,crit:true},
+  {id:12,cat:"à¹à¸à¸£à¸à¸ªà¸£à¹à¸²à¸",name:"à¸£à¸±à¹à¸§à¹à¸à¹à¸à¹à¸à¸¥à¸",os:37,oe:47,dur:11,wt:3},
+  {id:13,cat:"à¹à¸à¸£à¸à¸ªà¸£à¹à¸²à¸",name:"à¸à¸à¸±à¸ Precast à¸à¸±à¹à¸ 2",os:48,oe:57,dur:10,wt:4,crit:true},
+  {id:14,cat:"à¹à¸à¸£à¸à¸ªà¸£à¹à¸²à¸",name:"Ring Beam/à¹à¸ªà¸²à¸£à¸±à¸à¸«à¸¥à¸±à¸à¸à¸²",os:55,oe:61,dur:7,wt:3},
+  {id:15,cat:"à¹à¸à¸£à¸à¸ªà¸£à¹à¸²à¸",name:"à¸à¸±à¸à¹à¸ Precast",os:57,oe:63,dur:7,wt:2},
+  {id:16,cat:"à¹à¸à¸£à¸à¸ªà¸£à¹à¸²à¸",name:"à¹à¸à¸à¸·à¹à¸à¹à¸£à¸à¸à¸­à¸à¸£à¸",os:62,oe:67,dur:6,wt:2},
+  {id:17,cat:"à¹à¸à¸£à¸à¸ªà¸£à¹à¸²à¸",name:"à¹à¸à¹à¸¥à¸¡à¸à¹à¸«à¸à¹à¸²à¸à¹à¸²à¸",os:64,oe:69,dur:6,wt:1},
+  {id:18,cat:"à¹à¸à¸£à¸à¸ªà¸£à¹à¸²à¸",name:"à¸à¸±à¸à¸à¸¶à¸¡ à¸«à¸¥à¸±à¸à¸à¸²+à¸à¸·à¹à¸",os:63,oe:69,dur:7,wt:2},
+  {id:19,cat:"à¹à¸à¸£à¸à¸ªà¸£à¹à¸²à¸",name:"à¹à¸à¹à¸à¸£à¸±à¹à¸§à¸«à¸à¹à¸²à¸à¹à¸²à¸",os:67,oe:73,dur:7,wt:2},
+  {id:20,cat:"à¸«à¸¥à¸±à¸à¸à¸²",name:"à¹à¸à¸£à¸à¸«à¸¥à¸±à¸à¸à¸² Smart Touch",os:62,oe:71,dur:10,wt:3,crit:true},
+  {id:21,cat:"à¸«à¸¥à¸±à¸à¸à¸²",name:"à¸¡à¸¸à¸à¸«à¸¥à¸±à¸à¸à¸²+à¹à¸à¸´à¸à¸à¸²à¸¢",os:69,oe:77,dur:9,wt:3,crit:true},
+  {id:22,cat:"à¸ªà¸à¸²à¸à¸±à¸à¸¢à¹",name:"à¸à¸±à¸§à¸ à¸²à¸¢à¸à¸­à¸",os:71,oe:79,dur:9,wt:2},
+  {id:23,cat:"à¸ªà¸µ",name:"à¸ªà¸à¸´à¸¡à¸à¸±à¸+à¸ªà¸µà¸£à¸­à¸à¸à¸·à¹à¸",os:77,oe:85,dur:9,wt:3},
+  {id:24,cat:"à¸à¸£à¸°à¸à¸²",name:"à¸à¹à¸­à¸à¹à¸³ à¸à¸±à¹à¸ 2+à¸à¸à¸ªà¸­à¸",os:59,oe:69,dur:11,wt:3},
+  {id:25,cat:"à¹à¸à¸à¹à¸²",name:"à¸à¸±à¸à¸à¹à¸­à¸£à¹à¸­à¸¢à¹à¸",os:49,oe:64,dur:16,wt:3},
+  {id:26,cat:"à¹à¸à¸à¹à¸²",name:"à¸£à¹à¸­à¸¢à¸ªà¸²à¸¢à¹à¸",os:64,oe:77,dur:14,wt:3},
+  {id:27,cat:"à¸à¸£à¸°à¹à¸à¸·à¹à¸­à¸",name:"à¸à¸£à¸°à¹à¸à¸·à¹à¸­à¸à¸à¸à¸±à¸+à¹à¸à¸²à¸à¹à¹à¸à¸­à¸£à¹",os:81,oe:93,dur:13,wt:4},
+  {id:28,cat:"à¸à¸£à¸°à¹à¸à¸·à¹à¸­à¸",name:"à¸à¸£à¸°à¹à¸à¸·à¹à¸­à¸à¸à¸·à¹à¸ à¸à¸±à¹à¸ 1",os:87,oe:97,dur:11,wt:4},
+  {id:29,cat:"à¹à¸«à¸¥à¹à¸/à¸à¹à¸²",name:"à¸£à¸²à¸§à¸à¸±à¸à¹à¸+à¹à¸«à¸¥à¹à¸à¸à¸±à¸",os:79,oe:89,dur:11,wt:2},
+  {id:30,cat:"à¹à¸«à¸¥à¹à¸/à¸à¹à¸²",name:"à¸à¹à¸²à¹à¸à¸à¸²à¸",os:83,oe:93,dur:11,wt:3},
+  {id:31,cat:"à¸ªà¸µ",name:"à¸à¸²à¸ªà¸µà¸£à¸­à¸à¹à¸£à¸",os:89,oe:97,dur:9,wt:3},
+  {id:32,cat:"à¸à¸£à¸°à¸à¸¹",name:"à¸à¸´à¸à¸à¸±à¹à¸à¸§à¸à¸à¸",os:85,oe:93,dur:9,wt:2},
+  {id:33,cat:"à¸à¸£à¸°à¸à¸¹",name:"à¸à¸´à¸à¸à¸±à¹à¸à¸à¸²à¸à¸à¸£à¸°à¸à¸¹",os:91,oe:99,dur:9,wt:2},
+  {id:34,cat:"à¹à¸à¸à¹à¸²",name:"à¹à¸à¸¡à¹à¸+à¸ªà¸§à¸´à¸à¸à¹+à¸à¸¥à¸±à¹à¸",os:93,oe:102,dur:10,wt:3},
+  {id:35,cat:"à¸ªà¸µ",name:"à¸à¸²à¸ªà¸µà¸£à¸­à¸à¸ªà¸­à¸ à¹à¸à¹à¸à¸à¸²à¸",os:99,oe:107,dur:9,wt:3},
+  {id:36,cat:"à¸à¸£à¸°à¸à¸²",name:"à¸ªà¸¸à¸à¸ à¸±à¸à¸à¹+à¸à¸à¸ªà¸­à¸à¸à¹à¸³",os:97,oe:105,dur:9,wt:2},
+  {id:37,cat:"à¸ªà¸à¸²à¸à¸±à¸à¸¢à¹",name:"Top à¸«à¸´à¸à¹à¸à¸²à¸à¹à¹à¸à¸­à¸£à¹",os:99,oe:105,dur:7,wt:2},
+  {id:38,cat:"à¸ªà¸à¸²à¸à¸±à¸à¸¢à¹",name:"à¸à¸£à¸°à¸à¸à¹à¸à¸²",os:99,oe:105,dur:7,wt:1},
+  {id:39,cat:"à¸ªà¸à¸²à¸à¸±à¸à¸¢à¹",name:"à¸à¸£à¸°à¸à¸¹-à¸«à¸à¹à¸²à¸à¹à¸²à¸ UPVC",os:94,oe:103,dur:10,wt:2},
+  {id:40,cat:"à¸ªà¸à¸²à¸à¸±à¸à¸¢à¹",name:"SPC à¸à¸·à¹à¸à¸à¸±à¹à¸ 2",os:99,oe:107,dur:9,wt:2},
+  {id:41,cat:"à¸ªà¸à¸²à¸à¸±à¸à¸¢à¹",name:"à¹à¸¡à¹à¸à¸±à¸à¹à¸",os:97,oe:105,dur:9,wt:2},
+  {id:42,cat:"à¸ªà¸à¸²à¸à¸±à¸à¸¢à¹",name:"Digital Door Lock",os:103,oe:107,dur:5,wt:1},
+  {id:43,cat:"à¸ à¸²à¸¢à¸à¸­à¸",name:"à¸à¸¹à¸«à¸à¹à¸²à¸ à¸²à¸¢à¸à¸­à¸",os:105,oe:111,dur:7,wt:1},
+  {id:44,cat:"à¸ à¸²à¸¢à¸à¸­à¸",name:"à¸à¸±à¸à¸à¸¢à¸°",os:107,oe:109,dur:3,wt:1},
+  {id:45,cat:"à¸ à¸²à¸¢à¸à¸­à¸",name:"Stamp Concrete",os:101,oe:109,dur:9,wt:2},
+  {id:46,cat:"à¸ªà¸µ",name:"à¸ªà¸µ Texture à¸ à¸²à¸¢à¸à¸­à¸",os:103,oe:111,dur:9,wt:2},
+  {id:47,cat:"à¸ªà¸à¸²à¸à¸±à¸à¸¢à¹",name:"à¸à¹à¸²à¸¢à¸à¹à¸²à¸à¹à¸¥à¸à¸à¸µà¹",os:109,oe:111,dur:3,wt:1},
+  {id:48,cat:"à¸à¸´à¸à¹à¸à¸£à¸à¸à¸²à¸£",name:"à¸à¸³à¸à¸§à¸²à¸¡à¸ªà¸°à¸­à¸²à¸",os:111,oe:115,dur:5,wt:1},
+  {id:49,cat:"à¸à¸´à¸à¹à¸à¸£à¸à¸à¸²à¸£",name:"QC + Punch List",os:114,oe:117,dur:4,wt:1},
+  {id:50,cat:"à¸à¸´à¸à¹à¸à¸£à¸à¸à¸²à¸£",name:"à¸ªà¹à¸à¸¡à¸­à¸ â à¸à¹à¸²à¸¢à¸à¸²à¸¢ â",os:118,oe:119,dur:2,wt:1},
 ];
 const TW=TASKS.reduce((a,t)=>a+t.wt,0);
-// ══════════════════════════════
+// ââââââââââââââââââââââââââââââ
 // PROJECTS & PLOTS
-// ══════════════════════════════
+// ââââââââââââââââââââââââââââââ
 const PROJECTS = {
   'Hampton Grove': {
-    color:'#58a6ff', icon:'🏡',
+    color:'#58a6ff', icon:'ð¡',
     zones:['GA','GB','GC','GD','GE','GG','GH','GI'],
     zoneColors:{GA:'#f59e0b',GB:'#58a6ff',GC:'#3fb950',GD:'#f97316',GE:'#bc8cff',GG:'#39d353',GH:'#f85149',GI:'#06b6d4'}
   },
-  'Hampton พระราม9': {
-    color:'#f59e0b', icon:'🏘️',
+  'Hampton à¸à¸£à¸°à¸£à¸²à¸¡9': {
+    color:'#f59e0b', icon:'ðï¸',
     zones:['EH','HH'],
     zoneColors:{EH:'#f59e0b',HH:'#f97316'}
   },
-  'Osaka รามอินทรา': {
-    color:'#e11d48', icon:'🏯',
+  'Osaka à¸£à¸²à¸¡à¸­à¸´à¸à¸à¸£à¸²': {
+    color:'#e11d48', icon:'ð¯',
     zones:['CO','DO','EO','IO'],
     zoneColors:{CO:'#e11d48',DO:'#f43f5e',EO:'#fb7185',IO:'#fda4af'}
   },
-  'The Nice คลอง3': {
-    color:'#8b5cf6', icon:'🌿',
+  'The Nice à¸à¸¥à¸­à¸3': {
+    color:'#8b5cf6', icon:'ð¿',
     zones:['EQ','SP'],
     zoneColors:{EQ:'#8b5cf6',SP:'#a78bfa'}
   },
-  'Grand Verona ร่มเกล้า': {
-    color:'#10b981', icon:'🏰',
+  'Grand Verona à¸£à¹à¸¡à¹à¸à¸¥à¹à¸²': {
+    color:'#10b981', icon:'ð°',
     zones:['GSA','GSB','GSC','GSD','GSE','GSH'],
     zoneColors:{GSA:'#10b981',GSB:'#34d399',GSC:'#6ee7b7',GSD:'#059669',GSE:'#047857',GSH:'#065f46'}
   }
 };
 
-// สร้างแปลงทั้งหมด
+// à¸ªà¸£à¹à¸²à¸à¹à¸à¸¥à¸à¸à¸±à¹à¸à¸«à¸¡à¸
 function makePlots(zone, prefix, from, to) {
   const arr = [];
   for(let i=from;i<=to;i++) arr.push([`${prefix}${i}`, zone]);
@@ -701,18 +955,18 @@ const PR = [
   ...makePlots('GG','GG',1,9),
   ...makePlots('GH','GH',1,9),
   ...makePlots('GI','GI',1,10),
-  // Hampton พระราม9
+  // Hampton à¸à¸£à¸°à¸£à¸²à¸¡9
   ...makePlots('EH','EH',1,16),
   ...makePlots('HH','HH',1,12),
-  // Osaka รามอินทรา
+  // Osaka à¸£à¸²à¸¡à¸­à¸´à¸à¸à¸£à¸²
   ...makePlots('CO','CO',1,31),
   ...makePlots('DO','DO',1,28),
   ...makePlots('EO','EO',1,28),
   ...makePlots('IO','IO',1,27),
-  // The Nice คลอง3
+  // The Nice à¸à¸¥à¸­à¸3
   ...makePlots('EQ','EQ',1,42),
   ...makePlots('SP','SP',1,28),
-  // Grand Verona ร่มเกล้า
+  // Grand Verona à¸£à¹à¸¡à¹à¸à¸¥à¹à¸²
   ...makePlots('GSA','GSA',1,18),
   ...makePlots('GSB','GSB',1,21),
   ...makePlots('GSC','GSC',1,18),
@@ -721,14 +975,14 @@ const PR = [
   ...makePlots('GSH','GSH',1,16),
 ];
 
-// Zone ทั้งหมด
+// Zone à¸à¸±à¹à¸à¸«à¸¡à¸
 const ZONES = [...new Set(PR.map(p=>p[1]))];
 
-// ZC รวมทุกโครงการ
+// ZC à¸£à¸§à¸¡à¸à¸¸à¸à¹à¸à¸£à¸à¸à¸²à¸£
 const ZC = {};
 Object.values(PROJECTS).forEach(proj => Object.assign(ZC, proj.zoneColors));
 
-// หา project จาก zone
+// à¸«à¸² project à¸à¸²à¸ zone
 function getProject(zone) {
   for(const [name,proj] of Object.entries(PROJECTS)) {
     if(proj.zones.includes(zone)) return { name, ...proj };
@@ -739,54 +993,54 @@ function getProjectFromPid(pid) {
   const zone = PR.find(p=>p[0]===pid)?.[1];
   return zone ? getProject(zone) : null;
 }
-const CC={โครงสร้าง:'#58a6ff',ระบบ:'#3fb950',ประปา:'#06b6d4',ไฟฟ้า:'#d29922',หลังคา:'#f97316',สถาปัตย์:'#bc8cff',กระเบื้อง:'#f59e0b','เหล็ก/ฝ้า':'#8b949e',สี:'#39d353',ประตู:'#f85149',ภายนอก:'#22c55e',ปิดโครงการ:'#f85149'};
+const CC={à¹à¸à¸£à¸à¸ªà¸£à¹à¸²à¸:'#58a6ff',à¸£à¸°à¸à¸:'#3fb950',à¸à¸£à¸°à¸à¸²:'#06b6d4',à¹à¸à¸à¹à¸²:'#d29922',à¸«à¸¥à¸±à¸à¸à¸²:'#f97316',à¸ªà¸à¸²à¸à¸±à¸à¸¢à¹:'#bc8cff',à¸à¸£à¸°à¹à¸à¸·à¹à¸­à¸:'#f59e0b','à¹à¸«à¸¥à¹à¸/à¸à¹à¸²':'#8b949e',à¸ªà¸µ:'#39d353',à¸à¸£à¸°à¸à¸¹:'#f85149',à¸ à¸²à¸¢à¸à¸­à¸:'#22c55e',à¸à¸´à¸à¹à¸à¸£à¸à¸à¸²à¸£:'#f85149'};
 
-// ══════════════════════════════
+// ââââââââââââââââââââââââââââââ
 // STATE
-// ══════════════════════════════
+// ââââââââââââââââââââââââââââââ
 let plots={};
 PR.forEach(([pid])=>{
-  plots[pid]={startDate:'',saleStatus:'ว่าง',resp:'',note:'',
+  plots[pid]={startDate:'',saleStatus:'à¸§à¹à¸²à¸',resp:'',note:'',
     tasks:{},taskNotes:{},taskPhotos:{},taskActStart:{},taskActEnd:{}};
   TASKS.forEach(t=>{plots[pid].tasks[t.id]=0;});
 });
 let cur=null,prevScr='s-plots',fZone='ALL',fCat='ALL',curTid=null;
 let userName='PM',userRole='admin';
 let syncing=false,syncTimer=null;
-let fProject='ALL'; // กรองโครงการ
+let fProject='ALL'; // à¸à¸£à¸­à¸à¹à¸à¸£à¸à¸à¸²à¸£
 
-// ══════════════════════════════
+// ââââââââââââââââââââââââââââââ
 // UTILS
-// ══════════════════════════════
+// ââââââââââââââââââââââââââââââ
 const aD=(s,d)=>{if(!s)return null;const dt=new Date(s);dt.setDate(dt.getDate()+d);return dt;};
-const fmt=(d)=>d?d.toLocaleDateString('th-TH',{day:'2-digit',month:'short'}):'—';
-const fmtF=(d)=>d?d.toLocaleDateString('th-TH',{day:'2-digit',month:'2-digit',year:'numeric'}):'—';
+const fmt=(d)=>d?d.toLocaleDateString('th-TH',{day:'2-digit',month:'short'}):'â';
+const fmtF=(d)=>d?d.toLocaleDateString('th-TH',{day:'2-digit',month:'2-digit',year:'numeric'}):'â';
 const dif=(a,b)=>Math.round((b-a)/86400000);
 function wp(pid){let s=0;TASKS.forEach(t=>{s+=t.wt*(plots[pid].tasks[t.id]||0);});return Math.round(s*10/TW)/10;}
 function dc(pid){const p=wp(pid);return p===100?'#3fb950':p>0?'#58a6ff':plots[pid].startDate?'#d29922':'#484f58';}
 function pc(p){return p===100?'#3fb950':p>0?'#58a6ff':'#484f58';}
 function tst(t,s,p){
-  if(p===100)return{txt:'✅ เสร็จ',c:'#3fb950'};
-  if(!s)return{txt:'⬜ ยังไม่มีแผน',c:'#484f58'};
+  if(p===100)return{txt:'â à¹à¸ªà¸£à¹à¸',c:'#3fb950'};
+  if(!s)return{txt:'â¬ à¸¢à¸±à¸à¹à¸¡à¹à¸¡à¸µà¹à¸à¸',c:'#484f58'};
   const pe=aD(s,t.oe),today=new Date();today.setHours(0,0,0,0);
-  if(p>0)return pe<today?{txt:'🔴 ล่าช้า',c:'#f85149'}:{txt:'🟡 กำลังทำ',c:'#d29922'};
-  if(today>pe)return{txt:'🔴 ล่าช้า',c:'#f85149'};
-  if(today>=aD(s,t.os))return{txt:'⏰ ถึงเวลา',c:'#f97316'};
-  return{txt:'⬜ รอ',c:'#484f58'};
+  if(p>0)return pe<today?{txt:'ð´ à¸¥à¹à¸²à¸à¹à¸²',c:'#f85149'}:{txt:'ð¡ à¸à¸³à¸¥à¸±à¸à¸à¸³',c:'#d29922'};
+  if(today>pe)return{txt:'ð´ à¸¥à¹à¸²à¸à¹à¸²',c:'#f85149'};
+  if(today>=aD(s,t.os))return{txt:'â° à¸à¸¶à¸à¹à¸§à¸¥à¸²',c:'#f97316'};
+  return{txt:'â¬ à¸£à¸­',c:'#484f58'};
 }
 function canEdit(){return['admin','foreman','qc'].includes(userRole);}
 function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500);}
 
-// ══════════════════════════════
+// ââââââââââââââââââââââââââââââ
 // SAVE / LOAD LOCAL
-// ══════════════════════════════
+// ââââââââââââââââââââââââââââââ
 function saveLocal(){
   try{
     const slim={};
     PR.forEach(([pid])=>{
       slim[pid]={
         startDate:plots[pid].startDate||'',
-        saleStatus:plots[pid].saleStatus||'ว่าง',
+        saleStatus:plots[pid].saleStatus||'à¸§à¹à¸²à¸',
         resp:plots[pid].resp||'',
         note:plots[pid].note||'',
         tasks:{...plots[pid].tasks},
@@ -803,8 +1057,8 @@ function saveLocal(){
           localStorage.setItem('hg_ph7_'+pid,JSON.stringify(ph));
       }catch{}
     });
-    setSS('ok','บันทึกแล้ว · '+new Date().toLocaleTimeString('th-TH',{hour:'2-digit',minute:'2-digit'}));
-  }catch(e){setSS('err','Storage เต็ม');}
+    setSS('ok','à¸à¸±à¸à¸à¸¶à¸à¹à¸¥à¹à¸§ Â· '+new Date().toLocaleTimeString('th-TH',{hour:'2-digit',minute:'2-digit'}));
+  }catch(e){setSS('err','Storage à¹à¸à¹à¸¡');}
 }
 
 function loadLocal(){
@@ -822,9 +1076,9 @@ function loadLocal(){
   }catch{}
 }
 
-// ══════════════════════════════
+// ââââââââââââââââââââââââââââââ
 // GOOGLE SHEETS SYNC
-// ══════════════════════════════
+// ââââââââââââââââââââââââââââââ
 async function gsf(params){
   const url=SHEET_URL+'?'+new URLSearchParams(params);
   const r=await fetch(url,{mode:'cors'});
@@ -832,10 +1086,10 @@ async function gsf(params){
 }
 
 async function pullAll(){
-  setSS('ing','⬇️ กำลัง Pull...');syncing=true;
+  setSS('ing','â¬ï¸ à¸à¸³à¸¥à¸±à¸ Pull...');syncing=true;
   try{
     const d=await gsf({action:'getAll'});
-    if(!d||d.error)throw new Error(d?.error||'ไม่ได้รับข้อมูล');
+    if(!d||d.error)throw new Error(d?.error||'à¹à¸¡à¹à¹à¸à¹à¸£à¸±à¸à¸à¹à¸­à¸¡à¸¹à¸¥');
     let n=0;
     Object.keys(d).forEach(pid=>{
       if(plots[pid]){
@@ -845,20 +1099,20 @@ async function pullAll(){
     });
     saveLocal();renderHome();renderPlots();
     if(cur&&document.getElementById('s-detail').classList.contains('active'))renderDetail();
-    setSS('ok','✅ Pull '+n+' แปลงแล้ว · '+new Date().toLocaleTimeString('th-TH',{hour:'2-digit',minute:'2-digit'}));
-    toast('✅ Pull '+n+' แปลงสำเร็จ');
-  }catch(e){setSS('err','❌ Pull ล้มเหลว: '+e.message);toast('❌ '+e.message);}
+    setSS('ok','â Pull '+n+' à¹à¸à¸¥à¸à¹à¸¥à¹à¸§ Â· '+new Date().toLocaleTimeString('th-TH',{hour:'2-digit',minute:'2-digit'}));
+    toast('â Pull '+n+' à¹à¸à¸¥à¸à¸ªà¸³à¹à¸£à¹à¸');
+  }catch(e){setSS('err','â Pull à¸¥à¹à¸¡à¹à¸«à¸¥à¸§: '+e.message);toast('â '+e.message);}
   syncing=false;
 }
 
 async function pushAll(){
-  setSS('ing','⬆️ กำลัง Push...');syncing=true;
+  setSS('ing','â¬ï¸ à¸à¸³à¸¥à¸±à¸ Push...');syncing=true;
   try{
     const slim={};PR.forEach(([pid])=>{slim[pid]={...plots[pid],taskPhotos:{}};});
     const d=await gsf({action:'saveAll',allJson:JSON.stringify(slim)});
-    if(!d||d.error)throw new Error(d?.error||'ล้มเหลว');
-    setSS('ok','✅ Push '+d.saved+' แปลงแล้ว');toast('✅ Push สำเร็จ');
-  }catch(e){setSS('err','❌ Push ล้มเหลว');toast('❌ '+e.message);}
+    if(!d||d.error)throw new Error(d?.error||'à¸¥à¹à¸¡à¹à¸«à¸¥à¸§');
+    setSS('ok','â Push '+d.saved+' à¹à¸à¸¥à¸à¹à¸¥à¹à¸§');toast('â Push à¸ªà¸³à¹à¸£à¹à¸');
+  }catch(e){setSS('err','â Push à¸¥à¹à¸¡à¹à¸«à¸¥à¸§');toast('â '+e.message);}
   syncing=false;
 }
 
@@ -867,7 +1121,7 @@ async function pushOne(pid){
   try{
     const slim={...plots[pid],taskPhotos:{}};
     await gsf({action:'savePlot',plotId:pid,dataJson:JSON.stringify(slim),updatedBy:userName,updatedAt:new Date().toISOString()});
-    setSS('ok','☁️ Synced · '+new Date().toLocaleTimeString('th-TH',{hour:'2-digit',minute:'2-digit'}));
+    setSS('ok','âï¸ Synced Â· '+new Date().toLocaleTimeString('th-TH',{hour:'2-digit',minute:'2-digit'}));
   }catch{}
   syncing=false;
 }
@@ -881,34 +1135,34 @@ function schedSync(){
 function setSS(s,m){
   const c={ok:'#3fb950',err:'#f85149',ing:'#d29922','':'#484f58'}[s]||'#484f58';
   ['sdot','sdot2'].forEach(id=>{const el=document.getElementById(id);if(el)el.style.background=c;});
-  const ti=document.getElementById('tb-sync');if(ti)ti.textContent=s==='ok'?'✅':s==='err'?'❌':s==='ing'?'🔄':'☁️';
+  const ti=document.getElementById('tb-sync');if(ti)ti.textContent=s==='ok'?'â':s==='err'?'â':s==='ing'?'ð':'âï¸';
   const st=document.getElementById('stxt');if(st&&m)st.textContent=m;
   const syncT=document.getElementById('syncT');
   const syncS=document.getElementById('syncS');
-  if(syncT)syncT.textContent=s==='ok'?'✅ บันทึกและ Sync แล้ว':s==='err'?'❌ เกิดข้อผิดพลาด':s==='ing'?'🔄 กำลังดำเนินการ...':'💾 พร้อมใช้งาน';
+  if(syncT)syncT.textContent=s==='ok'?'â à¸à¸±à¸à¸à¸¶à¸à¹à¸¥à¸° Sync à¹à¸¥à¹à¸§':s==='err'?'â à¹à¸à¸´à¸à¸à¹à¸­à¸à¸´à¸à¸à¸¥à¸²à¸':s==='ing'?'ð à¸à¸³à¸¥à¸±à¸à¸à¸³à¹à¸à¸´à¸à¸à¸²à¸£...':'ð¾ à¸à¸£à¹à¸­à¸¡à¹à¸à¹à¸à¸²à¸';
   if(syncS&&m)syncS.textContent=m;
 }
 
-// ══════════════════════════════
+// ââââââââââââââââââââââââââââââ
 // SETUP / LOGIN
-// ══════════════════════════════
+// ââââââââââââââââââââââââââââââ
 function doEnter(){
   const name=document.getElementById('su-name').value.trim();
-  if(!name){toast('⚠️ กรุณาใส่ชื่อก่อน');return;}
+  if(!name){toast('â ï¸ à¸à¸£à¸¸à¸à¸²à¹à¸ªà¹à¸à¸·à¹à¸­à¸à¹à¸­à¸');return;}
   const role=document.getElementById('su-role').value;
   userName=name;userRole=role;
   try{localStorage.setItem('hg_sess7',JSON.stringify({name,role,at:Date.now()}));}catch{}
   document.getElementById('setup').style.display='none';
   document.getElementById('app').style.display='block';
   loadLocal();
-  document.getElementById('sb-role').textContent={admin:'👑 Admin',foreman:'👷 โฟร์แมน',qc:'🔍 QC',sales:'💼 ฝ่ายขาย',viewer:'👁️ ผู้บริหาร'}[role]||role;
+  document.getElementById('sb-role').textContent={admin:'ð Admin',foreman:'ð· à¹à¸à¸£à¹à¹à¸¡à¸',qc:'ð QC',sales:'ð¼ à¸à¹à¸²à¸¢à¸à¸²à¸¢',viewer:'ðï¸ à¸à¸¹à¹à¸à¸£à¸´à¸«à¸²à¸£'}[role]||role;
   document.getElementById('sb-uname').textContent=name;
-  document.getElementById('hGreet').textContent='สวัสดีครับ '+name+' 👋';
-  setSS('ok','เชื่อม Sheets แล้ว');
+  document.getElementById('hGreet').textContent='à¸ªà¸§à¸±à¸ªà¸à¸µà¸à¸£à¸±à¸ '+name+' ð';
+  setSS('ok','à¹à¸à¸·à¹à¸­à¸¡ Sheets à¹à¸¥à¹à¸§');
   tickClock();renderHome();renderPlots();
   setTimeout(()=>pullAll(),800);
   setInterval(()=>{if(!syncing)pullAll();},60000);
-  toast('👋 ยินดีต้อนรับ '+name);
+  toast('ð à¸¢à¸´à¸à¸à¸µà¸à¹à¸­à¸à¸£à¸±à¸ '+name);
 }
 
 function doLogout(){
@@ -918,9 +1172,9 @@ function doLogout(){
   document.getElementById('su-name').value='';
 }
 
-// ══════════════════════════════
+// ââââââââââââââââââââââââââââââ
 // UI HELPERS
-// ══════════════════════════════
+// ââââââââââââââââââââââââââââââ
 function tickClock(){
   const n=new Date();
   const c=document.getElementById('clk');if(c)c.textContent=n.toLocaleTimeString('th-TH',{hour:'2-digit',minute:'2-digit'});
@@ -961,9 +1215,9 @@ function openSyncM(){
   document.getElementById('syncM').classList.add('open');
 }
 
-// ══════════════════════════════
+// ââââââââââââââââââââââââââââââ
 // HOME
-// ══════════════════════════════
+// ââââââââââââââââââââââââââââââ
 function renderProjChips(elId, onClick) {
   const el = document.getElementById(elId);
   if(!el) return;
@@ -977,7 +1231,7 @@ function renderProjChips(elId, onClick) {
       color:${isActive ? (proj?.color||'#58a6ff') : 'var(--t2)'};
       cursor:pointer;white-space:nowrap;font-family:'IBM Plex Sans Thai',sans-serif;
       flex-shrink:0;transition:all .15s;
-    ">${p==='ALL'?'🏢 ทั้งหมด':proj.icon+' '+p}</button>`;
+    ">${p==='ALL'?'ð¢ à¸à¸±à¹à¸à¸«à¸¡à¸':proj.icon+' '+p}</button>`;
   }).join('');
 }
 
@@ -997,33 +1251,33 @@ function renderHome(){
   const bld=allP.filter(p=>p>0&&p<100).length,
         avg=allP.length?(allP.reduce((a,b)=>a+b,0)/allP.length).toFixed(1):0,
         d100=allP.filter(p=>p===100).length;
-  const sold=filtered.filter(([pid])=>['ขายแล้ว','โอนแล้ว'].includes(plots[pid].saleStatus)).length;
+  const sold=filtered.filter(([pid])=>['à¸à¸²à¸¢à¹à¸¥à¹à¸§','à¹à¸­à¸à¹à¸¥à¹à¸§'].includes(plots[pid].saleStatus)).length;
   const alerts=getAlerts(filtered);const late=alerts.filter(a=>a.type==='late').length;
 
   // Project name display
-  const projName = fProject==='ALL'?`ทั้งหมด ${Object.keys(PROJECTS).length} โครงการ (${PR.length} แปลง)`:
-    `${PROJECTS[fProject].icon} ${fProject} (${filtered.length} แปลง)`;
+  const projName = fProject==='ALL'?`à¸à¸±à¹à¸à¸«à¸¡à¸ ${Object.keys(PROJECTS).length} à¹à¸à¸£à¸à¸à¸²à¸£ (${PR.length} à¹à¸à¸¥à¸)`:
+    `${PROJECTS[fProject].icon} ${fProject} (${filtered.length} à¹à¸à¸¥à¸)`;
   document.getElementById('hKpi').innerHTML=`
-    <div class="kbox"><div class="knum" style="color:var(--blue)">${filtered.length}</div><div class="klbl">แปลงทั้งหมด</div></div>
-    <div class="kbox"><div class="knum" style="color:var(--green)">${bld}</div><div class="klbl">กำลังก่อสร้าง</div></div>
-    <div class="kbox"><div class="knum" style="color:var(--gold)">${avg}%</div><div class="klbl">เฉลี่ยรวม</div></div>
-    <div class="kbox"><div class="knum" style="color:var(--red)">${late}</div><div class="klbl">งานล่าช้า</div></div>
-    <div class="kbox"><div class="knum" style="color:var(--purple)">${sold}</div><div class="klbl">ขายแล้ว</div></div>
-    <div class="kbox"><div class="knum" style="color:var(--teal)">${d100}</div><div class="klbl">เสร็จ 100%</div></div>`;
+    <div class="kbox"><div class="knum" style="color:var(--blue)">${filtered.length}</div><div class="klbl">à¹à¸à¸¥à¸à¸à¸±à¹à¸à¸«à¸¡à¸</div></div>
+    <div class="kbox"><div class="knum" style="color:var(--green)">${bld}</div><div class="klbl">à¸à¸³à¸¥à¸±à¸à¸à¹à¸­à¸ªà¸£à¹à¸²à¸</div></div>
+    <div class="kbox"><div class="knum" style="color:var(--gold)">${avg}%</div><div class="klbl">à¹à¸à¸¥à¸µà¹à¸¢à¸£à¸§à¸¡</div></div>
+    <div class="kbox"><div class="knum" style="color:var(--red)">${late}</div><div class="klbl">à¸à¸²à¸à¸¥à¹à¸²à¸à¹à¸²</div></div>
+    <div class="kbox"><div class="knum" style="color:var(--purple)">${sold}</div><div class="klbl">à¸à¸²à¸¢à¹à¸¥à¹à¸§</div></div>
+    <div class="kbox"><div class="knum" style="color:var(--teal)">${d100}</div><div class="klbl">à¹à¸ªà¸£à¹à¸ 100%</div></div>`;
 
   const nb=alerts.length;
   ['nbb','snb'].forEach(id=>{const el=document.getElementById(id);if(el){el.textContent=nb;el.style.display=nb>0?'block':'none';}});
-  document.getElementById('aLbl').textContent=nb>0?`แจ้งเตือน (${nb})`:'แจ้งเตือน';
+  document.getElementById('aLbl').textContent=nb>0?`à¹à¸à¹à¸à¹à¸à¸·à¸­à¸ (${nb})`:'à¹à¸à¹à¸à¹à¸à¸·à¸­à¸';
   const hA=document.getElementById('hAlerts');
   hA.innerHTML=!alerts.length
-    ?`<div class="aitem"><span class="aicon">✅</span><div><div class="a-title">ไม่มีแจ้งเตือน</div><div class="a-sub">ทุกงานเป็นปกติ</div></div></div>`
+    ?`<div class="aitem"><span class="aicon">â</span><div><div class="a-title">à¹à¸¡à¹à¸¡à¸µà¹à¸à¹à¸à¹à¸à¸·à¸­à¸</div><div class="a-sub">à¸à¸¸à¸à¸à¸²à¸à¹à¸à¹à¸à¸à¸à¸à¸´</div></div></div>`
     :alerts.slice(0,3).map(a=>`<div class="aitem" style="border-left:3px solid ${a.c}" onclick="prevScr='s-home';selPlot('${a.pid}')"><span class="aicon">${a.icon}</span><div><div class="a-title">${a.title}</div><div class="a-sub">${a.sub}</div></div></div>`).join('');
 
   // Zones
   const zEl=document.getElementById('hZones');zEl.innerHTML='';
   const zd=document.createElement('div');zd.className='zprog';
 
-  // กลุ่มตาม Project
+  // à¸à¸¥à¸¸à¹à¸¡à¸à¸²à¸¡ Project
   const projectsToShow = fProject==='ALL' ? Object.entries(PROJECTS) : [[fProject, PROJECTS[fProject]]];
   projectsToShow.forEach(([pname,proj])=>{
     // Project header
@@ -1033,21 +1287,21 @@ function renderHome(){
       const zpcts=zp.map(([pid])=>wp(pid));
       const za=zpcts.length?(zpcts.reduce((a,b)=>a+b,0)/zpcts.length).toFixed(1):0;
       const zc=ZC[z]||proj.color;
-      zd.innerHTML+=`<div class="zrow"><div class="zrow-top"><div class="zname" style="color:${zc}">${z}</div><div class="zpct" style="color:${zc}">${za}%</div></div><div class="zbar"><div class="zfill" style="width:${za}%;background:${zc}"></div></div><div class="zstat">${zp.length} แปลง · ทำอยู่ ${zpcts.filter(p=>p>0&&p<100).length} · เสร็จ ${zpcts.filter(p=>p===100).length}</div></div>`;
+      zd.innerHTML+=`<div class="zrow"><div class="zrow-top"><div class="zname" style="color:${zc}">${z}</div><div class="zpct" style="color:${zc}">${za}%</div></div><div class="zbar"><div class="zfill" style="width:${za}%;background:${zc}"></div></div><div class="zstat">${zp.length} à¹à¸à¸¥à¸ Â· à¸à¸³à¸­à¸¢à¸¹à¹ ${zpcts.filter(p=>p>0&&p<100).length} Â· à¹à¸ªà¸£à¹à¸ ${zpcts.filter(p=>p===100).length}</div></div>`;
     });
   });
   zEl.appendChild(zd);
 }
 
-// ══════════════════════════════
+// ââââââââââââââââââââââââââââââ
 // PLOTS LIST
-// ══════════════════════════════
+// ââââââââââââââââââââââââââââââ
 function renderPlots(){
   renderProjChips('plotProjChips','setProjFilterPlots');
   const filtered = getFilteredPR();
   const projZones = [...new Set(filtered.map(p=>p[1]))];
   const cEl=document.getElementById('zChips');
-  cEl.innerHTML=['ALL',...projZones].map(z=>`<button class="chip ${fZone===z?'on':''}" onclick="setZ('${z}')">${z==='ALL'?'ทั้งหมด':z}</button>`).join('');
+  cEl.innerHTML=['ALL',...projZones].map(z=>`<button class="chip ${fZone===z?'on':''}" onclick="setZ('${z}')">${z==='ALL'?'à¸à¸±à¹à¸à¸«à¸¡à¸':z}</button>`).join('');
   const q=document.getElementById('srch').value.toLowerCase();
   const el=document.getElementById('plotList');el.innerHTML='';
   filtered.filter(([pid,z])=>(fZone==='ALL'||z===fZone)&&(!q||pid.toLowerCase().includes(q))).forEach(([pid,zone])=>{
@@ -1058,18 +1312,18 @@ function renderPlots(){
     const div=document.createElement('div');div.className='pcard';div.onclick=()=>{prevScr='s-plots';selPlot(pid);};
     div.innerHTML=`
       <div style="background:${zc}18;padding:4px 13px;font-size:10px;font-weight:700;color:${zc}">${proj?.icon||''} ${proj?.name||''}</div>
-      <div class="pcard-top"><div class="pdot" style="background:${dc(pid)}"></div><div style="flex:1;min-width:0"><div class="pc-id">${pid}</div><div class="pc-sub">โซน ${zone} · ${pd.saleStatus}${pd.resp?' · '+pd.resp:''}</div></div><div class="pc-pct" style="color:${pc(p)}">${p}%</div></div>
+      <div class="pcard-top"><div class="pdot" style="background:${dc(pid)}"></div><div style="flex:1;min-width:0"><div class="pc-id">${pid}</div><div class="pc-sub">à¹à¸à¸ ${zone} Â· ${pd.saleStatus}${pd.resp?' Â· '+pd.resp:''}</div></div><div class="pc-pct" style="color:${pc(p)}">${p}%</div></div>
       <div class="pbar"><div class="pbar-fill" style="width:${p}%;background:${pc(p)}"></div></div>
-      <div class="pcard-bot"><span>เริ่ม: <b>${pd.startDate?fmtF(new Date(pd.startDate)):'ยังไม่กำหนด'}</b></span><span>ส่งมอบ: <b style="color:${dl!==null&&dl<0?'#f85149':'#3fb950'}">${end?fmt(end):'—'}</b></span></div>`;
+      <div class="pcard-bot"><span>à¹à¸£à¸´à¹à¸¡: <b>${pd.startDate?fmtF(new Date(pd.startDate)):'à¸¢à¸±à¸à¹à¸¡à¹à¸à¸³à¸«à¸à¸'}</b></span><span>à¸ªà¹à¸à¸¡à¸­à¸: <b style="color:${dl!==null&&dl<0?'#f85149':'#3fb950'}">${end?fmt(end):'â'}</b></span></div>`;
     el.appendChild(div);
   });
 }
 function setZ(z){fZone=z;renderPlots();}
 document.getElementById('srch').oninput=()=>renderPlots();
 
-// ══════════════════════════════
+// ââââââââââââââââââââââââââââââ
 // DETAIL
-// ══════════════════════════════
+// ââââââââââââââââââââââââââââââ
 function selPlot(pid){cur=pid;fCat='ALL';document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById('s-detail').classList.add('active');renderDetail();}
 function renderDetail(){
   const pid=cur,pd=plots[pid];const p=wp(pid),done=TASKS.filter(t=>(pd.tasks[t.id]||0)===100).length;
@@ -1078,45 +1332,45 @@ function renderDetail(){
   const proj=getProject(zone);
   const zc=ZC[zone]||proj?.color||'#58a6ff';
   document.getElementById('dId').textContent=pid;
-  document.getElementById('dZone').textContent=`${proj?.icon||''} ${proj?.name||''} · โซน ${zone} · ${pd.saleStatus}${pd.resp?' · '+pd.resp:''}`;
+  document.getElementById('dZone').textContent=`${proj?.icon||''} ${proj?.name||''} Â· à¹à¸à¸ ${zone} Â· ${pd.saleStatus}${pd.resp?' Â· '+pd.resp:''}`;
   document.getElementById('dPct').textContent=p+'%';document.getElementById('dPct').style.color=pc(p);
   document.getElementById('dDone').textContent=`${done}/50`;
   document.getElementById('dBar').style.cssText=`width:${p}%;background:${pc(p)}`;
   document.getElementById('dSale').textContent=pd.saleStatus;
-  document.getElementById('dStart').textContent=pd.startDate?fmtF(new Date(pd.startDate)):'ตั้งค่า';
-  document.getElementById('dDeliv').textContent=end?fmtF(end):'—';
-  document.getElementById('dResp').textContent=pd.resp||'ตั้งค่า';
+  document.getElementById('dStart').textContent=pd.startDate?fmtF(new Date(pd.startDate)):'à¸à¸±à¹à¸à¸à¹à¸²';
+  document.getElementById('dDeliv').textContent=end?fmtF(end):'â';
+  document.getElementById('dResp').textContent=pd.resp||'à¸à¸±à¹à¸à¸à¹à¸²';
   const lEl=document.getElementById('dLeft');
-  if(dl!==null){if(dl<0){lEl.textContent=`เกิน ${Math.abs(dl)} วัน`;lEl.style.color='#f85149';}else if(dl===0){lEl.textContent='วันนี้!';lEl.style.color='#d29922';}else{lEl.textContent=dl+' วัน';lEl.style.color='#3fb950';}}
-  else lEl.textContent='—';
-  document.getElementById('dEndInfo').textContent=end?`🏁 ${fmtF(end)}`:'ยังไม่กำหนดวัน';
+  if(dl!==null){if(dl<0){lEl.textContent=`à¹à¸à¸´à¸ ${Math.abs(dl)} à¸§à¸±à¸`;lEl.style.color='#f85149';}else if(dl===0){lEl.textContent='à¸§à¸±à¸à¸à¸µà¹!';lEl.style.color='#d29922';}else{lEl.textContent=dl+' à¸§à¸±à¸';lEl.style.color='#3fb950';}}
+  else lEl.textContent='â';
+  document.getElementById('dEndInfo').textContent=end?`ð ${fmtF(end)}`:'à¸¢à¸±à¸à¹à¸¡à¹à¸à¸³à¸«à¸à¸à¸§à¸±à¸';
   const cats=['ALL',...new Set(TASKS.map(t=>t.cat))];
-  document.getElementById('catChips').innerHTML=cats.map(c=>`<button class="chip ${fCat===c?'on':''}" onclick="setC('${c}')">${c==='ALL'?'ทั้งหมด':c}</button>`).join('');
+  document.getElementById('catChips').innerHTML=cats.map(c=>`<button class="chip ${fCat===c?'on':''}" onclick="setC('${c}')">${c==='ALL'?'à¸à¸±à¹à¸à¸«à¸¡à¸':c}</button>`).join('');
   const el=document.getElementById('taskList');el.innerHTML='';
   (fCat==='ALL'?TASKS:TASKS.filter(t=>t.cat===fCat)).forEach(task=>{
     const tp=pd.tasks[task.id]||0,st=tst(task,pd.startDate,tp),cc=CC[task.cat]||'#8b949e';
     const ps=pd.startDate?aD(pd.startDate,task.os):null,pe=pd.startDate?aD(pd.startDate,task.oe):null;
     const photos=pd.taskPhotos?.[task.id]||[];
-    const phEl=photos.length>0?`<img class="tph" src="${photos[photos.length-1]}">`:`<div class="tph-ph">📷</div>`;
+    const phEl=photos.length>0?`<img class="tph" src="${photos[photos.length-1]}">`:`<div class="tph-ph">ð·</div>`;
     const div=document.createElement('div');div.className='titem';div.onclick=()=>openTaskM(task.id);
-    div.innerHTML=`<div class="tck ${tp===100?'done':tp>0?'part':''}">${tp===100?'✓':''}</div><div class="tinfo"><div class="tname ${tp===100?'done':''}">${task.crit?'🔴 ':''}${task.name}</div><div class="tmeta"><span class="tcb" style="background:${cc}22;color:${cc}">${task.cat}</span><span class="td">${ps?fmt(ps)+'→'+fmt(pe):'ไม่มีแผน'}</span><span class="ts" style="color:${st.c}">${st.txt}</span></div></div>${phEl}<div class="tpct" style="color:${pc(tp)}">${tp}%</div>`;
+    div.innerHTML=`<div class="tck ${tp===100?'done':tp>0?'part':''}">${tp===100?'â':''}</div><div class="tinfo"><div class="tname ${tp===100?'done':''}">${task.crit?'ð´ ':''}${task.name}</div><div class="tmeta"><span class="tcb" style="background:${cc}22;color:${cc}">${task.cat}</span><span class="td">${ps?fmt(ps)+'â'+fmt(pe):'à¹à¸¡à¹à¸¡à¸µà¹à¸à¸'}</span><span class="ts" style="color:${st.c}">${st.txt}</span></div></div>${phEl}<div class="tpct" style="color:${pc(tp)}">${tp}%</div>`;
     el.appendChild(div);
   });
 }
 function setC(c){fCat=c;renderDetail();}
 
-// ══════════════════════════════
+// ââââââââââââââââââââââââââââââ
 // TASK MODAL
-// ══════════════════════════════
+// ââââââââââââââââââââââââââââââ
 function openTaskM(tid){
   const task=TASKS.find(t=>t.id===tid),pd=plots[cur];
   const tp=pd.tasks[tid]||0,st=tst(task,pd.startDate,tp);
   const ps=pd.startDate?aD(pd.startDate,task.os):null,pe=pd.startDate?aD(pd.startDate,task.oe):null;
   curTid=tid;
   document.getElementById('mT').textContent=task.name;
-  document.getElementById('mS').textContent=`${task.cat} · ${task.dur} วัน`;
-  document.getElementById('mPS').textContent=ps?fmt(ps):'—';
-  document.getElementById('mPE').textContent=pe?fmt(pe):'—';
+  document.getElementById('mS').textContent=`${task.cat} Â· ${task.dur} à¸§à¸±à¸`;
+  document.getElementById('mPS').textContent=ps?fmt(ps):'â';
+  document.getElementById('mPE').textContent=pe?fmt(pe):'â';
   document.getElementById('mStat').textContent=st.txt;document.getElementById('mStat').style.color=st.c;
   document.getElementById('mAS').value=pd.taskActStart?.[tid]||'';
   document.getElementById('mAE').value=pd.taskActEnd?.[tid]||'';
@@ -1134,7 +1388,7 @@ function sp(v){
 document.getElementById('mSl').oninput=function(){sp(this.value);};
 
 function saveTask(){
-  if(!canEdit()){toast('🔒 ไม่มีสิทธิ์แก้ไข');return;}
+  if(!canEdit()){toast('ð à¹à¸¡à¹à¸¡à¸µà¸ªà¸´à¸à¸à¸´à¹à¹à¸à¹à¹à¸');return;}
   const v=parseInt(document.getElementById('mSl').value),pd=plots[cur];
   pd.tasks[curTid]=v;
   if(!pd.taskNotes)pd.taskNotes={};pd.taskNotes[curTid]=document.getElementById('mNote').value;
@@ -1142,15 +1396,15 @@ function saveTask(){
   if(!pd.taskActEnd)pd.taskActEnd={};pd.taskActEnd[curTid]=document.getElementById('mAE').value;
   saveLocal();schedSync();renderDetail();
   document.getElementById('taskM').classList.remove('open');
-  toast(v===100?'✅ งานเสร็จแล้ว!':'💾 บันทึกแล้ว');
+  toast(v===100?'â à¸à¸²à¸à¹à¸ªà¸£à¹à¸à¹à¸¥à¹à¸§!':'ð¾ à¸à¸±à¸à¸à¸¶à¸à¹à¸¥à¹à¸§');
 }
 
 function renderPhGrid(tid){
   const photos=plots[cur]?.taskPhotos?.[tid]||[];
-  document.getElementById('phGrid').innerHTML=photos.map((src,i)=>`<div class="pthumb"><img src="${src}" loading="lazy"><button class="pdel" onclick="delPh(${tid},${i},event)">✕</button></div>`).join('');
+  document.getElementById('phGrid').innerHTML=photos.map((src,i)=>`<div class="pthumb"><img src="${src}" loading="lazy"><button class="pdel" onclick="delPh(${tid},${i},event)">â</button></div>`).join('');
 }
 function addPhotos(e){
-  if(!canEdit()){toast('🔒 ไม่มีสิทธิ์');return;}
+  if(!canEdit()){toast('ð à¹à¸¡à¹à¸¡à¸µà¸ªà¸´à¸à¸à¸´à¹');return;}
   const files=[...e.target.files];if(!files.length)return;
   const pd=plots[cur];if(!pd.taskPhotos)pd.taskPhotos={};if(!pd.taskPhotos[curTid])pd.taskPhotos[curTid]=[];
   let done=0;
@@ -1160,7 +1414,7 @@ function addPhotos(e){
         const c=document.createElement('canvas');const mx=900;let w=img.width,h=img.height;
         if(w>mx){h=h*(mx/w);w=mx;}c.width=w;c.height=h;c.getContext('2d').drawImage(img,0,0,w,h);
         pd.taskPhotos[curTid].push(c.toDataURL('image/jpeg',.72));
-        done++;if(done===Math.min(files.length,6)){renderPhGrid(curTid);toast('📸 เพิ่มรูปแล้ว');}
+        done++;if(done===Math.min(files.length,6)){renderPhGrid(curTid);toast('ð¸ à¹à¸à¸´à¹à¸¡à¸£à¸¹à¸à¹à¸¥à¹à¸§');}
       };img.src=ev.target.result;
     };r.readAsDataURL(f);
   });
@@ -1168,33 +1422,33 @@ function addPhotos(e){
 }
 function delPh(tid,i,e){e.stopPropagation();plots[cur].taskPhotos[tid].splice(i,1);renderPhGrid(tid);}
 
-// ══════════════════════════════
+// ââââââââââââââââââââââââââââââ
 // PLOT MODAL
-// ══════════════════════════════
+// ââââââââââââââââââââââââââââââ
 function openPlotM(){
   const pd=plots[cur];
-  document.getElementById('pmT').textContent='ตั้งค่า '+cur;
-  document.getElementById('pmS').textContent='ข้อมูลพื้นฐาน — วันเริ่มคำนวณแผนทุกงานอัตโนมัติ';
+  document.getElementById('pmT').textContent='à¸à¸±à¹à¸à¸à¹à¸² '+cur;
+  document.getElementById('pmS').textContent='à¸à¹à¸­à¸¡à¸¹à¸¥à¸à¸·à¹à¸à¸à¸²à¸ â à¸§à¸±à¸à¹à¸£à¸´à¹à¸¡à¸à¸³à¸à¸§à¸à¹à¸à¸à¸à¸¸à¸à¸à¸²à¸à¸­à¸±à¸à¹à¸à¸¡à¸±à¸à¸´';
   document.getElementById('pmSt').value=pd.startDate||'';
-  document.getElementById('pmSale').value=pd.saleStatus||'ว่าง';
+  document.getElementById('pmSale').value=pd.saleStatus||'à¸§à¹à¸²à¸';
   document.getElementById('pmResp').value=pd.resp||'';
   document.getElementById('pmNote').value=pd.note||'';
   document.getElementById('plotM').classList.add('open');
 }
 function savePlotInfo(){
-  if(!canEdit()&&userRole!=='sales'){toast('🔒 ไม่มีสิทธิ์');return;}
+  if(!canEdit()&&userRole!=='sales'){toast('ð à¹à¸¡à¹à¸¡à¸µà¸ªà¸´à¸à¸à¸´à¹');return;}
   const pd=plots[cur];
   pd.startDate=document.getElementById('pmSt').value;
   pd.saleStatus=document.getElementById('pmSale').value;
   pd.resp=document.getElementById('pmResp').value;
   pd.note=document.getElementById('pmNote').value;
   saveLocal();schedSync();renderDetail();renderPlots();
-  document.getElementById('plotM').classList.remove('open');toast('📅 บันทึกแล้ว');
+  document.getElementById('plotM').classList.remove('open');toast('ð à¸à¸±à¸à¸à¸¶à¸à¹à¸¥à¹à¸§');
 }
 
-// ══════════════════════════════
+// ââââââââââââââââââââââââââââââ
 // GANTT
-// ══════════════════════════════
+// ââââââââââââââââââââââââââââââ
 function renderGantt(){
   const sel=document.getElementById('ganttSel');
   if(!sel.options.length){PR.forEach(([pid])=>{sel.add(new Option(pid,pid));});if(cur)sel.value=cur;sel.onchange=renderGC;}
@@ -1205,19 +1459,19 @@ function renderGC(){
   const pd=plots[pid];const tot=120;const today=new Date();today.setHours(0,0,0,0);
   const st=pd.startDate?new Date(pd.startDate):null;
   const tP=st?Math.max(0,Math.min(100,(dif(st,today)/tot)*100)):50;
-  document.getElementById('ganttSub').textContent=pid+(pd.startDate?` · เริ่ม ${fmtF(new Date(pd.startDate))}`:' · ยังไม่กำหนด');
-  let h=`<div style="font-size:10px;color:var(--t2);margin-bottom:8px">🟦 แผน &nbsp;🟩 จริง &nbsp;🟨 วันนี้</div>`;
+  document.getElementById('ganttSub').textContent=pid+(pd.startDate?` Â· à¹à¸£à¸´à¹à¸¡ ${fmtF(new Date(pd.startDate))}`:' Â· à¸¢à¸±à¸à¹à¸¡à¹à¸à¸³à¸«à¸à¸');
+  let h=`<div style="font-size:10px;color:var(--t2);margin-bottom:8px">ð¦ à¹à¸à¸ &nbsp;ð© à¸à¸£à¸´à¸ &nbsp;ð¨ à¸§à¸±à¸à¸à¸µà¹</div>`;
   TASKS.forEach(task=>{
     const tp=pd.tasks[task.id]||0,cc=CC[task.cat]||'#58a6ff';
     const pL=(task.os/tot)*100,pW=(task.dur/tot)*100,aW=(task.dur*(tp/100)/tot)*100;
-    h+=`<div class="grow"><div class="glbl" title="${task.name}">${task.id}. ${task.name}</div><div class="gtl">${st?`<div class="gplan" style="left:${pL}%;width:${pW}%;border-color:${cc};background:${cc}22"></div><div class="gact" style="left:${pL}%;width:${aW}%;background:${tp===100?'#3fb950':cc}"></div><div class="gtoday" style="left:${tP}%"></div>`:`<div style="font-size:9px;color:var(--t3);position:absolute;top:2px">ยังไม่มีแผน</div>`}</div></div>`;
+    h+=`<div class="grow"><div class="glbl" title="${task.name}">${task.id}. ${task.name}</div><div class="gtl">${st?`<div class="gplan" style="left:${pL}%;width:${pW}%;border-color:${cc};background:${cc}22"></div><div class="gact" style="left:${pL}%;width:${aW}%;background:${tp===100?'#3fb950':cc}"></div><div class="gtoday" style="left:${tP}%"></div>`:`<div style="font-size:9px;color:var(--t3);position:absolute;top:2px">à¸¢à¸±à¸à¹à¸¡à¹à¸¡à¸µà¹à¸à¸</div>`}</div></div>`;
   });
   document.getElementById('ganttC').innerHTML=h;
 }
 
-// ══════════════════════════════
+// ââââââââââââââââââââââââââââââ
 // REPORT
-// ══════════════════════════════
+// ââââââââââââââââââââââââââââââ
 function renderReport(){
   const filtered = getFilteredPR();
   const allP=filtered.map(([pid])=>wp(pid));
@@ -1226,10 +1480,10 @@ function renderReport(){
         d100=allP.filter(p=>p===100).length;
   const allS=filtered.map(([pid])=>plots[pid].saleStatus);
   document.getElementById('rKpi').innerHTML=`
-    <div class="rbox"><div class="rnum" style="color:var(--blue)">${avg}%</div><div class="rlbl">เฉลี่ยรวม</div></div>
-    <div class="rbox"><div class="rnum" style="color:var(--green)">${bld}</div><div class="rlbl">กำลังก่อสร้าง</div></div>
-    <div class="rbox"><div class="rnum" style="color:var(--gold)">${d100}</div><div class="rlbl">เสร็จแล้ว</div></div>
-    <div class="rbox"><div class="rnum" style="color:var(--blue)">${filtered.length}</div><div class="rlbl">แปลงทั้งหมด</div></div>`;
+    <div class="rbox"><div class="rnum" style="color:var(--blue)">${avg}%</div><div class="rlbl">à¹à¸à¸¥à¸µà¹à¸¢à¸£à¸§à¸¡</div></div>
+    <div class="rbox"><div class="rnum" style="color:var(--green)">${bld}</div><div class="rlbl">à¸à¸³à¸¥à¸±à¸à¸à¹à¸­à¸ªà¸£à¹à¸²à¸</div></div>
+    <div class="rbox"><div class="rnum" style="color:var(--gold)">${d100}</div><div class="rlbl">à¹à¸ªà¸£à¹à¸à¹à¸¥à¹à¸§</div></div>
+    <div class="rbox"><div class="rnum" style="color:var(--blue)">${filtered.length}</div><div class="rlbl">à¹à¸à¸¥à¸à¸à¸±à¹à¸à¸«à¸¡à¸</div></div>`;
   const zEl=document.getElementById('rZones');zEl.innerHTML='';
   const projectsToShow = fProject==='ALL' ? Object.entries(PROJECTS) : [[fProject, PROJECTS[fProject]]];
   projectsToShow.forEach(([pname,proj])=>{
@@ -1238,37 +1492,37 @@ function renderReport(){
       const zp=PR.filter(p=>p[1]===z);const zpcts=zp.map(([pid])=>wp(pid));
       if(!zp.length)return;
       const za=(zpcts.reduce((a,b)=>a+b,0)/zpcts.length).toFixed(1);const zc=ZC[z]||proj.color;
-      zEl.innerHTML+=`<div class="zrow"><div class="zrow-top"><div class="zname" style="color:${zc}">${z}</div><div class="zpct" style="color:${zc}">${za}%</div></div><div class="zbar"><div class="zfill" style="width:${za}%;background:${zc}"></div></div><div class="zstat">${zp.length} แปลง · ทำอยู่ ${zpcts.filter(p=>p>0&&p<100).length} · เสร็จ ${zpcts.filter(p=>p===100).length}</div></div>`;
+      zEl.innerHTML+=`<div class="zrow"><div class="zrow-top"><div class="zname" style="color:${zc}">${z}</div><div class="zpct" style="color:${zc}">${za}%</div></div><div class="zbar"><div class="zfill" style="width:${za}%;background:${zc}"></div></div><div class="zstat">${zp.length} à¹à¸à¸¥à¸ Â· à¸à¸³à¸­à¸¢à¸¹à¹ ${zpcts.filter(p=>p>0&&p<100).length} Â· à¹à¸ªà¸£à¹à¸ ${zpcts.filter(p=>p===100).length}</div></div>`;
     });
   });
-  const v=allS.filter(s=>s==='ว่าง').length,rs=allS.filter(s=>s==='จอง').length,
-        sl=allS.filter(s=>s==='ขายแล้ว').length,tr=allS.filter(s=>s==='โอนแล้ว').length;
+  const v=allS.filter(s=>s==='à¸§à¹à¸²à¸').length,rs=allS.filter(s=>s==='à¸à¸­à¸').length,
+        sl=allS.filter(s=>s==='à¸à¸²à¸¢à¹à¸¥à¹à¸§').length,tr=allS.filter(s=>s==='à¹à¸­à¸à¹à¸¥à¹à¸§').length;
   document.getElementById('rSales').innerHTML=`
-    <div class="crow"><div class="crow-l"><div class="crow-t">ว่าง</div></div><span class="badge badge-gray">${v} แปลง</span></div>
-    <div class="crow"><div class="crow-l"><div class="crow-t">จอง</div></div><span class="badge badge-gold">${rs} แปลง</span></div>
-    <div class="crow"><div class="crow-l"><div class="crow-t">ขายแล้ว</div></div><span class="badge badge-blue">${sl} แปลง</span></div>
-    <div class="crow"><div class="crow-l"><div class="crow-t">โอนแล้ว</div></div><span class="badge badge-green">${tr} แปลง</span></div>`;
+    <div class="crow"><div class="crow-l"><div class="crow-t">à¸§à¹à¸²à¸</div></div><span class="badge badge-gray">${v} à¹à¸à¸¥à¸</span></div>
+    <div class="crow"><div class="crow-l"><div class="crow-t">à¸à¸­à¸</div></div><span class="badge badge-gold">${rs} à¹à¸à¸¥à¸</span></div>
+    <div class="crow"><div class="crow-l"><div class="crow-t">à¸à¸²à¸¢à¹à¸¥à¹à¸§</div></div><span class="badge badge-blue">${sl} à¹à¸à¸¥à¸</span></div>
+    <div class="crow"><div class="crow-l"><div class="crow-t">à¹à¸­à¸à¹à¸¥à¹à¸§</div></div><span class="badge badge-green">${tr} à¹à¸à¸¥à¸</span></div>`;
 }
 
-// ══════════════════════════════
+// ââââââââââââââââââââââââââââââ
 // EXPORT
-// ══════════════════════════════
+// ââââââââââââââââââââââââââââââ
 function expCSV(){
-  let csv='แปลง,โซน,สถานะขาย,PM,วันเริ่ม,ส่งมอบ,% รวม';
+  let csv='à¹à¸à¸¥à¸,à¹à¸à¸,à¸ªà¸à¸²à¸à¸°à¸à¸²à¸¢,PM,à¸§à¸±à¸à¹à¸£à¸´à¹à¸¡,à¸ªà¹à¸à¸¡à¸­à¸,% à¸£à¸§à¸¡';
   TASKS.forEach(t=>csv+=`,${t.id}.${t.name}`);csv+='\n';
   PR.forEach(([pid,zone])=>{
-    const pd=plots[pid];const p=wp(pid);const end=pd.startDate?fmtF(aD(pd.startDate,119)):'—';
+    const pd=plots[pid];const p=wp(pid);const end=pd.startDate?fmtF(aD(pd.startDate,119)):'â';
     csv+=`${pid},${zone},${pd.saleStatus},${pd.resp||''},${pd.startDate||''},${end},${p}%`;
     TASKS.forEach(t=>csv+=`,${pd.tasks[t.id]||0}%`);csv+='\n';
   });
-  dlf(csv,'hampton_grove.csv','text/csv');toast('📄 Export CSV แล้ว');
+  dlf(csv,'hampton_grove.csv','text/csv');toast('ð Export CSV à¹à¸¥à¹à¸§');
 }
-function expJSON(){dlf(JSON.stringify({plots,at:new Date().toISOString()},null,2),'hampton_backup.json','application/json');toast('📦 Backup แล้ว');}
+function expJSON(){dlf(JSON.stringify({plots,at:new Date().toISOString()},null,2),'hampton_backup.json','application/json');toast('ð¦ Backup à¹à¸¥à¹à¸§');}
 function dlf(c,n,m){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([c],{type:m}));a.download=n;a.click();}
 
-// ══════════════════════════════
+// ââââââââââââââââââââââââââââââ
 // ALERTS
-// ══════════════════════════════
+// ââââââââââââââââââââââââââââââ
 function getAlerts(filteredPR){
   const plist = filteredPR || PR;
   const today=new Date();today.setHours(0,0,0,0);const alerts=[];
@@ -1277,45 +1531,45 @@ function getAlerts(filteredPR){
     TASKS.forEach(task=>{
       const tp=pd.tasks[task.id]||0;if(tp===100)return;
       const pe=aD(pd.startDate,task.oe),ps=aD(pd.startDate,task.os);
-      if(today>pe)alerts.push({pid,type:'late',icon:'🔴',c:'#f85149',title:`${pid} · ${task.name}`,sub:`ล่าช้า ${dif(pe,today)} วัน`,time:fmt(pe)});
-      else if(today>=ps&&tp===0)alerts.push({pid,type:'due',icon:'⏰',c:'#f97316',title:`${pid} · ${task.name}`,sub:'ถึงเวลาเริ่มงาน',time:fmt(ps)});
+      if(today>pe)alerts.push({pid,type:'late',icon:'ð´',c:'#f85149',title:`${pid} Â· ${task.name}`,sub:`à¸¥à¹à¸²à¸à¹à¸² ${dif(pe,today)} à¸§à¸±à¸`,time:fmt(pe)});
+      else if(today>=ps&&tp===0)alerts.push({pid,type:'due',icon:'â°',c:'#f97316',title:`${pid} Â· ${task.name}`,sub:'à¸à¸¶à¸à¹à¸§à¸¥à¸²à¹à¸£à¸´à¹à¸¡à¸à¸²à¸',time:fmt(ps)});
     });
     const end=aD(pd.startDate,119);const dl=dif(today,end);
-    if(dl>=0&&dl<=14)alerts.push({pid,type:'delivery',icon:'🏁',c:'#d29922',title:`${pid} · ใกล้ส่งมอบ`,sub:`เหลืออีก ${dl} วัน`,time:fmt(end)});
+    if(dl>=0&&dl<=14)alerts.push({pid,type:'delivery',icon:'ð',c:'#d29922',title:`${pid} Â· à¹à¸à¸¥à¹à¸ªà¹à¸à¸¡à¸­à¸`,sub:`à¹à¸«à¸¥à¸·à¸­à¸­à¸µà¸ ${dl} à¸§à¸±à¸`,time:fmt(end)});
   });
   return alerts;
 }
 function renderAlerts(){
   const alerts=getAlerts(getFilteredPR());
-  document.getElementById('aSub').textContent=`พบ ${alerts.length} รายการ`;
+  document.getElementById('aSub').textContent=`à¸à¸ ${alerts.length} à¸£à¸²à¸¢à¸à¸²à¸£`;
   const el=document.getElementById('aFull');
-  if(!alerts.length){el.innerHTML=`<div class="aitem"><span class="aicon">✅</span><div><div class="a-title">ไม่มีแจ้งเตือน</div></div></div>`;return;}
+  if(!alerts.length){el.innerHTML=`<div class="aitem"><span class="aicon">â</span><div><div class="a-title">à¹à¸¡à¹à¸¡à¸µà¹à¸à¹à¸à¹à¸à¸·à¸­à¸</div></div></div>`;return;}
   el.innerHTML=alerts.map(a=>`<div class="aitem" style="border-left:3px solid ${a.c}" onclick="prevScr='s-alerts';selPlot('${a.pid}')"><span class="aicon">${a.icon}</span><div style="flex:1"><div class="a-title">${a.title}</div><div class="a-sub">${a.sub}</div><div class="a-time" style="color:${a.c}">${a.time}</div></div></div>`).join('');
 }
 
-// ══════════════════════════════
+// ââââââââââââââââââââââââââââââ
 // INIT
-// ══════════════════════════════
+// ââââââââââââââââââââââââââââââ
 (function init(){
   try{
     const sess=JSON.parse(localStorage.getItem('hg_sess7')||'null');
-    // session หมดอายุ 12 ชั่วโมง
+    // session à¸«à¸¡à¸à¸­à¸²à¸¢à¸¸ 12 à¸à¸±à¹à¸§à¹à¸¡à¸
     if(sess&&sess.name&&(Date.now()-sess.at)<12*3600*1000){
       userName=sess.name;userRole=sess.role||'admin';
       document.getElementById('setup').style.display='none';
       document.getElementById('app').style.display='block';
-      document.getElementById('sb-role').textContent={admin:'👑 Admin',foreman:'👷 โฟร์แมน',qc:'🔍 QC',sales:'💼 ฝ่ายขาย',viewer:'👁️ ผู้บริหาร'}[userRole]||userRole;
+      document.getElementById('sb-role').textContent={admin:'ð Admin',foreman:'ð· à¹à¸à¸£à¹à¹à¸¡à¸',qc:'ð QC',sales:'ð¼ à¸à¹à¸²à¸¢à¸à¸²à¸¢',viewer:'ðï¸ à¸à¸¹à¹à¸à¸£à¸´à¸«à¸²à¸£'}[userRole]||userRole;
       document.getElementById('sb-uname').textContent=userName;
-      document.getElementById('hGreet').textContent='สวัสดีครับ '+userName+' 👋';
+      document.getElementById('hGreet').textContent='à¸ªà¸§à¸±à¸ªà¸à¸µà¸à¸£à¸±à¸ '+userName+' ð';
       loadLocal();
-      setSS('ok','เชื่อม Sheets แล้ว');
+      setSS('ok','à¹à¸à¸·à¹à¸­à¸¡ Sheets à¹à¸¥à¹à¸§');
       tickClock();renderHome();renderPlots();
       setTimeout(()=>pullAll(),1000);
       setInterval(()=>{if(!syncing)pullAll();},60000);
       return;
     }
   }catch{}
-  // ไม่มี session → แสดงหน้า setup
+  // à¹à¸¡à¹à¸¡à¸µ session â à¹à¸ªà¸à¸à¸«à¸à¹à¸² setup
   document.getElementById('setup').style.display='flex';
 })();
 </script>
@@ -1349,43 +1603,43 @@ function renderAlerts(){
   #bulkModal .quickBtn:hover{background:#1f252e}
 </style>
 
-<button id="bulkBtn" onclick="openBulkUpdate()">⚡ Update หลายแปลง</button>
+<button id="bulkBtn" onclick="openBulkUpdate()">â¡ Update à¸«à¸¥à¸²à¸¢à¹à¸à¸¥à¸</button>
 
 <div id="bulkModal">
   <div class="box">
     <div class="bh">
-      <h3>⚡ Update % งาน หลายแปลงพร้อมกัน</h3>
-      <button onclick="closeBulkUpdate()">✕</button>
+      <h3>â¡ Update % à¸à¸²à¸ à¸«à¸¥à¸²à¸¢à¹à¸à¸¥à¸à¸à¸£à¹à¸­à¸¡à¸à¸±à¸</h3>
+      <button onclick="closeBulkUpdate()">â</button>
     </div>
     <div class="bb">
       <div class="sec">
-        <label>1) เลือกโครงการ / โซน (กรองแปลง)</label>
+        <label>1) à¹à¸¥à¸·à¸­à¸à¹à¸à¸£à¸à¸à¸²à¸£ / à¹à¸à¸ (à¸à¸£à¸­à¸à¹à¸à¸¥à¸)</label>
         <div class="row">
           <div><select id="bkProj"></select></div>
           <div><select id="bkZone"></select></div>
         </div>
       </div>
       <div class="sec">
-        <label>2) เลือกแปลงที่ต้องการอัปเดต</label>
+        <label>2) à¹à¸¥à¸·à¸­à¸à¹à¸à¸¥à¸à¸à¸µà¹à¸à¹à¸­à¸à¸à¸²à¸£à¸­à¸±à¸à¹à¸à¸</label>
         <div class="selInfo">
-          <button class="quickBtn" onclick="bulkSelAll(true)">✅ เลือกทั้งหมด</button>
-          <button class="quickBtn" onclick="bulkSelAll(false)">❎ ล้าง</button>
+          <button class="quickBtn" onclick="bulkSelAll(true)">â à¹à¸¥à¸·à¸­à¸à¸à¸±à¹à¸à¸«à¸¡à¸</button>
+          <button class="quickBtn" onclick="bulkSelAll(false)">â à¸¥à¹à¸²à¸</button>
           <span id="bkCount" style="margin-left:10px"></span>
         </div>
         <div class="plotGrid" id="bkPlots"></div>
       </div>
       <div class="sec">
-        <label>3) เลือกงาน (Task) ที่จะอัปเดต</label>
+        <label>3) à¹à¸¥à¸·à¸­à¸à¸à¸²à¸ (Task) à¸à¸µà¹à¸à¸°à¸­à¸±à¸à¹à¸à¸</label>
         <select id="bkTask"></select>
       </div>
       <div class="sec">
-        <label>4) ตั้งค่า % งาน (0–100)</label>
+        <label>4) à¸à¸±à¹à¸à¸à¹à¸² % à¸à¸²à¸ (0â100)</label>
         <input type="number" id="bkPct" min="0" max="100" step="5" value="100" />
       </div>
     </div>
     <div class="bf">
-      <button onclick="closeBulkUpdate()">ยกเลิก</button>
-      <button class="apply" id="bkApply" onclick="applyBulkUpdate()">💾 บันทึก</button>
+      <button onclick="closeBulkUpdate()">à¸¢à¸à¹à¸¥à¸´à¸</button>
+      <button class="apply" id="bkApply" onclick="applyBulkUpdate()">ð¾ à¸à¸±à¸à¸à¸¶à¸</button>
     </div>
   </div>
 </div>
@@ -1395,14 +1649,14 @@ function renderAlerts(){
   window.bulkSel = new Set();
 
   window.openBulkUpdate = function() {
-    if (typeof canEdit === 'function' && !canEdit()) { toast('🔒 ไม่มีสิทธิ์แก้ไข'); return; }
+    if (typeof canEdit === 'function' && !canEdit()) { toast('ð à¹à¸¡à¹à¸¡à¸µà¸ªà¸´à¸à¸à¸´à¹à¹à¸à¹à¹à¸'); return; }
     window.bulkSel.clear();
     const projSel = document.getElementById('bkProj');
-    projSel.innerHTML = '<option value="ALL">🏢 ทุกโครงการ</option>' +
+    projSel.innerHTML = '<option value="ALL">ð¢ à¸à¸¸à¸à¹à¸à¸£à¸à¸à¸²à¸£</option>' +
       Object.keys(PROJECTS).map(p => `<option value="${p}">${PROJECTS[p].icon} ${p}</option>`).join('');
     const taskSel = document.getElementById('bkTask');
     taskSel.innerHTML = TASKS.map(t =>
-      `<option value="${t.id}">#${t.id} • ${t.cat} • ${t.name} (น้ำหนัก ${t.wt})</option>`
+      `<option value="${t.id}">#${t.id} â¢ ${t.cat} â¢ ${t.name} (à¸à¹à¸³à¸«à¸à¸±à¸ ${t.wt})</option>`
     ).join('');
     projSel.onchange = window.bulkRefreshZones;
     document.getElementById('bkZone').onchange = window.bulkRenderPlots;
@@ -1421,7 +1675,7 @@ function renderAlerts(){
     PR.forEach(([pid, z]) => {
       if (proj === 'ALL' || getProject(z)?.name === proj) zones.add(z);
     });
-    zoneSel.innerHTML = '<option value="ALL">📍 ทุกโซน</option>' +
+    zoneSel.innerHTML = '<option value="ALL">ð à¸à¸¸à¸à¹à¸à¸</option>' +
       Array.from(zones).map(z => `<option value="${z}">${z}</option>`).join('');
     window.bulkRenderPlots();
   };
@@ -1439,9 +1693,9 @@ function renderAlerts(){
       const on = window.bulkSel.has(pid);
       return `<label class="plotChip ${on ? 'on' : ''}" data-pid="${pid}">
         <input type="checkbox" ${on ? 'checked' : ''} onchange="bulkTogglePlot('${pid}', this.checked)"/>
-        <span><b>${pid}</b> • ${pct}%</span>
+        <span><b>${pid}</b> â¢ ${pct}%</span>
       </label>`;
-    }).join('') || '<div style="color:#7d8590;padding:10px">ไม่มีแปลง</div>';
+    }).join('') || '<div style="color:#7d8590;padding:10px">à¹à¸¡à¹à¸¡à¸µà¹à¸à¸¥à¸</div>';
     window.bulkUpdateCount();
   };
 
@@ -1465,19 +1719,19 @@ function renderAlerts(){
 
   window.bulkUpdateCount = function() {
     const n = window.bulkSel.size;
-    document.getElementById('bkCount').textContent = `เลือก ${n} แปลง`;
+    document.getElementById('bkCount').textContent = `à¹à¸¥à¸·à¸­à¸ ${n} à¹à¸à¸¥à¸`;
     document.getElementById('bkApply').disabled = n === 0;
   };
 
   window.applyBulkUpdate = function() {
-    if (typeof canEdit === 'function' && !canEdit()) { toast('🔒 ไม่มีสิทธิ์แก้ไข'); return; }
+    if (typeof canEdit === 'function' && !canEdit()) { toast('ð à¹à¸¡à¹à¸¡à¸µà¸ªà¸´à¸à¸à¸´à¹à¹à¸à¹à¹à¸'); return; }
     const sel = Array.from(window.bulkSel);
-    if (!sel.length) { toast('⚠️ กรุณาเลือกแปลง'); return; }
+    if (!sel.length) { toast('â ï¸ à¸à¸£à¸¸à¸à¸²à¹à¸¥à¸·à¸­à¸à¹à¸à¸¥à¸'); return; }
     const tid = parseInt(document.getElementById('bkTask').value);
     let pct = parseInt(document.getElementById('bkPct').value);
     if (isNaN(pct)) pct = 0;
     pct = Math.max(0, Math.min(100, pct));
-    if (!confirm(`ยืนยันอัปเดต "งาน #${tid}" เป็น ${pct}% สำหรับ ${sel.length} แปลง?`)) return;
+    if (!confirm(`à¸¢à¸·à¸à¸¢à¸±à¸à¸­à¸±à¸à¹à¸à¸ "à¸à¸²à¸ #${tid}" à¹à¸à¹à¸ ${pct}% à¸ªà¸³à¸«à¸£à¸±à¸ ${sel.length} à¹à¸à¸¥à¸?`)) return;
     sel.forEach(pid => {
       const pd = plots[pid];
       if (!pd) return;
@@ -1486,7 +1740,7 @@ function renderAlerts(){
     });
     saveLocal();
     sel.forEach(pid => { try { pushOne(pid); } catch(e){} });
-    toast(`✅ อัปเดต ${sel.length} แปลง → งาน#${tid} = ${pct}%`);
+    toast(`â à¸­à¸±à¸à¹à¸à¸ ${sel.length} à¹à¸à¸¥à¸ â à¸à¸²à¸#${tid} = ${pct}%`);
     window.closeBulkUpdate();
     try { renderPlots(); } catch(e){}
     try { renderHome(); } catch(e){}
