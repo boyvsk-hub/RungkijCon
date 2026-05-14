@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "multiCAD": {
+      "command": "C:\\Users\\%USERNAME%\\RungkijCon\\multiCAD-mcp\\.venv\\Scripts\\python.exe",
+      "args": ["C:\\Users\\%USERNAME%\\RungkijCon\\multiCAD-mcp\\src\\server.py"]
+    }
+  }
+}
