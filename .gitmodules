@@ -1,0 +1,3 @@
+[submodule "multiCAD-mcp"]
+	path = multiCAD-mcp
+	url = https://github.com/AnCode666/multiCAD-mcp.git
