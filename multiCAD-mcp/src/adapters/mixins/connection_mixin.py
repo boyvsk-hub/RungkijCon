@@ -13,7 +13,11 @@ if sys.platform == "win32":
     import pythoncom
     import pywintypes
 else:
-    raise ImportError("AutoCAD adapter requires Windows OS with COM support")
+    import types as _types
+    win32com = _types.ModuleType("win32com")
+    win32com.client = _types.ModuleType("win32com.client")  # type: ignore[attr-defined]
+    pythoncom = _types.ModuleType("pythoncom")  # type: ignore[assignment]
+    pywintypes = _types.ModuleType("pywintypes")  # type: ignore[assignment]
 
 from core import CADConnectionError
 

@@ -9,9 +9,16 @@ import base64
 import os
 import time
 import re
-import win32gui
-import win32con
+import sys
 from typing import TYPE_CHECKING, Dict
+
+if sys.platform == "win32":
+    import win32gui
+    import win32con
+else:
+    import types as _types
+    win32gui = _types.ModuleType("win32gui")  # type: ignore[assignment]
+    win32con = _types.ModuleType("win32con")  # type: ignore[assignment]
 from PIL import ImageGrab
 
 logger = logging.getLogger(__name__)
