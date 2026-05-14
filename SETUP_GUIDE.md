@@ -5,18 +5,21 @@
 **multiCAD-mcp** คือ MCP Server ที่ทำให้ AI อย่าง Claude สามารถควบคุมโปรแกรม CAD ได้โดยตรงผ่านคำสั่งภาษาธรรมชาติ
 
 ### โปรแกรม CAD ที่รองรับ
-- AutoCAD 2018+
-- ZWCAD 2020+
-- GstarCAD 2020+
-- BricsCAD 21+
+| โปรแกรม | เวอร์ชันขั้นต่ำ |
+|---------|----------------|
+| AutoCAD | 2018+ |
+| ZWCAD | 2020+ |
+| GstarCAD | 2020+ |
+| BricsCAD | 21+ |
 
 ### ความสามารถหลัก (7 MCP Tools / 55+ คำสั่ง)
-- วาดรูปทรง: เส้น, วงกลม, ส่วนโค้ง, สี่เหลี่ยม, polyline, spline
-- จัดการ Layer: สร้าง, เปลี่ยนชื่อ, ลบ, ซ่อน/แสดง
-- จัดการ Block: สร้าง, แทรก, ตรวจสอบ (รองรับ Attribute)
-- จัดการ Entity: ย้าย, หมุน, ปรับขนาด, คัดลอก, เลือก
-- Export ข้อมูล: JSON และ Excel
-- บันทึกไฟล์: DWG, DXF, PDF
+- **Drawing**: วาดเส้น, วงกลม, ส่วนโค้ง, สี่เหลี่ยม, polyline, spline
+- **Layer**: สร้าง, เปลี่ยนชื่อ, ลบ, ซ่อน/แสดง
+- **Block**: สร้าง, แทรก, ตรวจสอบ (รองรับ Attribute)
+- **Entity**: ย้าย, หมุน, ปรับขนาด, คัดลอก, เลือก
+- **Export**: JSON และ Excel
+- **File**: บันทึก DWG, DXF, PDF
+- **Session**: เชื่อมต่อ/ตัดการเชื่อมต่อ CAD, ดูประวัติ
 
 ---
 
@@ -26,17 +29,50 @@
 |--------|----------|
 | ระบบปฏิบัติการ | **Windows เท่านั้น** (ต้องการ COM Technology) |
 | Python | 3.10 ขึ้นไป |
+| uv | Package manager (ติดตั้งอัตโนมัติโดย install.bat) |
 | Claude Desktop | เวอร์ชันล่าสุด |
 | โปรแกรม CAD | อย่างน้อย 1 โปรแกรมที่รองรับ |
 
 ---
 
-## ขั้นตอนการติดตั้ง (Windows)
+## วิธีติดตั้งแบบ 1 คลิก (แนะนำ)
 
-### ขั้นตอนที่ 1: ติดตั้ง `uv` Package Manager
+### ขั้นตอนที่ 1: เปิด Folder multiCAD-mcp
 
-เปิด **PowerShell** แล้วรันคำสั่ง:
+เปิด File Explorer ไปที่ folder ที่ clone โปรเจกต์นี้มา แล้วเข้าไปใน:
+```
+RungkijCon\multiCAD-mcp\
+```
 
+### ขั้นตอนที่ 2: รัน install.bat
+
+ดับเบิ้ลคลิก **`install.bat`** (หรือคลิกขวา → Run as Administrator)
+
+Script จะทำทุกอย่างอัตโนมัติ:
+- ✅ ติดตั้ง uv (ถ้ายังไม่มี)
+- ✅ ติดตั้ง dependencies ทั้งหมด
+- ✅ อัพเกรด pywin32
+- ✅ สร้าง claude_desktop_config.json อัตโนมัติ
+- ✅ ทดสอบว่าทุก package พร้อมใช้งาน
+
+### ขั้นตอนที่ 3: Restart Claude Desktop
+
+ปิดและเปิด Claude Desktop ใหม่ — multiCAD tools จะปรากฏทันที
+
+### ขั้นตอนที่ 4: ใช้งาน
+
+เปิด CAD แล้วสั่ง Claude:
+```
+วาดวงกลมสีแดง ที่ตำแหน่ง 50,50 รัศมี 25
+```
+
+---
+
+## วิธีติดตั้งแบบ Manual (ถ้า install.bat ไม่ทำงาน)
+
+### 1. ติดตั้ง uv
+
+เปิด **PowerShell** แล้วรัน:
 ```powershell
 powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
 ```
@@ -46,97 +82,36 @@ powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | ie
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 ```
 
-### ขั้นตอนที่ 2: ดาวน์โหลด multiCAD-mcp
+### 2. ติดตั้ง Dependencies
 
 ```powershell
-# Clone repository นี้ (ถ้ายังไม่ได้ clone)
-git clone https://github.com/boyvsk-hub/rungkijcon.git
-cd rungkijcon
-
-# เข้าไปที่โฟลเดอร์ multiCAD-mcp
 cd multiCAD-mcp
-```
-
-หรือ Clone ตรงจากต้นทาง:
-```powershell
-git clone https://github.com/AnCode666/multiCAD-mcp.git
-cd multiCAD-mcp
-```
-
-### ขั้นตอนที่ 3: ติดตั้ง Dependencies
-
-```powershell
-# ติดตั้ง dependencies ทั้งหมด (สร้าง .venv อัตโนมัติ)
 uv sync --dev
-
-# อัพเกรด pywin32 (จำเป็นสำหรับการเชื่อมต่อ CAD)
 uv run python -m pip install --upgrade pywin32
 ```
 
-### ขั้นตอนที่ 4: ตรวจสอบการติดตั้ง
+### 3. ตั้งค่า Claude Desktop
 
-```powershell
-# รัน tests เพื่อตรวจสอบ
-uv run pytest tests/ -v
-
-# ทดสอบ server (Ctrl+C เพื่อหยุด)
-uv run python src/server.py
-```
-
----
-
-## การตั้งค่า Claude Desktop
-
-### ขั้นตอนที่ 5: แก้ไข claude_desktop_config.json
-
-เปิดไฟล์ config ของ Claude Desktop ที่:
-```
-%APPDATA%\Claude\claude_desktop_config.json
-```
-
-วิธีเปิดด้วย PowerShell:
-```powershell
-notepad "$env:APPDATA\Claude\claude_desktop_config.json"
-```
-
-### ขั้นตอนที่ 6: เพิ่ม MCP Server Configuration
-
-แทรกโค้ดต่อไปนี้ (แทนที่ `YOUR_USERNAME` ด้วยชื่อผู้ใช้ Windows ของคุณ):
+เปิดไฟล์ `%APPDATA%\Claude\claude_desktop_config.json` แล้วเพิ่ม:
 
 ```json
 {
   "mcpServers": {
     "multiCAD": {
-      "command": "C:\\Users\\YOUR_USERNAME\\rungkijcon\\multiCAD-mcp\\.venv\\Scripts\\python.exe",
-      "args": ["C:\\Users\\YOUR_USERNAME\\rungkijcon\\multiCAD-mcp\\src\\server.py"]
+      "command": "C:\\Users\\ชื่อผู้ใช้\\RungkijCon\\multiCAD-mcp\\.venv\\Scripts\\python.exe",
+      "args": ["C:\\Users\\ชื่อผู้ใช้\\RungkijCon\\multiCAD-mcp\\src\\server.py"]
     }
   }
 }
 ```
 
-**สำคัญมาก**: ใช้ path เต็มไปยัง `.venv\Scripts\python.exe` เสมอ ห้ามใช้คำสั่ง `py` หรือ `python` ทั่วไป
-
-หากติดตั้งที่โฟลเดอร์อื่น ให้ปรับ path ตามนั้น เช่น:
-```json
-{
-  "mcpServers": {
-    "multiCAD": {
-      "command": "C:\\multiCAD-mcp\\.venv\\Scripts\\python.exe",
-      "args": ["C:\\multiCAD-mcp\\src\\server.py"]
-    }
-  }
-}
-```
-
-### ขั้นตอนที่ 7: รีสตาร์ท Claude Desktop
-
-ปิดและเปิด Claude Desktop ใหม่เพื่อให้การตั้งค่ามีผล
+ดูชื่อผู้ใช้ได้โดยรัน `echo %USERNAME%` ใน Command Prompt
 
 ---
 
 ## การตั้งค่า config.json (ขั้นสูง)
 
-แก้ไขไฟล์ `multiCAD-mcp/src/config.json` เพื่อปรับแต่งการทำงาน:
+แก้ไขไฟล์ `multiCAD-mcp\src\config.json`:
 
 ```json
 {
@@ -146,96 +121,111 @@ notepad "$env:APPDATA\Claude\claude_desktop_config.json"
     "autocad": {
       "startup_wait_time": 20.0,
       "command_delay": 0.5
-    },
-    "zwcad": {
-      "startup_wait_time": 15.0,
-      "command_delay": 0.5
     }
   },
   "output": {
     "directory": "~/Documents/multiCAD Exports"
   },
   "dashboard": {
-    "port": 8888,
-    "host": "127.0.0.1"
+    "port": 8888
   }
 }
 ```
 
 | ค่า | คำอธิบาย |
 |-----|----------|
-| `logging_level` | ระดับ log: DEBUG, INFO, WARNING, ERROR |
-| `startup_wait_time` | เวลารอ CAD เปิด (วินาที) เพิ่มหาก CAD เปิดช้า |
-| `command_delay` | ระยะเวลาระหว่างคำสั่ง (วินาที) |
+| `logging_level` | DEBUG / INFO / WARNING / ERROR |
+| `startup_wait_time` | วินาทีรอ CAD เปิด (เพิ่มถ้า CAD เปิดช้า) |
+| `command_delay` | หน่วงเวลาระหว่างคำสั่ง (วินาที) |
 | `dashboard.port` | พอร์ต Web Dashboard (ค่าเริ่มต้น: 8888) |
 | `output.directory` | โฟลเดอร์บันทึกไฟล์ export |
 
 ---
 
-## การใช้งาน
+## ตัวอย่างการใช้งาน
 
-### เปิด CAD ก่อน แล้วบอก Claude
-
-หลังติดตั้งเสร็จ เปิดโปรแกรม CAD ก่อน แล้วใช้ Claude Desktop สั่งงาน:
-
+### วาดรูป
 ```
 วาดวงกลมสีแดง ที่ตำแหน่ง 50,50 รัศมี 25
+วาดเส้นจากจุด 0,0 ไปจุด 100,100
+สร้างสี่เหลี่ยมที่ 10,10 ขนาด 80x60
 ```
 
+### จัดการ Layer
 ```
 สร้าง layer ชื่อ "โครงสร้าง" สีน้ำเงิน
+ซ่อน layer ชื่อ "Dimension"
+แสดง layer ทั้งหมด
 ```
 
+### Block
 ```
-วาดกราฟ y = sin(x) พร้อมระบุแกน
+สร้าง block จากที่เลือกไว้ ชื่อ "เสา-กลม"
+แทรก block "เสา-กลม" ที่ตำแหน่ง 0,0
 ```
 
+### Export
 ```
 export ข้อมูลทั้งหมดเป็น Excel
+export เฉพาะที่เลือกเป็น JSON
 ```
 
-### Web Dashboard
+### งานซับซ้อน
+```
+วาดกราฟ y = sin(x) ตั้งแต่ -2π ถึง 2π พร้อมระบุแกน
+สร้าง title block มาตรฐาน A3
+```
 
-เปิด browser ไปที่ `http://127.0.0.1:8888` เพื่อดูสถานะ CAD แบบ real-time
+---
+
+## Web Dashboard
+
+เปิด browser ไปที่ **http://127.0.0.1:8888** เพื่อดู:
+- สถานะการเชื่อมต่อ CAD
+- ประวัติคำสั่งที่รัน
+- Entity และ Layer ใน Drawing ปัจจุบัน
 
 ---
 
 ## การแก้ปัญหา
 
 ### ดู Log
-
 ```powershell
 # ดู log ล่าสุด 50 บรรทัด
-Get-Content logs\multicad_mcp.log -Tail 50
+Get-Content multiCAD-mcp\logs\multicad_mcp.log -Tail 50
 
 # ดู log แบบ real-time
-Get-Content logs\multicad_mcp.log -Wait -Tail 20
+Get-Content multiCAD-mcp\logs\multicad_mcp.log -Wait -Tail 20
 ```
 
 ### ปัญหาที่พบบ่อย
 
 | ปัญหา | วิธีแก้ |
 |-------|---------|
-| Claude ไม่เห็น multiCAD tool | ตรวจสอบ path ใน claude_desktop_config.json และ restart Claude |
-| เชื่อมต่อ CAD ไม่ได้ | เปิด CAD ก่อนใช้งาน, ตรวจสอบว่า CAD ที่ติดตั้งรองรับ |
-| pywin32 error | รัน `uv run python -m pip install --upgrade pywin32` ใหม่ |
-| Timeout error | เพิ่มค่า `startup_wait_time` ใน config.json |
+| Claude ไม่เห็น multiCAD tool | Restart Claude Desktop หลังแก้ config |
+| เชื่อมต่อ CAD ไม่ได้ | เปิด CAD ก่อนสั่ง Claude |
+| pywin32 error | รัน `uv run python -m pip install --upgrade pywin32` |
+| Timeout | เพิ่ม `startup_wait_time` ใน config.json |
+| Execution Policy Error | รัน `Set-ExecutionPolicy RemoteSigned -Scope CurrentUser` |
 
 ---
 
 ## โครงสร้างไฟล์
 
 ```
-multiCAD-mcp/
-├── src/
-│   ├── server.py              # Entry point หลัก
-│   ├── config.json            # ไฟล์ตั้งค่า (แก้ไขได้)
-│   ├── core/                  # Interface หลัก
-│   ├── adapters/              # การเชื่อมต่อ CAD แต่ละโปรแกรม
-│   └── mcp_tools/             # 7 MCP Tools
-├── logs/                      # Log files (สร้างอัตโนมัติ)
-├── tests/                     # Tests
-└── .venv/                     # Virtual environment (สร้างโดย uv)
+RungkijCon/
+├── multiCAD-mcp/
+│   ├── install.bat            ← รันตัวนี้เพื่อติดตั้ง (Windows)
+│   ├── src/
+│   │   ├── server.py          ← Entry point ของ MCP Server
+│   │   ├── config.json        ← ตั้งค่าการทำงาน (แก้ไขได้)
+│   │   ├── core/              ← Interface หลัก
+│   │   ├── adapters/          ← ตัวเชื่อมต่อ CAD แต่ละโปรแกรม
+│   │   └── mcp_tools/         ← 7 MCP Tools
+│   ├── .venv/                 ← Virtual environment (สร้างโดย install.bat)
+│   └── logs/                  ← Log files (สร้างอัตโนมัติ)
+├── claude_desktop_config.json ← Template config สำหรับ Claude Desktop
+└── SETUP_GUIDE.md             ← ไฟล์นี้
 ```
 
 ---
@@ -244,5 +234,5 @@ multiCAD-mcp/
 
 - [multiCAD-mcp GitHub](https://github.com/AnCode666/multiCAD-mcp)
 - [เอกสาร multiCAD-mcp](https://AnCode666.github.io/multiCAD-mcp/)
-- [Claude Desktop](https://claude.ai/download)
-- [MCP Documentation](https://modelcontextprotocol.io/)
+- [Claude Desktop Download](https://claude.ai/download)
+- [MCP Protocol](https://modelcontextprotocol.io/)
